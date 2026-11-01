@@ -1,0 +1,32 @@
+{
+  "name": "maria-do-reino",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "scripts": {
+    "dev": "node scripts/prepare-admin.mjs && node scripts/astro.mjs dev --host 0.0.0.0",
+    "check": "node scripts/astro.mjs check && node scripts/validate-content.mjs",
+    "build": "node scripts/build.mjs",
+    "build:editor": "node scripts/build.mjs --editor",
+    "preview": "node scripts/astro.mjs preview --host 0.0.0.0",
+    "cms": "decap-server",
+    "test": "node --import tsx --test --test-isolation=none tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "export": "npm run check && npm run build && node scripts/export.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.4",
+    "@fontsource-variable/dm-sans": "5.3.0",
+    "@fontsource-variable/newsreader": "5.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@playwright/test": "1.56.1",
+    "decap-cms": "3.17.3",
+    "@axe-core/playwright": "4.14.0",
+    "decap-server": "3.11.6",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  }
+}

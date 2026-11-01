@@ -1,0 +1,36 @@
+{
+  "slug": "apoie",
+  "title": "Cuidar é também somar",
+  "description": "Conheça formas de apoiar a Maria do Reino com participação, voluntariado, propostas culturais e doações voluntárias.",
+  "eyebrow": "Apoie a Maria do Reino",
+  "intro": "Uma comunidade se fortalece quando mais pessoas encontram um jeito de participar. Você pode somar com tempo, conhecimento, arte, colaboração ou apoio voluntário.",
+  "sections": [
+    {
+      "title": "Doe seu tempo e seu conhecimento",
+      "body": "Profissionais, artistas, coletivos e voluntários podem conversar com a equipe sobre possibilidades de colaboração.\n\nConte sua área de atuação, sua disponibilidade e como gostaria de contribuir. Uma proposta inicia uma conversa; não confirma vínculo, parceria ou atividade antes da avaliação conjunta."
+    },
+    {
+      "title": "Apoie a cultura e a convivência",
+      "body": "O MR Cultural recebe propostas de oficinas, apresentações, encontros e outras ações comunitárias. A participação é construída de acordo com o contexto e as condições de cada iniciativa.\n\nSe sua ideia envolve outras pessoas, imagens ou espaços, converse também sobre as autorizações e os cuidados necessários."
+    },
+    {
+      "title": "Doações são voluntárias",
+      "body": "A associação é gratuita e não está condicionada a uma doação. Doações voluntárias são uma forma de apoiar a continuidade do trabalho de acolhimento e participação comunitária.\n\nAntes de transferir qualquer valor, confirme os dados de recebimento no canal oficial. Confira sempre o titular exibido pelo seu banco. Não presuma que o CNPJ da associação seja uma chave Pix."
+    },
+    {
+      "title": "Converse sobre a melhor forma de ajudar",
+      "body": "A equipe pode informar as necessidades e as possibilidades de apoio vigentes. Não anuncie uma campanha em nome da Maria do Reino ou use sua identidade antes de alinhar a iniciativa.\n\nEntre em contato para construir uma colaboração com finalidade e condições claras."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Preciso doar para me associar?",
+      "answer": "Não. A associação é gratuita. Doações são voluntárias e independentes do vínculo associativo."
+    },
+    {
+      "question": "Onde encontro os dados para uma doação?",
+      "answer": "Use somente dados de recebimento confirmados pela associação. Se não houver chave ou link publicado nesta página, solicite orientação pelo canal oficial antes de transferir."
+    }
+  ],
+  "seoTitle": "Apoie a Associação Maria do Reino"
+}

@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ProjectList from '../../../components/ProjectList.astro';
+import '../../../styles/pages.css';
+---
+<Layout title="Projetos e ações do MR Cultural" description="Conheça as iniciativas culturais da Associação Maria do Reino e os caminhos para propor atividades e participar." path="/mr-cultural/projetos/">
+  <header class="inner-hero cultural-hero"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/mr-cultural/">MR Cultural</a><span aria-hidden="true">/</span><span aria-current="page">Projetos</span></nav><p class="eyebrow">Cultural como extensão do cuidado</p><h1>O que criamos em comunidade.</h1><p class="lead">Um espaço para iniciativas que aproximam expressão artística, convivência e pertencimento. Cada projeto tem sua história e sua forma de participação.</p></div></header>
+  <section class="container list-section" aria-label="Projetos e ações culturais"><ProjectList /></section>
+</Layout>

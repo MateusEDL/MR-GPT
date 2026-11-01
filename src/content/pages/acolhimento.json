@@ -1,0 +1,36 @@
+{
+  "slug": "acolhimento",
+  "title": "Você pode começar pelas suas dúvidas",
+  "description": "Entenda como o acolhimento da Maria do Reino orienta pacientes e familiares e se diferencia da consulta profissional.",
+  "eyebrow": "Acolhimento e orientação",
+  "intro": "Nem sempre é fácil saber por onde começar. O acolhimento existe para ouvir, ajudar a organizar as perguntas e orientar os próximos passos possíveis.",
+  "sections": [
+    {
+      "title": "Escutar antes de encaminhar",
+      "body": "Você e sua família podem procurar a equipe para entender a associação e seus caminhos de participação. A conversa deve acontecer com respeito, sem julgamentos e sem promessa de resultado.\n\nNosso papel é ajudar a compreender as possibilidades e os limites da orientação associativa."
+    },
+    {
+      "title": "Acolhimento e consulta são diferentes",
+      "body": "Acolhimento é escuta, orientação e encaminhamento. Não substitui avaliação clínica, diagnóstico, prescrição ou acompanhamento terapêutico.\n\nEssas decisões competem aos profissionais habilitados, considerando cada pessoa. Não altere tratamentos por conta própria a partir de informações do site."
+    },
+    {
+      "title": "Informação para conversar com quem cuida",
+      "body": "Sobre cannabis medicinal, nosso compromisso é com informação responsável e com a orientação para buscar profissionais habilitados.\n\nIndicações, riscos e possibilidades precisam ser avaliados individualmente. Nenhum conteúdo desta página equivale a recomendação de tratamento."
+    },
+    {
+      "title": "Antes de procurar atendimento presencial",
+      "body": "Confirme com a equipe o local, o horário e a disponibilidade do atendimento desejado. Não se desloque com base em um endereço antigo ou em uma divulgação sem data atual.\n\nEm uma urgência de saúde, procure um serviço de urgência. O canal de acolhimento da associação não é um serviço de emergência."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "A equipe de acolhimento pode prescrever um tratamento?",
+      "answer": "Não. A avaliação clínica e a prescrição são responsabilidade de profissionais habilitados. O acolhimento orienta e ajuda a esclarecer o caminho."
+    },
+    {
+      "question": "Posso buscar orientação para um familiar?",
+      "answer": "Sim. Familiares e responsáveis também podem procurar o acolhimento para entender a associação e os próximos passos."
+    }
+  ],
+  "seoTitle": "Acolhimento e orientação | Maria do Reino"
+}

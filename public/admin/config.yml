@@ -1,0 +1,235 @@
+backend:
+  name: github
+  repo: MateusEDL/MR-GPT
+  branch: main
+  auth_endpoint: api/auth
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: editorial_workflow
+show_preview_links: false
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+collections:
+  - name: configuracoes
+    label: Configurações e início
+    files:
+      - name: site
+        label: Contatos, identidade e doações
+        file: src/content/site.json
+        fields:
+          - { name: name, label: Nome institucional, widget: string }
+          - { name: shortName, label: Nome curto, widget: string }
+          - { name: description, label: Descrição institucional, widget: text }
+          - { name: footerPurpose, label: Propósito no rodapé, widget: text }
+          - { name: footerClosing, label: Frase de encerramento no rodapé, widget: string }
+          - { name: logoInstitutional, label: Logotipo oficial Maria do Reino (preservar proporções), widget: image, required: false }
+          - { name: logoCultural, label: Logotipo oficial MR Cultural (preservar proporções), widget: image, required: false }
+          - { name: city, label: Cidade, widget: string }
+          - { name: state, label: Estado, widget: string }
+          - { name: cnpj, label: CNPJ, widget: string }
+          - { name: whatsapp, label: WhatsApp (somente números com país e DDD), widget: string }
+          - { name: instagram, label: URL do Instagram institucional, widget: string }
+          - { name: instagramCultural, label: URL do Instagram MR Cultural, widget: string }
+          - { name: memberUrl, label: URL da Área do Associado existente, widget: string }
+          - { name: email, label: E-mail confirmado, widget: string, required: false }
+          - { name: address, label: Endereço público confirmado, widget: text, required: false }
+          - { name: hours, label: Horários confirmados, widget: text, required: false }
+          - name: donation
+            label: Doação (preencher somente dados oficiais confirmados)
+            widget: object
+            fields:
+              - { name: pixKey, label: Chave Pix oficial, widget: string, required: false }
+              - { name: pixHolder, label: Titular confirmado, widget: string, required: false }
+              - { name: bank, label: Instituição recebedora, widget: string, required: false }
+              - { name: paymentUrl, label: Link oficial de pagamento, widget: string, required: false }
+          - name: seo
+            label: Endereço canônico
+            widget: object
+            fields:
+              - { name: url, label: URL de produção (com https), widget: string }
+      - name: home
+        label: Página inicial
+        file: src/content/home.json
+        fields:
+          - { name: eyebrow, label: Identificação acima do título, widget: string }
+          - { name: title, label: Título principal, widget: string }
+          - { name: intro, label: Texto de abertura, widget: text }
+          - { name: reassurance, label: Informação breve junto à abertura, widget: text }
+          - { name: imageLabelTitle, label: Título da composição visual, widget: string }
+          - { name: imageLabelSubtitle, label: Subtítulo da composição visual, widget: string }
+          - { name: primaryLabel, label: Botão principal, widget: string }
+          - { name: secondaryLabel, label: Botão secundário, widget: string }
+          - { name: careTitle, label: Título de acolhimento, widget: string }
+          - { name: careIntro, label: Introdução de acolhimento, widget: text }
+          - { name: careEyebrow, label: Identificação acima do acolhimento, widget: string }
+          - { name: careFootnote, label: Orientação ao final do acolhimento, widget: text }
+          - { name: cultureEyebrow, label: Identificação cultural, widget: string }
+          - { name: cultureTitle, label: Título cultural, widget: string }
+          - { name: cultureIntro, label: Texto cultural, widget: text }
+          - { name: cultureButton, label: Botão da seção cultural, widget: string }
+          - { name: agendaEyebrow, label: Identificação acima da agenda, widget: string }
+          - { name: agendaTitle, label: Título da agenda, widget: text }
+          - { name: agendaEmptyTitle, label: Título quando não há programação confirmada, widget: string }
+          - { name: agendaEmptyDescription, label: Explicação quando não há programação confirmada, widget: text }
+          - { name: manifestoEyebrow, label: Identificação do trecho institucional, widget: string }
+          - { name: manifestoQuote, label: Trecho institucional em destaque, widget: text }
+          - { name: manifestoAttribution, label: Identificação pública do trecho, widget: string }
+          - { name: faqEyebrow, label: Identificação acima das dúvidas, widget: string }
+          - { name: faqTitle, label: Título de dúvidas frequentes, widget: text }
+          - { name: faqIntro, label: Introdução das dúvidas frequentes, widget: text }
+          - { name: supportEyebrow, label: Identificação acima da participação, widget: string }
+          - { name: participationTitle, label: Título de participação, widget: string }
+          - { name: participationIntro, label: Texto de participação, widget: text }
+  - name: paginas
+    label: Páginas institucionais
+    folder: src/content/pages
+    format: json
+    extension: json
+    create: false
+    identifier_field: slug
+    summary: '{{title}}'
+    fields:
+      - { name: slug, label: Caminho (não alterar sem redirecionamento), widget: string }
+      - { name: title, label: Título da página, widget: string }
+      - { name: seoTitle, label: Título para buscadores, widget: string, required: false, hint: 'Busque aproximadamente até 60 caracteres. Escreva um título claro; isso não garante posição nos resultados de busca.' }
+      - { name: description, label: Descrição para busca e compartilhamento, widget: text }
+      - { name: eyebrow, label: Identificação curta, widget: string }
+      - { name: intro, label: Introdução, widget: text }
+      - name: sections
+        label: Seções de conteúdo
+        widget: list
+        fields:
+          - { name: title, label: Título da seção, widget: string }
+          - { name: body, label: Texto (separe parágrafos com linha em branco), widget: text }
+      - name: faqs
+        label: Perguntas e respostas
+        widget: list
+        required: false
+        fields:
+          - { name: question, label: Pergunta, widget: string }
+          - { name: answer, label: Resposta, widget: text }
+  - name: noticias
+    label: Notícias e conteúdos
+    folder: src/content/posts
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{title}}'
+    fields:
+      - { name: slug, label: URL curta sem acentos, widget: string }
+      - { name: title, label: Título, widget: string }
+      - { name: description, label: Resumo e descrição de busca, widget: text }
+      - { name: category, label: Categoria, widget: select, options: [Institucional, Cultura, Informação] }
+      - { name: publishedAt, label: Data real de publicação, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
+      - { name: author, label: Autor público autorizado, widget: relation, collection: autores, search_fields: [name], value_field: name, display_fields: [name, qualification] }
+      - { name: body, label: Texto (parágrafos separados por linha em branco), widget: text }
+      - { name: image, label: Foto real autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição da foto para acessibilidade, widget: string, required: false }
+      - { name: reviewer, label: Revisor (somente revisão realizada), widget: relation, collection: autores, search_fields: [name], value_field: name, display_fields: [name, qualification], required: false }
+      - { name: reviewedAt, label: Data real da revisão, widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false }
+  - name: eventos
+    label: Agenda única (geral e cultural)
+    folder: src/content/events
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{title}} — {{start}}'
+    fields:
+      - { name: slug, label: URL curta sem acentos, widget: string }
+      - { name: title, label: Nome do evento, widget: string }
+      - { name: description, label: Descrição e informações de participação, widget: text }
+      - { name: start, label: Início confirmado (fuso de São Paulo), widget: datetime, picker_utc: false }
+      - { name: end, label: Término, widget: datetime, picker_utc: false, required: false }
+      - { name: location, label: Local confirmado e acessibilidade, widget: text }
+      - { name: cost, label: Condição de participação (gratuidade ou cobrança e inscrição), widget: text }
+      - { name: registrationUrl, label: Link real de inscrição, widget: string, required: false }
+      - { name: cultural, label: Mostrar também na agenda MR Cultural, widget: boolean, default: true }
+      - { name: status, label: Situação, widget: select, options: [{label: Programado, value: scheduled}, {label: Cancelado, value: cancelled}, {label: Adiado, value: postponed}] }
+      - { name: image, label: Imagem autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição da imagem, widget: string, required: false }
+  - name: projetos
+    label: Projetos do MR Cultural
+    folder: src/content/projects
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{title}}'
+    fields:
+      - { name: slug, label: URL curta sem acentos, widget: string }
+      - { name: title, label: Nome do projeto, widget: string }
+      - { name: description, label: Resumo, widget: text }
+      - { name: body, label: Descrição e contexto, widget: text }
+      - { name: status, label: Situação real, widget: select, options: [{label: Em atividade, value: active}, {label: Em planejamento, value: planned}, {label: Encerrado, value: completed}] }
+      - { name: image, label: Foto real autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição da foto, widget: string, required: false }
+  - name: galerias
+    label: Galerias culturais
+    folder: src/content/galleries
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{title}}'
+    fields:
+      - { name: slug, label: URL curta sem acentos, widget: string }
+      - { name: title, label: Título, widget: string }
+      - { name: description, label: Contexto do registro, widget: text }
+      - { name: date, label: Data real da atividade (se conhecida), widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false }
+      - { name: activity, label: Atividade ou edição, widget: string, required: false }
+      - { name: approved, label: Publicação e direitos de uso conferidos, widget: boolean, default: false, hint: 'Ative somente depois de verificar contexto, créditos e permissões necessárias. Não guarde documentos de autorização neste repositório público.' }
+      - name: items
+        label: Fotografias
+        widget: list
+        fields:
+          - { name: src, label: Arquivo autorizado, widget: image }
+          - { name: alt, label: Descrição acessível do conteúdo da foto, widget: string }
+          - { name: caption, label: Legenda e contexto, widget: text }
+          - { name: credit, label: Crédito público autorizado, widget: string }
+      - { name: videoUrl, label: URL do vídeo autorizado, widget: string, required: false }
+      - { name: videoTitle, label: Título do vídeo, widget: string, required: false }
+      - { name: transcript, label: Transcrição e informações acessíveis do vídeo, widget: text, required: false }
+  - name: parceiros
+    label: Parceiros autorizados
+    folder: src/content/partners
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{name}}'
+    fields:
+      - { name: slug, label: Identificador curto sem acentos, widget: string }
+      - { name: name, label: Nome público, widget: string }
+      - { name: description, label: Descrição do vínculo confirmado, widget: text, required: false }
+      - { name: url, label: Site oficial, widget: string, required: false }
+      - { name: image, label: Identidade visual autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição da imagem, widget: string, required: false }
+      - { name: approved, label: Vínculo e publicação autorizados, widget: boolean, default: false, hint: 'Somente parceiros aprovados aparecem no site. Não cadastrar marcas comerciais independentes como parte da associação.' }
+  - name: autores
+    label: Autores e revisores
+    folder: src/content/authors
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{name}}'
+    fields:
+      - { name: slug, label: Identificador curto sem acentos, widget: string }
+      - { name: name, label: Nome público autorizado, widget: string }
+      - { name: bio, label: Apresentação pública, widget: text }
+      - { name: qualification, label: Qualificação verificada (sem credenciais inventadas), widget: string, required: false }
+      - { name: role, label: Atuação editorial, widget: select, options: [{label: Autor, value: author}, {label: Revisor, value: reviewer}] }
+      - { name: url, label: Perfil profissional público autorizado, widget: string, required: false }
+      - { name: image, label: Foto autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição da foto, widget: string, required: false }

@@ -1,0 +1,40 @@
+{
+  "slug": "mr-cultural",
+  "title": "Cultural como extensão do cuidado",
+  "description": "Conheça o MR Cultural, frente da Associação Maria do Reino dedicada à arte, convivência e participação comunitária.",
+  "eyebrow": "MR Cultural",
+  "intro": "Há cuidado no encontro, na escuta e na possibilidade de criar junto. O MR Cultural é a frente cultural e social da Associação Maria do Reino.",
+  "sections": [
+    {
+      "title": "Um espaço para pertencer",
+      "body": "A cultura aproxima histórias e abre espaço para a expressão. No MR Cultural, convivência, arte e participação comunitária fazem parte da proposta de cuidado integral.\n\nA iniciativa pertence à própria associação. É um convite para que as pessoas se reconheçam como vizinhas, artistas, aprendizes e participantes da vida em comunidade."
+    },
+    {
+      "title": "Muitas formas de se encontrar",
+      "body": "Capoeira, pintura, arquearia, música, palestras, oficinas e feiras integram o universo de atividades do MR Cultural.\n\nA programação de cada encontro precisa ser consultada na agenda ou confirmada com a equipe. Não presumimos que todas essas atividades estejam disponíveis regularmente."
+    },
+    {
+      "title": "Para participar, confira cada atividade",
+      "body": "Cada atividade deve informar data, local, acessibilidade, inscrição e condições de participação. A gratuidade de um encontro não se estende automaticamente a toda oficina ou projeto.\n\nQuando uma nova programação estiver confirmada, ela aparecerá na agenda. Registros de encontros já realizados terão identificação própria."
+    },
+    {
+      "title": "Sua ideia também pode somar",
+      "body": "Artistas, coletivos, oficineiros, mestres, voluntários e pessoas da comunidade podem propor atividades. Conte o que você imagina e como gostaria de participar.\n\nA equipe avalia a proposta e conversa sobre possibilidades, condições e próximos passos. O envio não confirma automaticamente uma parceria ou uma atividade."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "O MR Cultural faz parte da Maria do Reino?",
+      "answer": "Sim. É uma frente cultural e social da própria Associação Maria do Reino."
+    },
+    {
+      "question": "Todas as atividades são gratuitas?",
+      "answer": "Não presuma a gratuidade de toda a programação. Confira as condições, inscrições e eventual cobrança de cada atividade."
+    },
+    {
+      "question": "Como posso propor uma oficina ou apresentação?",
+      "answer": "Use o contato de participação cultural e conte sua ideia. A equipe dará continuidade à conversa antes de confirmar a atividade."
+    }
+  ],
+  "seoTitle": "MR Cultural | Cultural como extensão do cuidado"
+}

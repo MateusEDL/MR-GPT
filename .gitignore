@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.*
+!.env.example
+exports/
+playwright-report/
+test-results/
+public/admin/decap-cms.js
+public/admin/vendor/
+public/admin/*.decap-cms.js
+public/admin/*.wasm
+public/admin/*.LICENSE.txt
+*.log
+.DS_Store

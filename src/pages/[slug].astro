@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { pages, site, whatsappUrl } from '../lib/content';
+import '../styles/pages.css';
+
+export function getStaticPaths() {
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+const { page } = Astro.props;
+const cultural = page.slug === 'mr-cultural';
+const health = page.slug === 'cannabis-medicinal' || page.slug === 'acolhimento';
+const legal = ['politica-de-privacidade', 'cookies'].includes(page.slug);
+const paragraphs = (body: string) => body.split(/\n\s*\n/).filter(Boolean);
+const pixAvailable = Boolean(site.donation.pixKey && site.donation.pixHolder && site.donation.bank);
+---
+<Layout title={page.seoTitle || page.title} description={page.description} path={`/${page.slug}/`}>
+  <header class:list={['inner-hero', { 'cultural-hero': cultural }]}>
+    <div class="container">
+      <nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
+      {cultural ? (
+        <div class="cultural-intro">
+          <div>{site.logoCultural && <img class="cultural-official-logo" src={site.logoCultural} alt="MR Cultural" width="120" height="120" />}<p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p><div class="page-actions"><a class="button button--dark" href="/mr-cultural/agenda/">Ver a agenda <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#participar">Quero participar</a></div></div>
+          <figure class="cultural-figure"><img src="/images/cultura-oficina-ia.webp" srcset="/images/cultura-oficina-ia-640.webp 640w, /images/cultura-oficina-ia-960.webp 960w, /images/cultura-oficina-ia.webp 1448w" sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1200px) 44vw, 580px" alt="Composição ilustrativa de mãos adultas criando em uma mesa de oficina artística." width="1448" height="1086" fetchpriority="high" /><figcaption>Imagem ilustrativa gerada por IA. Não é um registro de atividade da associação.</figcaption></figure>
+        </div>
+      ) : <><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p></>}
+    </div>
+  </header>
+  <div class="container content-layout">
+    <div class="page-prose">
+      {page.sections.map((section) => <section><h2>{section.title}</h2>{paragraphs(section.body).map((paragraph) => <p>{paragraph}</p>)}</section>)}
+      {page.faqs && page.faqs.length > 0 && <div class="faq-list">{page.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>}
+      {health && <aside class="health-note"><strong>Informação para orientar a conversa.</strong><br />O conteúdo deste site não substitui avaliação, prescrição ou acompanhamento por profissional habilitado. O acolhimento da associação orienta e encaminha; não realiza diagnóstico nem promete resultados de tratamento.</aside>}
+      {page.slug === 'como-se-associar' && <div class="contact-card"><strong>Associação gratuita. Próximos passos com orientação.</strong><p>Converse com a equipe para entender o cadastro e o caminho adequado à sua situação. O primeiro contato não conclui automaticamente a associação nem agenda consulta.</p><a class="button button--dark" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Quero conversar sobre associação <span aria-hidden="true">↗</span></a></div>}
+      {page.slug === 'contato' && <>
+        {(site.email || site.address || site.hours) && <section class="contact-channels"><h2>Canais e informações de contato</h2><dl>{site.email && <div><dt>E-mail</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>}{site.address && <div><dt>Endereço informado pela associação</dt><dd>{site.address}</dd></div>}{site.hours && <div><dt>Horários de atendimento</dt><dd>{site.hours}</dd></div>}</dl></section>}
+        <ContactForm />
+      </>}
+      {page.slug === 'apoie' && (
+        pixAvailable ? <div class="pix-box"><h2>Doação voluntária via Pix</h2><p>Titular: <strong>{site.donation.pixHolder}</strong><br />Instituição: {site.donation.bank}</p><code class="pix-key" id="pix-key">{site.donation.pixKey}</code><button type="button" class="button button--dark" data-copy-pix data-pix={site.donation.pixKey}>Copiar chave Pix</button><p role="status" aria-live="polite" data-pix-status></p><p class="form-hint">Confira os dados do recebedor no aplicativo do seu banco antes de confirmar a transferência. Doar é uma escolha, nunca uma condição para se associar.</p></div>
+        : <div class="contact-card"><strong>Seu apoio pode tomar muitas formas.</strong><p>Converse com a equipe sobre voluntariado, parcerias e os meios de doação disponíveis. A associação é gratuita e a doação é voluntária.</p><a class="button button--dark" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Quero apoiar <span aria-hidden="true">↗</span></a></div>
+      )}
+      {page.slug === 'apoie' && site.donation.paymentUrl && <p><a class="text-link" href={site.donation.paymentUrl} target="_blank" rel="noopener noreferrer">Acessar o canal de doação <span aria-hidden="true">↗</span></a></p>}
+      {cultural && <section id="participar"><h2>Vamos criar esse encontro?</h2><p>Artistas, coletivos, oficineiros e voluntários podem conversar com a equipe para propor atividades e conhecer os caminhos de participação.</p><ContactForm subject="cultura" /></section>}
+    </div>
+    <aside class="page-aside">
+      <p class="eyebrow">{legal ? 'Sua privacidade importa' : cultural ? 'Cultura também é cuidado' : 'Ninguém cuida sozinho'}</p>
+      <h2>{legal ? 'Informação clara, cuidado com os dados.' : 'O próximo passo começa com uma conversa.'}</h2>
+      <p>{legal ? 'Se tiver dúvidas sobre o uso de dados ou quiser exercer seus direitos, converse com a associação pelos canais oficiais.' : 'A equipe pode ouvir sua dúvida e orientar o caminho para acolhimento, associação ou participação.'}</p>
+      <a class="button button--dark" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Falar com a equipe <span aria-hidden="true">↗</span></a>
+      <div class="aside-links"><a href="/como-se-associar/">Como se associar</a><a href="/perguntas-frequentes/">Perguntas frequentes</a><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Já sou associado <span aria-hidden="true">↗</span></a></div>
+    </aside>
+  </div>
+  {cultural && <section class="container cultural-paths" aria-label="Explore o MR Cultural">
+    <a class="cultural-path" href="/mr-cultural/projetos/"><span class="path-number">01 / CRIAR</span><h2>Projetos e ações</h2><p>Ideias e iniciativas que aproximam pessoas e comunidade.</p><span class="path-arrow" aria-hidden="true">↗</span></a>
+    <a class="cultural-path" href="/mr-cultural/agenda/"><span class="path-number">02 / ENCONTRAR</span><h2>Agenda cultural</h2><p>Programação confirmada e informações para participar.</p><span class="path-arrow" aria-hidden="true">↗</span></a>
+    <a class="cultural-path" href="/mr-cultural/galeria/"><span class="path-number">03 / COMPARTILHAR</span><h2>Memória dos encontros</h2><p>Um espaço para registros reais e histórias de convivência.</p><span class="path-arrow" aria-hidden="true">↗</span></a>
+  </section>}
+</Layout>
+<script>
+  document.querySelector<HTMLButtonElement>('[data-copy-pix]')?.addEventListener('click', async (event) => {
+    const target = event.currentTarget as HTMLButtonElement;
+    const status = document.querySelector<HTMLElement>('[data-pix-status]');
+    if (!status || !target.dataset.pix) return;
+    try { await navigator.clipboard.writeText(target.dataset.pix); status.textContent = 'Chave copiada. Confira os dados do recebedor antes de transferir.'; }
+    catch { status.textContent = 'Não foi possível copiar automaticamente. Selecione e copie a chave apresentada acima.'; }
+  });
+</script>

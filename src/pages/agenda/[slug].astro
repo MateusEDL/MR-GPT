@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { events, eventIsPast, site, whatsappUrl } from '../../lib/content';
+import '../../styles/pages.css';
+export function getStaticPaths() { return events.map((event) => ({ params: { slug: event.slug }, props: { event } })); }
+const { event } = Astro.props;
+const past = eventIsPast(event);
+const labels: Record<string,string> = { cancelled: 'Encontro cancelado', postponed: 'Encontro adiado', scheduled: past ? 'Evento com data passada' : 'Encontro programado' };
+const dateTime = (value: string) => new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeStyle: 'short', timeZone: 'America/Sao_Paulo' }).format(new Date(value));
+const schema = { '@context': 'https://schema.org', '@type': 'Event', name: event.title, description: event.description, startDate: event.start, ...(event.end ? { endDate: event.end } : {}), eventStatus: event.status === 'cancelled' ? 'https://schema.org/EventCancelled' : event.status === 'postponed' ? 'https://schema.org/EventPostponed' : 'https://schema.org/EventScheduled', location: { '@type': 'Place', name: event.location }, organizer: { '@type': 'Organization', name: site.name, url: site.seo.url }, ...(event.image ? { image: new URL(event.image, site.seo.url).href } : {}) };
+---
+<Layout title={`${event.title} | Maria do Reino`} description={event.description} path={`/agenda/${event.slug}/`} image={event.image} schema={schema}>
+  <header class="inner-hero"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/agenda/">Agenda</a><span aria-hidden="true">/</span><span aria-current="page">{event.title}</span></nav><p class="eyebrow">{labels[event.status] || event.status}</p><h1>{event.title}</h1><p class="lead">{event.description}</p></div></header>
+  <div class="container content-layout"><article class="page-prose">
+    {event.image && <img class="article-image" src={event.image} alt={event.imageAlt || ''} width="1200" height="675" />}
+    <dl class="event-facts"><div><dt>Quando</dt><dd><time datetime={event.start}>{dateTime(event.start)}</time>{event.end && <><br />Até <time datetime={event.end}>{dateTime(event.end)}</time></>}<br /><small>Horário de Brasília</small></dd></div><div><dt>Local</dt><dd>{event.location}</dd></div><div><dt>Condições de participação</dt><dd>{event.cost}</dd></div><div><dt>Situação</dt><dd>{labels[event.status] || event.status}</dd></div></dl>
+    <h2>{past ? 'Programação anterior' : 'Para participar'}</h2>
+    <p>{past ? 'Esta página conserva a programação de um evento com data passada. Consulte a agenda para acompanhar os próximos encontros.' : event.status === 'scheduled' ? 'Confira as condições deste encontro e converse com a equipe para esclarecer dúvidas sobre inscrição, acessibilidade e participação.' : 'A situação deste encontro mudou. Consulte a equipe para obter informações atualizadas antes de se deslocar.'}</p>
+    <div class="page-actions">{!past && event.status === 'scheduled' && event.registrationUrl && <a class="button button--dark" href={event.registrationUrl} target="_blank" rel="noopener noreferrer">Informações e inscrição <span aria-hidden="true">↗</span></a>}<a class="button button--outline" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Conversar com a equipe <span aria-hidden="true">↗</span></a></div>
+    <div class="page-actions"><a class="text-link" href={event.cultural ? '/mr-cultural/agenda/' : '/agenda/'}>← Voltar à agenda</a></div>
+  </article><aside class="page-aside"><p class="eyebrow">Participação consciente</p><h2>Cada encontro tem seu próprio caminho.</h2><p>A gratuidade da associação não significa gratuidade automática de todas as atividades. Confira sempre as condições informadas para este evento.</p><a class="text-link" href="/mr-cultural/">Conhecer o MR Cultural <span aria-hidden="true">↗</span></a></aside></div>
+</Layout>

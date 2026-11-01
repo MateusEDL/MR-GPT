@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EventList from '../../components/EventList.astro';
+import { events } from '../../lib/content';
+import '../../styles/pages.css';
+---
+<Layout title="Agenda | Associação Maria do Reino" description="Acompanhe as atividades confirmadas da Maria do Reino, com informações de participação e registros dos encontros." path="/agenda/">
+  <header class="inner-hero"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">Agenda</span></nav><p class="eyebrow">Tempo para estar junto</p><h1>Encontros que fazem parte do cuidado.</h1><p class="lead">Acompanhe a programação confirmada da associação. Cada atividade informa suas condições de participação, inscrição e acessibilidade.</p></div></header>
+  <section class="container list-section" aria-label="Programação da associação" data-agenda>
+    {events.length > 0 && <div class="list-toolbar" aria-label="Filtrar programação"><button class="filter-button" type="button" data-event-filter="all" aria-pressed="true">Todas as atividades</button><button class="filter-button" type="button" data-event-filter="culture" aria-pressed="false">MR Cultural</button><p class="form-hint" role="status" aria-live="polite" data-filter-status></p></div>}
+    <EventList />
+    <p class="form-hint" data-filter-empty hidden>Nenhum encontro cultural nesta seleção. Novas atividades aparecerão quando forem confirmadas.</p>
+  </section>
+</Layout>
+<script>
+  const agenda = document.querySelector<HTMLElement>('[data-agenda]');
+  agenda?.querySelectorAll<HTMLButtonElement>('[data-event-filter]').forEach((button) => button.addEventListener('click', () => {
+    const cultural = button.dataset.eventFilter === 'culture';
+    agenda.querySelectorAll<HTMLButtonElement>('[data-event-filter]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+    let total = 0;
+    agenda.querySelectorAll<HTMLElement>('[data-event-card]').forEach((item) => { item.hidden = cultural && item.dataset.cultural !== 'true'; if (!item.hidden) total++; });
+    agenda.querySelectorAll<HTMLElement>('.event-group').forEach((group) => { group.hidden = ![...group.querySelectorAll<HTMLElement>('[data-event-card]')].some((item) => !item.hidden); });
+    const empty = agenda.querySelector<HTMLElement>('[data-filter-empty]');
+    const status = agenda.querySelector<HTMLElement>('[data-filter-status]');
+    if (empty) empty.hidden = total > 0;
+    if (status) status.textContent = `${total} ${total === 1 ? 'atividade encontrada' : 'atividades encontradas'}.`;
+  }));
+</script>

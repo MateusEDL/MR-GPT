@@ -1,0 +1,40 @@
+{
+  "slug": "como-se-associar",
+  "title": "O primeiro passo é uma conversa",
+  "description": "Saiba como se associar gratuitamente à Maria do Reino, conversar com o acolhimento e entender os próximos passos.",
+  "eyebrow": "Como se associar",
+  "intro": "A associação à Maria do Reino é gratuita. Não há taxa de adesão nem contribuição associativa obrigatória. Para começar, fale com a equipe e conte que deseja se associar.",
+  "sections": [
+    {
+      "title": "1. Entre em contato",
+      "body": "Procure o acolhimento pelo canal oficial indicado nesta página. Você pode começar dizendo seu nome, sua cidade e que gostaria de conhecer o caminho de associação.\n\nNão envie laudos, receitas, diagnósticos ou documentos pessoais neste primeiro contato público."
+    },
+    {
+      "title": "2. Entenda o caminho com a equipe",
+      "body": "A equipe explica as etapas e os requisitos de cadastro e esclarece suas dúvidas. Esse momento também ajuda a identificar qual orientação faz sentido para você ou sua família.\n\nManifestar interesse não conclui automaticamente a associação e não significa consulta marcada."
+    },
+    {
+      "title": "3. Siga a orientação de cadastro",
+      "body": "Quando forem necessários documentos ou informações complementares, a equipe deve orientar o envio pelo ambiente adequado e protegido.\n\nSe você já é associado, use a Área do Associado existente. O site público e o sistema de associados têm funções diferentes."
+    },
+    {
+      "title": "Associação gratuita, condições claras",
+      "body": "A gratuidade é do vínculo associativo. Consultas, atendimentos, oficinas e outras atividades podem ter condições próprias.\n\nAntes de participar, confirme disponibilidade, inscrição e eventual cobrança com a equipe. A associação não deve ser condicionada a uma doação."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Preciso pagar para me associar?",
+      "answer": "Não. A associação é gratuita, sem taxa de adesão nem contribuição associativa obrigatória. Isso não torna automaticamente gratuitas as consultas e atividades."
+    },
+    {
+      "question": "O contato já me torna associado?",
+      "answer": "Não. O primeiro contato manifesta seu interesse. A equipe explica as etapas necessárias e orienta o cadastro."
+    },
+    {
+      "question": "Preciso enviar meus documentos agora?",
+      "answer": "Não envie documentos pessoais ou de saúde no formulário público inicial. Quando forem necessários, a equipe indicará o ambiente adequado."
+    }
+  ],
+  "seoTitle": "Como se associar à Maria do Reino"
+}

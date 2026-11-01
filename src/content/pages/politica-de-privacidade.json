@@ -1,0 +1,30 @@
+{
+  "slug": "politica-de-privacidade",
+  "title": "Privacidade e respeito às suas informações",
+  "description": "Saiba como os canais do site da Maria do Reino se relacionam com seus dados e como falar com a associação sobre privacidade.",
+  "eyebrow": "Política de privacidade",
+  "intro": "A Associação Maria do Reino, CNPJ 52.247.721/0001-02, é responsável por este site institucional. Nosso princípio é pedir apenas as informações necessárias para cada conversa.",
+  "sections": [
+    {
+      "title": "Navegação e contato",
+      "body": "Você pode ler o conteúdo institucional sem criar uma conta neste site. Não instalamos publicidade comportamental nem ferramentas de analytics nesta versão.\n\nAo escolher entrar em contato, você decide quais informações compartilhar. Elas devem ser utilizadas para compreender a solicitação e permitir o retorno da equipe, com acesso limitado a quem precisar atendê-la."
+    },
+    {
+      "title": "Dados de saúde e documentos",
+      "body": "Diagnósticos, laudos, receitas e outras informações de saúde são dados pessoais sensíveis. Não os envie por formulários públicos de contato, interesse ou participação cultural.\n\nQuando um processo precisar de documentos, a equipe deve informar o ambiente adequado, a finalidade e os cuidados aplicáveis. Este site público não é um prontuário."
+    },
+    {
+      "title": "Serviços externos e infraestrutura",
+      "body": "Os links de WhatsApp, Instagram e Área do Associado levam a outros serviços, com suas próprias condições e políticas. Abrir um desses links pode permitir que o serviço de destino receba dados de navegação.\n\nO provedor de hospedagem também pode tratar dados técnicos necessários para entregar as páginas e proteger a infraestrutura. As condições e os prazos dependem do serviço utilizado."
+    },
+    {
+      "title": "Seus direitos e o contato para privacidade",
+      "body": "Você pode entrar em contato com a associação para perguntar sobre o tratamento de seus dados e solicitar o exercício dos direitos previstos na legislação aplicável.\n\nUse o WhatsApp oficial (47) 99910-8994 e identifique o assunto como privacidade. Não envie documentos de identificação sem antes receber orientação sobre o canal e a necessidade da verificação. Dados de contato devem ser mantidos apenas pelo período necessário à finalidade e às obrigações aplicáveis."
+    },
+    {
+      "title": "Mudanças nesta política",
+      "body": "A política deve acompanhar as funcionalidades e os serviços efetivamente utilizados. Novos formulários, ferramentas de medição ou integrações precisam ser avaliados antes de entrar em funcionamento.\n\nConsulte também a página de cookies para conhecer o funcionamento desta versão do site."
+    }
+  ],
+  "seoTitle": "Política de privacidade | Maria do Reino"
+}

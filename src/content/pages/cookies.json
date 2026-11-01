@@ -1,0 +1,26 @@
+{
+  "slug": "cookies",
+  "title": "Suas preferências, com clareza",
+  "description": "Entenda o uso de cookies e serviços externos no site institucional da Associação Maria do Reino.",
+  "eyebrow": "Cookies e preferências",
+  "intro": "Esta versão do site público não usa cookies de publicidade nem ferramentas de analytics. Você pode consultar o conteúdo sem aceitar rastreadores opcionais.",
+  "sections": [
+    {
+      "title": "Conteúdo sem rastreamento publicitário",
+      "body": "As páginas institucionais não incorporam feeds de redes sociais nem iniciam vídeos externos automaticamente. Os perfis oficiais são apresentados como links, que você escolhe abrir.\n\nNão há categorias opcionais de rastreamento ativadas nesta versão."
+    },
+    {
+      "title": "Links para outros serviços",
+      "body": "Quando você abre WhatsApp, Instagram ou a Área do Associado, passa a utilizar outro serviço. Ele pode empregar cookies e outras tecnologias de acordo com suas próprias políticas.\n\nAs preferências desses serviços devem ser gerenciadas nos respectivos ambientes."
+    },
+    {
+      "title": "Área de edição",
+      "body": "A área de edição é destinada à equipe autorizada e tem um fluxo próprio de autenticação. Recursos necessários para esse acesso não são ferramentas de publicidade e não devem ser utilizados para acompanhar visitantes do site público."
+    },
+    {
+      "title": "Se houver mudanças",
+      "body": "Antes da inclusão de ferramentas opcionais, a informação desta página e os controles de preferência deverão ser atualizados. Recursos que dependam de uma escolha de privacidade não devem iniciar antes dessa escolha.\n\nPara dúvidas sobre seus dados, consulte a política de privacidade ou fale com a associação pelo canal oficial."
+    }
+  ],
+  "seoTitle": "Cookies e preferências | Maria do Reino"
+}

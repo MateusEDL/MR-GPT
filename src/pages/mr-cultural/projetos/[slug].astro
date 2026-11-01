@@ -1,0 +1,12 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { projects, whatsappUrl } from '../../../lib/content';
+import '../../../styles/pages.css';
+export function getStaticPaths() { return projects.map((project) => ({ params: { slug: project.slug }, props: { project } })); }
+const { project } = Astro.props;
+const labels: Record<string,string> = { active: 'Em atividade', planned: 'Em planejamento', completed: 'Realizado' };
+---
+<Layout title={`${project.title} | MR Cultural`} description={project.description} path={`/mr-cultural/projetos/${project.slug}/`} image={project.image}>
+  <header class="inner-hero cultural-hero"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/mr-cultural/">MR Cultural</a><span aria-hidden="true">/</span><a href="/mr-cultural/projetos/">Projetos</a><span aria-hidden="true">/</span><span aria-current="page">{project.title}</span></nav><p class="eyebrow">{labels[project.status] || project.status}</p><h1>{project.title}</h1><p class="lead">{project.description}</p></div></header>
+  <div class="container content-layout"><article class="page-prose">{project.image && <img class="article-image" src={project.image} alt={project.imageAlt || ''} width="1200" height="675" />}{project.body.split(/\n\s*\n/).filter(Boolean).map((body) => <p>{body}</p>)}{project.status === 'planned' && <aside class="health-note">Este projeto está em planejamento. Sua apresentação não significa que inscrições ou atividades já estejam disponíveis.</aside>}<div class="page-actions"><a class="text-link" href="/mr-cultural/projetos/">← Voltar aos projetos</a></div></article><aside class="page-aside"><p class="eyebrow">Faça parte</p><h2>Compartilhar ideias é um começo.</h2><p>Converse com a equipe para conhecer o projeto e as possibilidades de participação.</p><a class="button button--dark" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Falar com a equipe <span aria-hidden="true">↗</span></a></aside></div>
+</Layout>

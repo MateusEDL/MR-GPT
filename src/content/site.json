@@ -1,0 +1,28 @@
+{
+  "name": "Associação Maria do Reino",
+  "shortName": "Maria do Reino",
+  "description": "Acolhimento, informação responsável e cultura como parte do cuidado. Conheça a Associação Maria do Reino, em Jaraguá do Sul, Santa Catarina.",
+  "city": "Jaraguá do Sul",
+  "state": "SC",
+  "cnpj": "52.247.721/0001-02",
+  "whatsapp": "5547999108994",
+  "instagram": "https://www.instagram.com/mariadoreinomed/",
+  "instagramCultural": "https://www.instagram.com/mrcultural.sc/",
+  "memberUrl": "https://acesso.mariadoreino.com.br/",
+  "email": "",
+  "address": "",
+  "hours": "",
+  "donation": {
+    "pixKey": "",
+    "pixHolder": "",
+    "bank": "",
+    "paymentUrl": ""
+  },
+  "seo": {
+    "url": "https://mariadoreino.com.br"
+  },
+  "logoInstitutional": "",
+  "logoCultural": "",
+  "footerPurpose": "Acolher é o começo.\nCaminhar junto é o que nos move.",
+  "footerClosing": "Feito de cuidado e comunidade."
+}

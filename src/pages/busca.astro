@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { pages, posts, events, projects } from '../lib/content';
+import '../styles/pages.css';
+const entries = [
+  ...pages.map((page) => ({ title: page.title, description: page.description, keywords: [page.eyebrow, page.intro, ...page.sections.map((section) => `${section.title} ${section.body}`), ...(page.faqs || []).map((faq) => `${faq.question} ${faq.answer}`)].join(' '), url: `/${page.slug}/` })),
+  ...posts.map((post) => ({ title: post.title, description: post.description, keywords: `${post.category} ${post.body}`, url: `/blog/${post.slug}/` })),
+  ...events.map((event) => ({ title: event.title, description: event.description, url: `/agenda/${event.slug}/` })),
+  ...projects.map((project) => ({ title: project.title, description: project.description, url: `/mr-cultural/projetos/${project.slug}/` })),
+  { title: 'Agenda da associação', description: 'Programação confirmada e condições de participação.', url: '/agenda/' },
+  { title: 'Agenda do MR Cultural', description: 'Encontros e atividades culturais.', url: '/mr-cultural/agenda/' },
+  { title: 'Projetos do MR Cultural', description: 'Iniciativas culturais e comunitárias.', url: '/mr-cultural/projetos/' },
+  { title: 'Galeria do MR Cultural', description: 'Registros reais dos encontros.', url: '/mr-cultural/galeria/' },
+];
+const safeIndex = JSON.stringify(entries).replace(/</g, '\\u003c');
+---
+<Layout title="Buscar no site | Maria do Reino" description="Encontre páginas, conteúdos e atividades da Associação Maria do Reino." path="/busca/" noindex>
+  <header class="inner-hero"><div class="container"><p class="eyebrow">Encontre seu caminho</p><h1>O que você procura?</h1><p class="lead">Busque informações sobre a associação, o acolhimento e a participação cultural.</p></div></header>
+  <section class="container list-section"><div class="search-block"><label class="search-label" for="site-search">Buscar no site</label><input class="search-input" id="site-search" type="search" placeholder="Por exemplo: associação, cultura ou contato" autocomplete="off" aria-describedby="search-status" /><p class="search-status" id="search-status" role="status" aria-live="polite">Digite uma palavra para encontrar páginas e conteúdos.</p><div class="search-results" id="search-results"></div><noscript><p>A busca precisa de JavaScript. Você pode navegar pelas páginas a seguir.</p><ul>{entries.map((entry) => <li><a href={entry.url}>{entry.title}</a></li>)}</ul></noscript></div></section>
+  <script type="application/json" id="search-index" set:html={safeIndex}></script>
+</Layout>
+<script>
+  interface SearchEntry { title: string; description: string; keywords?: string; url: string; }
+  const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const input = document.querySelector<HTMLInputElement>('#site-search');
+  const results = document.querySelector<HTMLElement>('#search-results');
+  const status = document.querySelector<HTMLElement>('#search-status');
+  const entries: SearchEntry[] = JSON.parse(document.querySelector('#search-index')?.textContent || '[]');
+  input?.addEventListener('input', () => {
+    if (!results || !status) return;
+    results.replaceChildren();
+    const query = normalize(input.value.trim());
+    if (!query) { status.textContent = 'Digite uma palavra para encontrar páginas e conteúdos.'; return; }
+    const words = query.split(/\s+/).filter(Boolean);
+    const matches = entries.filter((entry) => words.every((word) => normalize(`${entry.title} ${entry.description} ${entry.keywords || ''}`).includes(word)));
+    status.textContent = matches.length ? `${matches.length} ${matches.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}.` : 'Nenhum resultado encontrado. Experimente outra palavra ou fale com a equipe.';
+    for (const entry of matches) {
+      const article = document.createElement('article'); article.className = 'search-result';
+      const heading = document.createElement('h2');
+      const link = document.createElement('a'); link.href = entry.url; link.textContent = entry.title;
+      const description = document.createElement('p'); description.textContent = entry.description;
+      heading.append(link); article.append(heading, description); results.append(article);
+    }
+  });
+</script>

@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import EventList from '../../../components/EventList.astro';
+import '../../../styles/pages.css';
+---
+<Layout title="Agenda do MR Cultural | Maria do Reino" description="Programação cultural confirmada, condições de participação e registros dos encontros realizados pelo MR Cultural." path="/mr-cultural/agenda/">
+  <header class="inner-hero cultural-hero"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/mr-cultural/">MR Cultural</a><span aria-hidden="true">/</span><span aria-current="page">Agenda</span></nav><p class="eyebrow">Cultural como extensão do cuidado</p><h1>A gente se encontra por aqui.</h1><p class="lead">Arte, convivência e participação comunitária. Conheça a programação cultural e confira as condições de cada atividade.</p></div></header>
+  <section class="container list-section" aria-label="Programação cultural"><EventList cultural /><div class="page-actions"><a class="text-link" href="/agenda/">Ver a agenda completa da associação <span aria-hidden="true">↗</span></a></div></section>
+</Layout>

@@ -1,0 +1,60 @@
+{
+  "slug": "perguntas-frequentes",
+  "title": "Vamos esclarecer suas dúvidas",
+  "description": "Respostas sobre associação gratuita, acolhimento, atendimento e participação no MR Cultural.",
+  "eyebrow": "Perguntas frequentes",
+  "intro": "Aqui estão respostas para ajudar você a encontrar o próximo passo. Se sua dúvida continuar, converse com a equipe pelos canais oficiais.",
+  "sections": [
+    {
+      "title": "Uma conversa pode ajudar",
+      "body": "Você não precisa conhecer todos os termos ou já saber qual caminho seguir. A equipe pode explicar a associação e orientar por onde começar."
+    },
+    {
+      "title": "Cuide das suas informações",
+      "body": "Não envie documentos pessoais, receitas, laudos ou diagnósticos por formulários públicos. Se algum documento for necessário, peça orientação sobre o ambiente apropriado."
+    },
+    {
+      "title": "Informação e cuidado profissional",
+      "body": "As respostas do site são institucionais e informativas. Não substituem avaliação, prescrição ou acompanhamento por profissional habilitado."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "O que é a Maria do Reino?",
+      "answer": "É uma associação sem fins lucrativos de Jaraguá do Sul, Santa Catarina, voltada ao acolhimento, à informação responsável e ao cuidado integral, com cultura e participação comunitária."
+    },
+    {
+      "question": "A associação é gratuita?",
+      "answer": "Sim. Não há taxa de adesão nem contribuição associativa obrigatória. Consultas, atendimentos e atividades têm condições próprias, que devem ser confirmadas separadamente."
+    },
+    {
+      "question": "Como começo a me associar?",
+      "answer": "Fale com o acolhimento e diga que deseja se associar. A equipe explica o fluxo e os requisitos. O primeiro contato não conclui automaticamente o cadastro."
+    },
+    {
+      "question": "Acolhimento é uma consulta?",
+      "answer": "Não. O acolhimento escuta, orienta e encaminha. Avaliação clínica, diagnóstico, prescrição e acompanhamento terapêutico cabem aos profissionais habilitados."
+    },
+    {
+      "question": "Um familiar pode procurar orientação?",
+      "answer": "Sim. Familiares e responsáveis também podem entrar em contato para entender a associação e os próximos passos."
+    },
+    {
+      "question": "Como acesso a Área do Associado?",
+      "answer": "Use o link Área do Associado, que leva ao sistema existente em acesso.mariadoreino.com.br. Em caso de dificuldade, peça orientação à equipe."
+    },
+    {
+      "question": "O que é o MR Cultural?",
+      "answer": "É uma frente cultural e social da Associação Maria do Reino. Aproxima arte, convivência e participação comunitária sob o slogan Cultural como extensão do cuidado."
+    },
+    {
+      "question": "Há atividades culturais em datas fixas?",
+      "answer": "Consulte a programação confirmada de cada atividade. Não considere uma publicação antiga como confirmação de horário, periodicidade, local ou gratuidade atuais."
+    },
+    {
+      "question": "Posso colaborar sem me associar?",
+      "answer": "Converse com a equipe sobre voluntariado, propostas culturais e outras formas de apoio. As condições de cada participação serão alinhadas antes da confirmação."
+    }
+  ],
+  "seoTitle": "Perguntas frequentes | Maria do Reino"
+}

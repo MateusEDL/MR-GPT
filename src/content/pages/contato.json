@@ -1,0 +1,26 @@
+{
+  "slug": "contato",
+  "title": "Vamos conversar?",
+  "description": "Encontre os canais oficiais da Associação Maria do Reino para pedir orientação e propor atividades.",
+  "eyebrow": "Contato",
+  "intro": "Para conhecer a associação, pedir orientação ou propor uma atividade, comece pelos nossos canais oficiais. Uma conversa ajuda a encontrar o próximo passo.",
+  "sections": [
+    {
+      "title": "Acolhimento e associação",
+      "body": "Fale com a equipe pelo WhatsApp (47) 99910-8994. Diga seu nome, sua cidade e que tipo de orientação procura.\n\nNão envie laudos, receitas, diagnósticos ou documentos pessoais neste primeiro contato. Se forem necessários, a equipe orientará o envio pelo ambiente apropriado."
+    },
+    {
+      "title": "Cultura e participação",
+      "body": "Para oficinas, apresentações, ações comunitárias, voluntariado e propostas culturais, identifique sua mensagem como participação no MR Cultural.\n\nVocê também pode acompanhar os perfis @mariadoreinomed e @mrcultural.sc no Instagram."
+    },
+    {
+      "title": "Antes de uma visita",
+      "body": "A associação tem suas raízes em Jaraguá do Sul, Santa Catarina. Confirme o local efetivo, o horário e a disponibilidade de atendimento com a equipe antes de se deslocar."
+    },
+    {
+      "title": "Se você já é associado",
+      "body": "Acesse o sistema existente pelo link Área do Associado. O site público apresenta a associação; a área de acesso mantém o caminho próprio dos associados.\n\nEste canal não é um serviço de urgência. Em uma urgência de saúde, procure atendimento apropriado."
+    }
+  ],
+  "seoTitle": "Contato e WhatsApp | Maria do Reino"
+}

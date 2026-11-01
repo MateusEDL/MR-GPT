@@ -1,0 +1,28 @@
+---
+import { projects, site } from '../lib/content';
+import type { Project as ProjectRecord } from '../lib/content';
+import '../styles/pages.css';
+interface Props { items?: ProjectRecord[]; compact?: boolean; }
+const { items = projects, compact = false } = Astro.props;
+const selected = compact ? items.slice(0,3) : items;
+const labels: Record<string,string> = { active: 'Em atividade', planned: 'Em planejamento', completed: 'Realizado' };
+---
+{selected.length === 0 ? (
+  <div class="empty-state">
+    <span class="eyebrow">Arte, convivência e pertencimento</span>
+    <h2>Boas ideias encontram espaço na comunidade.</h2>
+    <p>Os projetos culturais serão apresentados aqui com contexto, registros reais e informações de participação. Tem uma proposta de oficina, encontro ou ação coletiva?</p>
+    <a class="text-link" href="/contato/?assunto=cultura">Apresentar uma proposta <span aria-hidden="true">↗</span></a>
+    <p><a href={site.instagramCultural} target="_blank" rel="noopener noreferrer">Conheça também o perfil do MR Cultural.</a></p>
+  </div>
+) : (
+  <div class="entry-grid">{selected.map((item) => (
+    <article class="entry-card">
+      {item.image && <img src={item.image} alt={item.imageAlt || ''} width="600" height="450" loading="lazy" />}
+      <div class="entry-meta"><span class="pill">{labels[item.status] || item.status}</span></div>
+      <h2><a href={`/mr-cultural/projetos/${item.slug}/`}>{item.title}</a></h2>
+      <p>{item.description}</p>
+      <a class="text-link" href={`/mr-cultural/projetos/${item.slug}/`}>Conhecer o projeto <span aria-hidden="true">↗</span></a>
+    </article>
+  ))}</div>
+)}

@@ -1,0 +1,12 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { posts } from '../../lib/content';
+import '../../styles/pages.css';
+const ordered = [...posts].sort((a,b) => b.publishedAt.localeCompare(a.publishedAt));
+---
+<Layout title="Notícias e conteúdos | Maria do Reino" description="Notícias da associação, cultura e informação responsável para acompanhar os caminhos do cuidado." path="/blog/">
+  <header class="inner-hero"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">Conteúdos</span></nav><p class="eyebrow">Conhecimento que aproxima</p><h1>Informação para caminhar junto.</h1><p class="lead">Notícias da associação, vida cultural e informação responsável. Um espaço para entender, perguntar e participar.</p></div></header>
+  <section class="container list-section" aria-label="Publicações">
+    {ordered.length > 0 ? <div class="entry-grid">{ordered.map((post) => <article class="entry-card">{post.image && <img src={post.image} alt={post.imageAlt || ''} width="600" height="450" loading="lazy" />}<div class="entry-meta"><span>{post.category}</span><time datetime={post.publishedAt}>{new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeZone: 'America/Sao_Paulo' }).format(new Date(`${post.publishedAt.slice(0,10)}T12:00:00-03:00`))}</time></div><h2><a href={`/blog/${post.slug}/`}>{post.title}</a></h2><p>{post.description}</p><a class="text-link" href={`/blog/${post.slug}/`}>Ler conteúdo <span aria-hidden="true">↗</span></a></article>)}</div> : <div class="empty-state"><p class="eyebrow">Este espaço está sendo preparado</p><h2>Informar também é uma forma de acolher.</h2><p>Os conteúdos serão publicados com autoria, contexto e revisão quando necessária. Enquanto isso, conheça como a associação pode orientar os próximos passos.</p><a class="text-link" href="/acolhimento/">Conhecer o acolhimento <span aria-hidden="true">↗</span></a></div>}
+  </section>
+</Layout>

@@ -1,0 +1,72 @@
+---
+import '@fontsource-variable/dm-sans';
+import '@fontsource-variable/newsreader';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import {site,indexable,whatsappUrl} from '../lib/content';
+import {existsSync} from 'node:fs';
+interface Props { title: string; description: string; path?: string; image?: string; noindex?: boolean; schema?: Record<string,unknown> | Record<string,unknown>[] }
+const {title,description,path=Astro.url.pathname,image='/images/compartilhamento.png',noindex=false,schema} = Astro.props;
+const canonical = new URL(path, site.seo.url).href;
+const institutionalLogo = site.logoInstitutional || (existsSync('public/uploads/logo-maria-do-reino.png') ? '/uploads/logo-maria-do-reino.png' : existsSync('public/uploads/logo-maria-do-reino.svg') ? '/uploads/logo-maria-do-reino.svg' : null);
+const structured = [{ '@context':'https://schema.org', '@type':'NGO',name:site.name,url:site.seo.url,sameAs:[site.instagram,site.instagramCultural],address:{'@type':'PostalAddress',addressLocality:site.city,addressRegion:site.state,addressCountry:'BR'}}, ...(schema ? Array.isArray(schema)?schema:[schema]:[])];
+const menu = [{label:'A associação',href:'/quem-somos/'},{label:'Acolhimento',href:'/acolhimento/'},{label:'MR Cultural',href:'/mr-cultural/'},{label:'Apoie',href:'/apoie/'}];
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173e34" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={indexable&&!noindex?'index, follow':'noindex, nofollow'} />
+    <link rel="canonical" href={canonical} />
+    <title>{title.includes('Maria do Reino')?title:`${title} | Maria do Reino`}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image,site.seo.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g,'\\u003c')} />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <div class="utility"><div class="container utility-inner"><span>Uma associação sem fins lucrativos. Um cuidado que aproxima.</span><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Área do Associado <Icon name="up" size={13}/></a></div></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          {institutionalLogo ? <img src={institutionalLogo} alt="" width="68" height="68" /> : null}
+          <span class="brand-type"><span>Maria do Reino<span class="brand-dot">.</span></span><small>ASSOCIAÇÃO · CUIDADO · CULTURA</small></span>
+        </a>
+        <nav class="desktop-nav" aria-label="Navegação principal">{menu.map(item=><a href={item.href} aria-current={path.startsWith(item.href)?'page':undefined}>{item.label}</a>)}</nav>
+        <div class="header-actions"><a class="search-link" href="/busca/" aria-label="Buscar no site"><Icon name="search" size={21}/></a><a class="button button--dark header-cta" href="/como-se-associar/">Quero me associar <Icon name="up" size={17}/></a></div>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><span></span><span></span></button>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="Navegação para celular" hidden>{menu.map(item=><a href={item.href}>{item.label}<Icon name="arrow" size={19}/></a>)}<a href="/cannabis-medicinal/">Cannabis medicinal</a><a href="/agenda/">Agenda</a><a href="/contato/">Contato</a><a class="button button--dark" href="/como-se-associar/">Quero me associar</a></nav>
+    </header>
+    <main id="conteudo"><slot /></main>
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div class="footer-purpose"><a class="brand brand--footer" href="/"><span class="brand-type"><span>Maria do Reino.</span><small>NINGUÉM CUIDA SOZINHO</small></span></a><p>{site.footerPurpose}</p><div class="social-links"><a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram Maria do Reino"><Icon name="instagram" size={20}/></a><a href={site.instagramCultural} target="_blank" rel="noopener noreferrer">MR Cultural <Icon name="up" size={17}/></a></div></div>
+        <div class="footer-column"><span>ENCONTRE SEU CAMINHO</span><a href="/quem-somos/">Quem somos</a><a href="/como-se-associar/">Como se associar</a><a href="/acolhimento/">Acolhimento</a><a href="/cannabis-medicinal/">Cannabis medicinal</a><a href="/perguntas-frequentes/">Perguntas frequentes</a></div>
+        <div class="footer-column"><span>VIDA EM COMUNIDADE</span><a href="/mr-cultural/">MR Cultural</a><a href="/mr-cultural/agenda/">Agenda cultural</a><a href="/mr-cultural/galeria/">Galeria</a><a href="/blog/">Notícias e conteúdos</a><a href="/apoie/">Apoie e participe</a></div>
+        <div class="footer-column footer-contact"><span>VAMOS CONVERSAR?</span><a class="footer-phone" href={whatsappUrl} target="_blank" rel="noopener noreferrer">(47) 99910-8994 <Icon name="up" size={17}/></a><p>{site.city}, Santa Catarina</p><a href="/contato/">Todos os canais de contato</a><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Área do Associado <Icon name="up" size={13}/></a></div>
+      </div>
+      <div class="container footer-bottom"><span>{site.name}<br/>CNPJ {site.cnpj}</span><div><a href="/politica-de-privacidade/">Privacidade</a><a href="/cookies/">Cookies e preferências</a></div><span>{site.footerClosing}</span></div>
+      <div class="container health-note">Informação que acolhe, sem substituir avaliação e acompanhamento de profissionais habilitados.</div>
+    </footer>
+    <a class="whatsapp-float" href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Vamos conversar? Fale com o acolhimento pelo WhatsApp"><Icon name="chat" size={24}/><span>Vamos conversar?</span></a>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      function closeMenu(){if(menu&&toggle){menu.hidden=true;toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menu');}}
+      toggle?.addEventListener('click',()=>{if(!menu)return;const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));toggle.setAttribute('aria-label',open?'Abrir menu':'Fechar menu');menu.hidden=open;});
+      document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){closeMenu();toggle?.focus();}});
+      menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+      window.matchMedia('(min-width: 1051px)').addEventListener('change',(e)=>{if(e.matches)closeMenu();});
+    </script>
+  </body>
+</html>

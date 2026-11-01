@@ -1,0 +1,114 @@
+# Maria do Reino
+
+Site institucional em português da Associação Maria do Reino, com destaque para o MR Cultural. Construído com Astro, HTML estático, fontes locais e conteúdo em JSON. O projeto não depende da Vercel para servir suas páginas.
+
+## Começar
+
+Requisito: Node.js 24 e npm. Use o checkout existente; não é preciso criar outro worktree.
+
+```sh
+npm ci
+npm run dev
+```
+
+O endereço de desenvolvimento é mostrado pelo Astro. Para editar pelo painel local, execute também `npm run cms` em outro terminal e abra `/admin/` no servidor de desenvolvimento. O proxy de edição fica vinculado somente à própria máquina. Não o exponha na internet.
+
+O painel local foi testado com alteração real de um título, gravação de `home.json` e restauração do original. Não é necessário programar para editar os campos disponíveis.
+
+## O que está incluído
+
+- Home, associação, acolhimento, informação introdutória em saúde, MR Cultural, apoio, contato, FAQ, privacidade e cookies.
+- Agenda geral e cultural com uma base única; projetos, galeria e notícias preparados para registros reais.
+- Busca local, menu móvel, perguntas acessíveis por teclado, links oficiais e Área do Associado preservada.
+- Conteúdo e configurações editáveis: páginas, home, contatos, logos, notícias, eventos, projetos, galerias, parceiros e autores/revisores.
+- Metadados, cartão social PNG, sitemap e robots; indexação desativada inicialmente.
+- APIs Vercel opcionais para autenticação editorial e contato. Não há confirmação falsa de envio.
+- Imagens ilustrativas de IA identificadas. Não são registros de eventos ou da sede.
+
+Não foram inventados eventos, depoimentos, profissionais, parceiros, números de impacto, dados Pix ou serviços em funcionamento. Estatuto, notas internas, documentos de pacientes e arquivos originais dos anexos não fazem parte deste repositório.
+
+## Build e exportação
+
+```sh
+npm run check
+npm test
+npm run build
+npm run export
+```
+
+`npm run build` gera `dist/` para hospedagem estática. Por segurança, o painel administrativo **é excluído do build público por padrão**. Leia a auditoria abaixo.
+
+`npm run export` verifica e constrói o projeto, produzindo em `exports/`:
+
+- `maria-do-reino-fonte.zip`: código, conteúdo, imagens, configuração e documentação, sem segredos nem node_modules.
+- `maria-do-reino-estatico.zip`: somente os arquivos de `dist/` para hospedagem estática.
+
+Os arquivos ZIP podem ser extraídos por ferramentas comuns de arquivo. No pacote fonte, execute `npm ci` e `npm run build` para reconstruir. Em uma hospedagem estática genérica, APIs `/api/*` precisam de um runtime separado; os links de WhatsApp e o conteúdo público continuam independentes dessas funções.
+
+## Conectar à Vercel
+
+A conta Vercel e a autorização GitHub pertencem à associação. Nenhum login ou token pessoal foi solicitado em chat, e nenhum projeto Vercel foi criado por esta entrega.
+
+1. Crie uma conta em https://vercel.com/signup e conecte o GitHub com acesso ao repositório `MateusEDL/MR-GPT`.
+2. Em https://vercel.com/new, importe o repositório. Se o código ainda não estiver no GitHub, envie primeiro o conteúdo deste pacote ao repositório.
+3. A configuração `vercel.json` define framework **Astro**, instalação **npm ci**, build **npm run build** e saída **dist**. Use Node.js **24.x**. A Vercel servirá os arquivos estáticos e as funções Node de `api/`.
+4. Comece pelo endereço de teste fornecido pela Vercel. Mantenha `PUBLIC_INDEXABLE=false` e `PUBLIC_CMS_ENABLED=false`. Não altere o domínio existente nem o subdomínio `acesso.mariadoreino.com.br` nesta etapa.
+5. Confira a versão publicada no endereço de teste. O deploy real e as funções precisam de verificação nesse ambiente; o build local não comprova a infraestrutura da Vercel.
+6. Quando a conexão Git estiver ativa, alterações aprovadas e publicadas na branch `main` acionam novo deploy. Defina a produção para `main` e aplique as permissões de revisão adequadas à equipe.
+7. Troque o domínio somente após aprovação final, backup e plano de migração. Revise os dados de `src/content/site.json`, o `SITE_URL`, os canonicals, o sitemap e os redirecionamentos reais antes de ativar `PUBLIC_INDEXABLE=true`.
+
+Nenhum provedor ou plano pago é presumido; os termos e custos da hospedagem devem corresponder ao uso institucional da associação.
+
+## Painel e segurança
+
+A edição local está disponível por Decap CMS. A auditoria completa encontrou alertas em dependências do editor. Dependências usadas para preparar um bundle de navegador continuam relevantes mesmo quando classificadas como desenvolvimento.
+
+O build público remove `/admin/` por padrão. **Não habilite `PUBLIC_CMS_ENABLED=true` em produção antes de resolver ou aprovar formalmente o alcance dos alertas**, atualizar/reconstruir o bundle quando necessário e revalidar o painel. Não aplicar downgrade ou override às cegas, porque isso não garante que o JavaScript pré-compilado esteja corrigido.
+
+Para testar o painel apenas localmente:
+
+```sh
+npm run build:editor
+npm run preview
+# Em outro terminal:
+npm run cms
+```
+
+Depois da revisão do pacote, o login online tem endpoints de OAuth preparados e requer configuração segura de `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` e `CMS_ORIGIN`. O escopo GitHub deve refletir o repositório; a OAuth App não tem a mesma granularidade de um GitHub App. Consulte [painel e integrações](docs/painel-e-integracoes.md) e [auditoria](docs/auditoria-dependencias.md).
+
+## Contato e privacidade
+
+O caminho público inicial é o WhatsApp fornecido no briefing. A associação deve confirmar os contatos antes do lançamento. Não há formulário público ativo sem receptor configurado. O endpoint retorna indisponibilidade real quando falta configuração.
+
+O formulário só deve ser habilitado depois de configurar e testar um receptor HTTPS aprovado, revisar a retenção e a política de privacidade e estabelecer proteção contra abuso no provedor. Campos públicos não pedem documentos ou diagnósticos. Variáveis privadas nunca devem receber prefixo `PUBLIC_`.
+
+Sem analytics, pixels, embeds sociais automáticos ou cookies publicitários. Links para serviços externos dependem das políticas dos destinos. Conteúdo público não substitui acompanhamento profissional.
+
+## Validação
+
+```sh
+npm run check
+npm test
+npm run build:editor
+npm run test:e2e
+npm run build
+```
+
+Playwright usa `/usr/bin/chromium` neste ambiente; fora dele, defina `PLAYWRIGHT_CHROMIUM_EXECUTABLE` para seu Chromium compatível. Os testes incluem desktop, celular, busca, acessibilidade automatizada e painel local. Confira as contagens e os limites em [testes visuais](docs/testes-visuais.md). Não foi feita medição Lighthouse ou de Core Web Vitals em campo.
+
+## Conteúdo e pendências
+
+Os logos foram identificados visualmente na conversa, mas não chegaram ao filesystem como arquivos de imagem anexados. Por isso, o site usa o nome tipográfico até a inserção dos **originais**, sem recriar o símbolo. No painel, use os campos “Logotipo oficial Maria do Reino” e “Logotipo oficial MR Cultural”.
+
+Fotos e vídeos das redes não foram obtidos: a rede do ambiente bloqueou as requisições. Os domínios necessários foram salvos no rascunho do ambiente, cuja aplicação ainda está pendente. Não confundir as ilustrações de IA com esse acervo.
+
+Ainda precisam de confirmação: contatos atuais, endereço e horários, serviços e condições de participação, programação, autorizações de mídia, profissionais revisores, parceiros, dados oficiais de doação, hospedagem, integração real e inventário de URLs antigas. Campos sem dados ficam ausentes da interface. A área atual dos associados não foi alterada nem testada com autenticação.
+
+Documentação:
+
+- [Guia da equipe](docs/guia-editorial.md)
+- [Painel e integrações](docs/painel-e-integracoes.md)
+- [Auditoria de dependências](docs/auditoria-dependencias.md)
+- [Inventário das ilustrações](docs/inventario-imagens.md)
+- [Testes visuais](docs/testes-visuais.md)
+- [Migração e lançamento](docs/lancamento.md)

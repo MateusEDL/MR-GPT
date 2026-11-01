@@ -1,0 +1,36 @@
+{
+  "slug": "cannabis-medicinal",
+  "title": "Informação responsável para o cuidado",
+  "description": "Uma introdução responsável ao tema da cannabis medicinal, com foco em acompanhamento profissional e perguntas para a consulta.",
+  "eyebrow": "Cannabis medicinal",
+  "intro": "Falar sobre cannabis medicinal exige cuidado com as informações e respeito à história de cada pessoa. O ponto de partida é conversar com um profissional habilitado.",
+  "sections": [
+    {
+      "title": "Comece pela avaliação profissional",
+      "body": "A possibilidade de um tratamento não pode ser definida por uma publicação ou por uma experiência de outra pessoa. Sua situação deve ser avaliada por um profissional habilitado.\n\nEste site oferece orientação institucional. Não apresenta doses, prescrições ou recomendações individuais de uso."
+    },
+    {
+      "title": "Leve suas perguntas para a consulta",
+      "body": "Pergunte qual é o objetivo do cuidado, quais alternativas podem ser consideradas e como serão avaliados riscos, benefícios e acompanhamento.\n\nTambém é importante esclarecer dúvidas sobre outros tratamentos em uso, rotina de retorno e o que fazer diante de uma intercorrência. Essas respostas precisam vir de quem acompanha você."
+    },
+    {
+      "title": "Informação não é promessa",
+      "body": "Nenhum resultado é garantido. Relatos individuais e mensagens nas redes não substituem avaliação profissional nem demonstram, sozinhos, o que é adequado a outra pessoa.\n\nAo consultar conteúdos de saúde, confira autoria, fontes, data e contexto. Desconfie de promessas de cura e de afirmações de ausência de riscos."
+    },
+    {
+      "title": "O papel da associação",
+      "body": "A Maria do Reino acolhe dúvidas e orienta a busca por informação responsável e pelos caminhos de cuidado. A consulta e o acompanhamento terapêutico competem aos profissionais habilitados.\n\nPara conhecer a associação e entender como começar, converse com o acolhimento. Não envie documentos clínicos por formulários públicos."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Esta página indica um tratamento para mim?",
+      "answer": "Não. O conteúdo é institucional e informativo. Uma indicação individual depende de avaliação e acompanhamento de profissional habilitado."
+    },
+    {
+      "question": "Posso alterar meu tratamento com base no site?",
+      "answer": "Não use o site para iniciar, interromper ou ajustar tratamentos. Leve suas dúvidas ao profissional que acompanha você."
+    }
+  ],
+  "seoTitle": "Cannabis medicinal: informação responsável | Maria do Reino"
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "quem-somos",
+  "title": "Cuidado com raízes na comunidade",
+  "description": "Conheça a história, o propósito e os valores da Associação Maria do Reino, em Jaraguá do Sul, Santa Catarina.",
+  "eyebrow": "Quem somos",
+  "intro": "A Maria do Reino nasceu da vontade de construir caminhos de cuidado com escuta, dignidade e presença. Somos uma associação sem fins lucrativos de Jaraguá do Sul, Santa Catarina.",
+  "sections": [
+    {
+      "title": "Uma história que começa pelo encontro",
+      "body": "Fundada em 15 de maio de 2023, a Associação Maria do Reino reúne pessoas em torno de uma ideia: ninguém deveria enfrentar sozinho as dúvidas e os desafios do cuidado.\n\nAcolhemos pacientes e familiares, orientamos a busca por informação responsável e aproximamos a comunidade de caminhos de participação e cuidado."
+    },
+    {
+      "title": "A pessoa vem com a história inteira",
+      "body": "Cada pessoa traz sua rotina, suas dúvidas e suas possibilidades. Nossa escuta considera esse contexto e respeita o tempo de cada um.\n\nO acolhimento associativo orienta. Avaliação clínica, prescrição e acompanhamento terapêutico cabem aos profissionais habilitados."
+    },
+    {
+      "title": "Independência, dignidade e acesso",
+      "body": "Somos independentes de marcas comerciais e de partidos políticos. Valorizamos os direitos humanos, o respeito às diferenças, a sustentabilidade e o acesso à informação.\n\nA associação é gratuita, sem taxas ou contribuições associativas obrigatórias. As condições de consultas, atendimentos e atividades são informadas separadamente."
+    },
+    {
+      "title": "Cultura também faz parte",
+      "body": "O MR Cultural é uma frente cultural e social da própria Maria do Reino. A arte, a convivência e a participação comunitária ampliam os espaços de encontro.\n\nAcreditamos no pertencimento: ser vizinho, artista, aprendiz, familiar e participante de uma comunidade é parte de uma vida acompanhada."
+    }
+  ],
+  "seoTitle": "Quem somos | Associação Maria do Reino"
+}
