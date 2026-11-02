@@ -1,6 +1,6 @@
 # Inventário das imagens ilustrativas
 
-As quatro imagens abaixo foram geradas para este projeto. Não são fotografias da Associação Maria do Reino, de seus espaços ou de atividades realizadas pelo MR Cultural. Não foram obtidas dos perfis sociais. Nenhum logo foi criado, redesenhado ou alterado nesta tarefa.
+As seis imagens abaixo foram geradas para este projeto. Não são fotografias da Associação Maria do Reino, de seus espaços ou de atividades realizadas pelo MR Cultural. Não foram obtidas dos perfis sociais. Nenhum logo foi criado, redesenhado ou alterado nesta tarefa.
 
 Os originais PNG gerados permanecem em `/workspace/generated_images/`. Os arquivos WebP do site são conversões desses originais, sem modificação da composição. As versões menores contêm a mesma imagem com redimensionamento proporcional.
 
@@ -75,9 +75,45 @@ Os originais PNG gerados permanecem em `/workspace/generated_images/`. Os arquiv
 
 > Create a single realistic editorial photograph, horizontal landscape 3:2, illustrating gentle organic gardening and care for living plants. Close-up of only a pair of adult hands, naturally proportioned and anatomically correct, carefully tending dark rich living soil around small healthy green seedlings in an outdoor raised garden bed. Natural golden early morning sunlight, subtle warmth, organic textures, lush green leaf garden softly blurred in the background, honest unstaged feel, tactile soil, tiny roots and young leaves, earthy browns, warm orange highlights and deep institutional forest greens. Focus on the intimate act of planting and nurturing, not a portrait. Adult person not identifiable, no faces, no jewelry or identifying clothing, no children, no patients, no smoking, no consumption, no medicine bottles, no commercial products, no logos, no brand names, no text, no watermark. This is a generic illustrative fictional garden, not documentary evidence of any nonprofit's work or current cultivation. Premium documentary-style editorial composition, calm, photorealistic natural textures, human care and sustainability without therapeutic claims. Composition allows a clean, generous garden atmosphere around the hands.
 
+## Acervo botânico — orvalho
+
+- Arquivo principal: `public/images/botanica-orvalho-ia.webp`.
+- Dimensões reais: **1536 × 1024 px**, proporção **3:2**, 219.750 bytes.
+- Versões responsivas: `botanica-orvalho-ia-960.webp` (960 × 640 px, 111.240 bytes) e `botanica-orvalho-ia-640.webp` (640 × 427 px, 63.548 bytes).
+- Local proposto: imagem botânica de destaque em seção institucional ou composição de natureza e informação responsável; não deve representar uma atividade realizada.
+- Assunto: close de folhas de cannabis com gotas de orvalho sob luz suave da manhã e fundo verde desfocado. Cena genérica e ficcional, sem pessoas, marcas ou produtos.
+- Texto alternativo informativo: `Folhas de cannabis com gotas de orvalho sob luz da manhã em uma cena botânica ilustrativa.`
+- Legenda obrigatória visível: **Imagem ilustrativa gerada por IA**.
+- Desktop: preservar as gotas e as nervuras em foco; manter proporção 3:2 ou enquadramento que conserve a folha principal inteira.
+- Celular: usar versão responsiva e conferir que a folha principal continua identificável sem exigir aumento artificial.
+- Carregamento abaixo da primeira dobra: `width="1536"`, `height="1024"`, `loading="lazy"` e `decoding="async"`; `srcset`: 640w, 960w e 1536w.
+- Original gerado: `/workspace/generated_images/exec-1376854d-409f-4462-8101-0e6b452fcdd9.png`.
+
+### Prompt em inglês
+
+> Create a single extremely realistic botanical editorial photograph, horizontal landscape 3:2. Macro close-up of healthy medicinal cannabis leaves, sharply rendered fine serrated edges and delicate veins with fresh tiny morning dew droplets sparkling in soft early sunlight, layered organically among ordinary natural garden greenery. One beautifully detailed fan leaf in crisp focus, emerald and deep forest green background with creamy natural bokeh, rich living textures, restrained golden light, refined photographic art direction, tranquil welcoming botanical atmosphere. This is a generic fictional AI illustration for an informational nonprofit website, not documentary evidence of actual cultivation or facilities of any association. No people, no faces, no smoking, no consumption, no medicine bottles, no packaging, no commercial products, no labels, no logos, no writing, no watermark. No medical efficacy claims. Photograph should feel immersive, natural, tactile and alive, with exceptional botanical detail and organic composition.
+
+## Acervo botânico — jardim medicinal ilustrativo
+
+- Arquivo principal: `public/images/jardim-medicinal-ia.webp`.
+- Dimensões reais: **1774 × 887 px**, proporção **2:1**, 459.404 bytes.
+- Versões responsivas: `jardim-medicinal-ia-1280.webp` (1280 × 640 px, 270.894 bytes) e `jardim-medicinal-ia-768.webp` (768 × 384 px, 125.628 bytes).
+- Local proposto: faixa panorâmica de natureza ou composição visual ampla do site; não identifica instalações nem cultivo da associação.
+- Assunto: jardim botânico ficcional ao ar livre, com cannabis entre ervas e hortaliças, caminho de terra e luz dourada da tarde. Não comprova autorização, cultivo atual ou atividade da associação.
+- Texto alternativo informativo: `Jardim botânico ilustrativo com cannabis, ervas e hortaliças ao redor de um caminho de terra iluminado pelo sol.`
+- Legenda obrigatória visível: **Imagem ilustrativa gerada por IA**.
+- Desktop: aproveitar o panorama e a profundidade do caminho; não cobrir a imagem com texto sem medir contraste.
+- Celular: conferir o recorte do caminho e das plantas; o original possui 1774 px de largura e não foi ampliado artificialmente.
+- Carregamento abaixo da primeira dobra: `width="1774"`, `height="887"`, `loading="lazy"` e `decoding="async"`; `srcset`: 768w, 1280w e 1774w.
+- Original gerado: `/workspace/generated_images/exec-82daf8b1-f080-464e-bc39-699de9e81ffb.png`.
+
+### Prompt em inglês
+
+> Generate one panoramic botanical landscape photograph, extra wide horizontal aspect ratio about 2:1, for a nonprofit informational medicinal cannabis and community care website. A lush fictional outdoor organic botanical garden: beautifully healthy cannabis foliage mixed naturally with ordinary aromatic herbs, edible garden plants and native greenery, a modest winding dark earth footpath through the leaves, shafts of warm golden late afternoon sunlight streaming diagonally through a softly blurred canopy. Immersive close foreground leaves and layered depth, deep forest greens, emerald tones, subtle warm ochre light, authentic natural textures, refined magazine editorial photographic art direction, photorealistic rather than illustration painting. No buildings or facilities suggesting any actual association premises, no identifying location, no people, no faces, no patients, no children, no smoking, no consumption, no medicine bottles, no packaging, no commercial products, no labels, no signs, no writing, no logos, no watermark. This garden is a generic fictional AI-generated illustration, not evidence of cultivation or activity by a real association, and makes no therapeutic claim. A welcoming contemplative living landscape with sharp botanical detail and soft natural background.
+
 ## Verificação realizada
 
-- Os quatro arquivos principais foram abertos e inspecionados visualmente; os dois novos assets do redesign também tiveram suas variantes e dimensões conferidas.
+- Os seis arquivos principais foram abertos e inspecionados visualmente; todos os assets tiveram suas variantes e dimensões conferidas.
 - As imagens não contêm logos, pacientes, crianças ou alegações de resultado clínico.
 - As dimensões e os arquivos WebP foram verificados após a conversão.
 - Desempenho real, posição LCP e recortes finais devem ser conferidos na página implementada. A geração das imagens não comprova metas Lighthouse ou Core Web Vitals.

@@ -64,6 +64,8 @@ collections:
           - { name: secondaryLabel, label: Botão secundário, widget: string }
           - { name: careTitle, label: Título de acolhimento, widget: string }
           - { name: careIntro, label: Introdução de acolhimento, widget: text }
+          - { name: careImage, label: Imagem botânica de acolhimento, widget: image, required: true, default: /images/botanica-orvalho-ia.webp }
+          - { name: careImageAlt, label: Descrição da imagem botânica de acolhimento, widget: string, required: true }
           - { name: careEyebrow, label: Identificação acima do acolhimento, widget: string }
           - { name: careFootnote, label: Orientação ao final do acolhimento, widget: text }
           - { name: cultureEyebrow, label: Identificação cultural, widget: string }
@@ -78,6 +80,8 @@ collections:
           - { name: manifestoEyebrow, label: Identificação do trecho institucional, widget: string }
           - { name: manifestoQuote, label: Trecho institucional em destaque, widget: text }
           - { name: manifestoAttribution, label: Identificação pública do trecho, widget: string }
+          - { name: manifestoImage, label: Paisagem botânica do manifesto, widget: image, required: true, default: /images/jardim-medicinal-ia.webp }
+          - { name: manifestoImageAlt, label: Descrição da paisagem botânica do manifesto, widget: string, required: true }
           - { name: faqEyebrow, label: Identificação acima das dúvidas, widget: string }
           - { name: faqTitle, label: Título de dúvidas frequentes, widget: text }
           - { name: faqIntro, label: Introdução das dúvidas frequentes, widget: text }

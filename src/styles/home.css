@@ -64,3 +64,12 @@ html.motion-paused .organic-home *,html.motion-reduced .organic-home *{animation
 .garden-portrait figcaption{left:50%;right:auto;transform:translateX(-50%);white-space:nowrap}
 .culture-photo figcaption{left:50%;right:auto;transform:translateX(-50%) rotate(-5deg);white-space:nowrap}
 .nature-photo figcaption{left:50%;right:auto;transform:translateX(-50%) rotate(5deg);white-space:nowrap}
+.manifesto-section--botanical{background:#092d20;min-height:850px;padding-block:210px;isolation:isolate}
+.manifesto-landscape{position:absolute;inset:0;z-index:-3}
+.manifesto-landscape img{object-position:62% center}
+.manifesto-photo-shade{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#042b20ed 0%,#052d20c4 50%,#062b2038 100%),linear-gradient(0deg,#052d20dd,transparent 60%)}
+.manifesto-section--botanical .manifesto-inner{text-align:left;align-items:flex-start}
+.manifesto-section--botanical blockquote{max-width:920px}
+.manifesto-section--botanical .manifesto-shape{opacity:.3}
+.manifesto-landscape figcaption{bottom:128px;right:40px;white-space:nowrap}
+@media(max-width:700px){.manifesto-section--botanical{min-height:790px;padding-block:125px 155px}.manifesto-photo-shade{background:linear-gradient(90deg,#042b20e6,#052d20b5),linear-gradient(0deg,#052d20e6,transparent 70%)}.manifesto-landscape img{object-position:65% center}.manifesto-section--botanical blockquote{font-size:44px;line-height:1.12}.manifesto-landscape figcaption{bottom:85px;left:50%;right:auto;transform:translateX(-50%);font-size:9px}}

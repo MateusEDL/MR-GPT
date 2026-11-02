@@ -63,3 +63,7 @@ Capturas completas persistidas para revisão: `docs/previews/inicio-desktop.png`
 Os resultados acima correspondem à configuração inicial sem formulário habilitado e sem registros de eventos/notícias publicados. Não equivalem a validação de e-mail transacional, credenciais OAuth, hospedagem real, Core Web Vitals de campo ou certificação completa de acessibilidade.
 
 Após centralizar os créditos das três imagens com máscara orgânica, a validação dirigida da home foi repetida: quatro testes passaram (imagem/legendas e Axe da home nos dois tamanhos). As capturas finais foram atualizadas. O relatório HTML do runner pode refletir essa seleção mais recente.
+
+## Revisão de imagens botânicas e posições de marca
+
+Depois da inclusão de duas novas imagens botânicas e do componente preparado para os logos originais, foram executados 12 cenários dirigidos: 11 passaram e 1 foi pulado por ser menu móvel no desktop. Foram verificados home, cinco legendas de IA, MR Cultural, menu e as seis verificações Axe em desktop e celular. Não havia arquivos originais de logo no projeto; o teste não comprova qualidade ou visual de um logo ainda não fornecido. A exibição final das marcas requer validação após inserir os originais.

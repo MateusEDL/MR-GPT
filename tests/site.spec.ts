@@ -73,7 +73,7 @@ test('home identifica as ilustrações e preserva o caminho dos associados', asy
   await page.goto('/');
   await prepareImages(page);
   const captions = page.locator('figcaption').filter({ hasText: 'Imagem ilustrativa gerada por IA' });
-  await expect(captions).toHaveCount(4);
+  await expect(captions).toHaveCount(5);
   for (const caption of await captions.all()) await expect(caption).toBeVisible();
   const memberLinks = page.getByRole('link', { name: 'Área do Associado' });
   expect(await memberLinks.count()).toBeGreaterThan(0);

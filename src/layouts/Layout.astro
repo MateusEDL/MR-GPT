@@ -5,6 +5,7 @@ import '../styles/global.css';
 import '../styles/organic-theme.css';
 import Icon from '../components/Icon.astro';
 import LivingBackground from '../components/LivingBackground.astro';
+import BrandLogo from '../components/BrandLogo.astro';
 import {site,indexable,whatsappUrl} from '../lib/content';
 import {existsSync} from 'node:fs';
 interface Props { title: string; description: string; path?: string; image?: string; noindex?: boolean; immersive?: boolean; schema?: Record<string,unknown> | Record<string,unknown>[] }
@@ -38,24 +39,24 @@ const menu = [{label:'A associação',href:'/quem-somos/'},{label:'Acolhimento',
     <LivingBackground />
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div class="utility"><div class="container utility-inner"><span>Uma associação sem fins lucrativos. Um cuidado que aproxima.</span><div class="utility-actions"><button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false"><Icon name="sun" size={13}/><span data-motion-label>Pausar movimento</span></button><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Área do Associado <Icon name="up" size={13}/></a></div></div></div>
-    <header class="site-header">
+    <header class:list={['site-header',{'site-header--branded':!!institutionalLogo}]}>
       <div class="container header-inner">
-        <a class="brand" href="/">
-          {institutionalLogo ? <img src={institutionalLogo} alt="" width="68" height="68" /> : null}
+        <a class:list={['brand',{'brand--with-mark':!!institutionalLogo}]} href="/">
+          <BrandLogo kind="institutional" variant="header" src={institutionalLogo || undefined} decorative />
           <span class="brand-type"><span>Maria do Reino<span class="brand-dot">.</span></span><small>ASSOCIAÇÃO · CUIDADO · CULTURA</small></span>
         </a>
         <nav class="desktop-nav" aria-label="Navegação principal">{menu.map(item=><a href={item.href} aria-current={path.startsWith(item.href)?'page':undefined}>{item.label}</a>)}</nav>
         <div class="header-actions"><a class="search-link" href="/busca/" aria-label="Buscar no site"><Icon name="search" size={21}/></a><a class="button button--dark header-cta" href="/como-se-associar/">Quero me associar <Icon name="up" size={17}/></a></div>
         <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><span></span><span></span></button>
       </div>
-      <nav id="mobile-menu" class="mobile-menu" aria-label="Navegação para celular" hidden>{menu.map(item=><a href={item.href}>{item.label}<Icon name="arrow" size={19}/></a>)}<a href="/cannabis-medicinal/">Cannabis medicinal</a><a href="/agenda/">Agenda</a><a href="/contato/">Contato</a><a class="button button--dark" href="/como-se-associar/">Quero me associar</a></nav>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="Navegação para celular" hidden>{menu.map(item=><a href={item.href}>{item.label}<Icon name="arrow" size={19}/></a>)}<a href="/cannabis-medicinal/">Cannabis medicinal</a><a href="/agenda/">Agenda</a><a href="/contato/">Contato</a><a href="/busca/">Buscar no site</a><a class="button button--dark" href="/como-se-associar/">Quero me associar</a></nav>
     </header>
     <main id="conteudo"><slot /></main>
     <footer class="site-footer">
       <div class="container footer-main">
-        <div class="footer-purpose"><a class="brand brand--footer" href="/"><span class="brand-type"><span>Maria do Reino.</span><small>NINGUÉM CUIDA SOZINHO</small></span></a><p>{site.footerPurpose}</p><div class="social-links"><a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram Maria do Reino"><Icon name="instagram" size={20}/></a><a href={site.instagramCultural} target="_blank" rel="noopener noreferrer">MR Cultural <Icon name="up" size={17}/></a></div></div>
+        <div class="footer-purpose"><a class="brand brand--footer" href="/"><BrandLogo kind="institutional" variant="footer" src={institutionalLogo || undefined} decorative/><span class="brand-type"><span>Maria do Reino.</span><small>NINGUÉM CUIDA SOZINHO</small></span></a><p>{site.footerPurpose}</p><div class="social-links"><a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram Maria do Reino"><Icon name="instagram" size={20}/></a><a href={site.instagramCultural} target="_blank" rel="noopener noreferrer">MR Cultural <Icon name="up" size={17}/></a></div></div>
         <div class="footer-column"><span>ENCONTRE SEU CAMINHO</span><a href="/quem-somos/">Quem somos</a><a href="/como-se-associar/">Como se associar</a><a href="/acolhimento/">Acolhimento</a><a href="/cannabis-medicinal/">Cannabis medicinal</a><a href="/perguntas-frequentes/">Perguntas frequentes</a></div>
-        <div class="footer-column"><span>VIDA EM COMUNIDADE</span><a href="/mr-cultural/">MR Cultural</a><a href="/mr-cultural/agenda/">Agenda cultural</a><a href="/mr-cultural/galeria/">Galeria</a><a href="/blog/">Notícias e conteúdos</a><a href="/apoie/">Apoie e participe</a></div>
+        <div class="footer-column"><BrandLogo kind="cultural" variant="footer"/><span>VIDA EM COMUNIDADE</span><a href="/mr-cultural/">MR Cultural</a><a href="/mr-cultural/agenda/">Agenda cultural</a><a href="/mr-cultural/galeria/">Galeria</a><a href="/blog/">Notícias e conteúdos</a><a href="/apoie/">Apoie e participe</a></div>
         <div class="footer-column footer-contact"><span>VAMOS CONVERSAR?</span><a class="footer-phone" href={whatsappUrl} target="_blank" rel="noopener noreferrer">(47) 99910-8994 <Icon name="up" size={17}/></a><p>{site.city}, Santa Catarina</p><a href="/contato/">Todos os canais de contato</a><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Área do Associado <Icon name="up" size={13}/></a></div>
       </div>
       <div class="container footer-bottom"><span>{site.name}<br/>CNPJ {site.cnpj}</span><div><a href="/politica-de-privacidade/">Privacidade</a><a href="/cookies/">Cookies e preferências</a></div><span>{site.footerClosing}</span></div>

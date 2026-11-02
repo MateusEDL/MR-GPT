@@ -24,6 +24,8 @@ O endereço da Área do Associado é `https://acesso.mariadoreino.com.br/`. Atua
 
 A **Home** possui campos próprios para a abertura, os primeiros passos, o MR Cultural e o convite à participação. Os rótulos dos botões devem continuar claros e descrever o que acontece ao clicar.
 
+Na home, **Imagem botânica de acolhimento** e **Paisagem botânica do manifesto** permitem trocar as imagens dessas duas seções. Os padrões são `/images/botanica-orvalho-ia.webp` e `/images/jardim-medicinal-ia.webp`, ilustrações geradas por IA e identificadas dessa forma na apresentação. Elas não representam instalações, cultivo ou atuação real da associação. Preencha a descrição acessível de cada imagem de acordo com seu conteúdo e preserve a identificação de IA quando a substituição também for gerada. Ao trocar o arquivo, confira enquadramento e nitidez no celular e no computador; um novo upload não cria automaticamente todas as variações responsivas dos arquivos originais preparados para o projeto.
+
 Em **Páginas**, escolha o conteúdo desejado. Cada página tem título, descrição para busca, apresentação, seções e, quando apropriado, perguntas frequentes. Nos textos das seções, separe os parágrafos com uma linha em branco.
 
 Preserve URLs já publicadas. Alterar o nome visível não exige trocar o endereço da página. Uma mudança de endereço precisa de revisão técnica e, quando pertinente, de redirecionamento individual para a página equivalente.
@@ -73,6 +75,8 @@ Fotografias de pacientes e de crianças exigem cuidados e autorizações adequad
 Os logos enviados na conversa foram identificados pelo responsável: o primeiro é da Maria do Reino e o segundo, do MR Cultural. Preserve suas proporções e características. Não invente um símbolo alternativo para substituir a identidade oficial.
 
 Em **Dados da associação**, use os campos de logo institucional e logo cultural para enviar os arquivos fornecidos. Escolha o original na melhor qualidade disponível e preserve o arquivo; não distorça, redesenhe ou substitua o símbolo. Os campos ficam vazios até que esses arquivos sejam efetivamente adicionados à biblioteca do projeto.
+
+Para os logos, prefira **SVG vetorial original** ou **PNG original com transparência e pelo menos 800 pixels de largura**, em boa resolução e sem recorte. Não redesenhe por IA nem invente detalhes para ampliar uma imagem de baixa qualidade. Os espaços de aplicação estão preparados no cabeçalho, no rodapé e na seção cultural; isso não significa que os arquivos originais já tenham sido inseridos no projeto. As imagens enviadas na conversa servem para identificar as duas marcas, mas seus arquivos originais ainda precisam ser adicionados à biblioteca.
 
 ### Galerias
 

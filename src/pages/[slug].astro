@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ContactForm from '../components/ContactForm.astro';
+import BrandLogo from '../components/BrandLogo.astro';
 import { pages, site, whatsappUrl } from '../lib/content';
 import '../styles/pages.css';
 
@@ -21,7 +22,7 @@ const pixAvailable = Boolean(site.donation.pixKey && site.donation.pixHolder && 
       <nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
       {cultural ? (
         <div class="cultural-intro">
-          <div class="cultural-copy">{site.logoCultural && <img class="cultural-official-logo" src={site.logoCultural} alt="MR Cultural" width="120" height="120" />}<p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p><div class="page-actions"><a class="button button--dark" href="/mr-cultural/agenda/">Ver a agenda <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#participar">Quero participar</a></div></div>
+          <div class="cultural-copy"><BrandLogo kind="cultural" variant="feature" /><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p><div class="page-actions"><a class="button button--dark" href="/mr-cultural/agenda/">Ver a agenda <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#participar">Quero participar</a></div></div>
           <figure class="cultural-figure"><img src="/images/cultura-oficina-ia.webp" srcset="/images/cultura-oficina-ia-640.webp 640w, /images/cultura-oficina-ia-960.webp 960w, /images/cultura-oficina-ia.webp 1448w" sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1200px) 48vw, 680px" alt="Composição ilustrativa de mãos adultas criando em uma mesa de oficina artística." width="1448" height="1086" fetchpriority="high" /><figcaption>Imagem ilustrativa gerada por IA. Não é um registro de atividade da associação.</figcaption></figure>
         </div>
       ) : <><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p></>}

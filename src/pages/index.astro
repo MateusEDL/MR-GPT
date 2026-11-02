@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import CurveEdge from '../components/CurveEdge.astro';
+import BrandLogo from '../components/BrandLogo.astro';
 import {home,site,pages,posts,events,partners,eventIsPast,formatDate} from '../lib/content';
 import '../styles/home.css';
 const titleWords=home.title.trim().split(' ');
@@ -11,6 +12,10 @@ const paths=[{slug:'acolhimento',icon:'hands',label:'01'},{slug:'cannabis-medici
 const cards=paths.map(path=>({...path,...pages.find(page=>page.slug===path.slug)!}));
 const questions=pages.find(page=>page.slug==='perguntas-frequentes')?.faqs?.slice(0,4)||[];
 const upcoming=events.filter(event=>!eventIsPast(event)&&event.status==='scheduled').slice(0,3);
+const careImage=home.careImage;
+const manifestoImage=home.manifestoImage;
+const careSet=careImage==='/images/botanica-orvalho-ia.webp'?'/images/botanica-orvalho-ia-640.webp 640w, /images/botanica-orvalho-ia-960.webp 960w, /images/botanica-orvalho-ia.webp 1536w':undefined;
+const manifestoSet=manifestoImage==='/images/jardim-medicinal-ia.webp'?'/images/jardim-medicinal-ia-768.webp 768w, /images/jardim-medicinal-ia-1280.webp 1280w, /images/jardim-medicinal-ia.webp 1774w':undefined;
 ---
 <Layout title="Maria do Reino — acolhimento, informação e cultura" description={site.description} path="/" immersive>
   <div class="organic-home">
@@ -34,7 +39,7 @@ const upcoming=events.filter(event=>!eventIsPast(event)&&event.status==='schedul
         <div class="care-heading" data-reveal><span class="eyebrow">{home.careEyebrow}</span><h2 id="care-title">{home.careTitle}</h2><p>{home.careIntro}</p></div>
         <div class="care-flow">
           <div class="care-paths">{cards.map(card=><a class="care-path" href={`/${card.slug}/`} data-reveal><span class="path-count">{card.label}</span><div><span class="path-label"><Icon name={card.icon} size={20}/>{card.eyebrow}</span><h3>{card.title}</h3><p>{card.description}</p></div><span class="path-arrow"><Icon name="up" size={24}/></span></a>)}<p class="care-footnote">{home.careFootnote}</p></div>
-          <div class="care-garden" data-reveal><span class="botanical-outline" aria-hidden="true"></span><figure class="garden-portrait scene-media" data-parallax="0.06"><img src="/images/hero-jardim-ia-960.webp" srcset="/images/hero-jardim-ia-640.webp 640w, /images/hero-jardim-ia-960.webp 960w, /images/hero-jardim-ia.webp 1448w" sizes="(max-width:760px) 90vw,45vw" width="1448" height="1086" alt="Jardim acolhedor ilustrativo, com plantas, banco de madeira e luz natural." loading="lazy"/><figcaption>Imagem ilustrativa gerada por IA</figcaption></figure><p class="garden-note">{home.imageLabelTitle}<small>{home.imageLabelSubtitle}</small></p></div>
+          <div class="care-garden" data-reveal><span class="botanical-outline" aria-hidden="true"></span><figure class="garden-portrait scene-media" data-parallax="0.06"><img src={careImage} srcset={careSet} sizes="(max-width:760px) 100vw,55vw" width="1536" height="1024" alt={home.careImageAlt} loading="lazy"/>{careImage.startsWith('/images/')&&careImage.includes('-ia')&&<figcaption>Imagem ilustrativa gerada por IA</figcaption>}</figure><p class="garden-note">{home.imageLabelTitle}<small>{home.imageLabelSubtitle}</small></p></div>
         </div>
       </div>
     </section>
@@ -44,7 +49,7 @@ const upcoming=events.filter(event=>!eventIsPast(event)&&event.status==='schedul
       <div class="culture-glow" aria-hidden="true"></div>
       <div class="word-river" aria-hidden="true"><div>CRIAR &nbsp;·&nbsp; SENTIR &nbsp;·&nbsp; PERTENCER &nbsp;·&nbsp; CRIAR &nbsp;·&nbsp; SENTIR &nbsp;·&nbsp; PERTENCER &nbsp;·&nbsp;</div></div>
       <div class="container culture-grid">
-        <div class="culture-copy" data-reveal><span class="eyebrow">MR Cultural</span><p class="culture-byline">{home.cultureEyebrow}</p>{site.logoCultural&&<img class="cultural-original-logo" src={site.logoCultural} alt="MR Cultural" width="120" height="120" loading="lazy"/>}<h2 id="culture-title">{home.cultureTitle}<em>.</em></h2><p class="culture-kicker">{home.cultureKicker}</p><p>{home.cultureIntro}</p><div class="culture-tags"><span>Arte</span><span>Convivência</span><span>Expressão</span><span>Comunidade</span></div><a class="button button--orange" href="/mr-cultural/">{home.cultureButton}<Icon name="up" size={20}/></a></div>
+        <div class="culture-copy" data-reveal><span class="eyebrow">MR Cultural</span><p class="culture-byline">{home.cultureEyebrow}</p><BrandLogo kind="cultural" variant="feature"/><h2 id="culture-title">{home.cultureTitle}<em>.</em></h2><p class="culture-kicker">{home.cultureKicker}</p><p>{home.cultureIntro}</p><div class="culture-tags"><span>Arte</span><span>Convivência</span><span>Expressão</span><span>Comunidade</span></div><a class="button button--orange" href="/mr-cultural/">{home.cultureButton}<Icon name="up" size={20}/></a></div>
         <div class="culture-visual" data-reveal><div class="culture-orbit" aria-hidden="true"></div><figure class="scene-media culture-photo" data-parallax="0.07"><img src="/images/cultura-oficina-ia-960.webp" srcset="/images/cultura-oficina-ia-640.webp 640w, /images/cultura-oficina-ia-960.webp 960w, /images/cultura-oficina-ia.webp 1448w" sizes="(max-width:760px) 100vw,52vw" width="1448" height="1086" alt="Mãos adultas criando com tintas e cerâmica em uma oficina artística ilustrativa." loading="lazy"/><figcaption>Imagem ilustrativa gerada por IA</figcaption></figure><span class="culture-sideword" aria-hidden="true">vida em movimento</span></div>
       </div>
       <CurveEdge fill="#e1e9d6" variant="rolling"/>
@@ -60,7 +65,7 @@ const upcoming=events.filter(event=>!eventIsPast(event)&&event.status==='schedul
       <div class="community-links">{[{title:'Projetos e ações',href:'/mr-cultural/projetos/',word:'Criar',tone:'green'},{title:'Memórias e registros',href:'/mr-cultural/galeria/',word:'Sentir',tone:'wine'},{title:'Proponha uma atividade',href:'/contato/?assunto=cultura',word:'Pertencer',tone:'orange'}].map(link=><a href={link.href} class={`community-link community-link--${link.tone}`} data-reveal><span class="link-word">{link.word}</span><span>{link.title}<Icon name="up" size={22}/></span></a>)}</div>
     </div></section>
 
-    <section class="manifesto-section" data-scene="forest"><CurveEdge fill="#fbf6e9" top/><div class="manifesto-shape" aria-hidden="true"></div><div class="container manifesto-inner" data-reveal><span class="eyebrow">{home.manifestoEyebrow}</span><blockquote>{home.manifestoQuote}</blockquote><span class="manifesto-attribution">{home.manifestoAttribution}</span><a class="text-link" href="/quem-somos/">Conheça nossa história<Icon name="arrow" size={20}/></a></div><CurveEdge fill="#fbf6e9" variant="rolling"/></section>
+    <section class="manifesto-section manifesto-section--botanical" data-scene="forest"><CurveEdge fill="#fbf6e9" top/><figure class="manifesto-landscape scene-media" data-parallax="0.06"><img src={manifestoImage} srcset={manifestoSet} sizes="(max-width:700px) 1800px,100vw" width="1774" height="887" alt={home.manifestoImageAlt} loading="lazy"/>{manifestoImage.startsWith('/images/')&&manifestoImage.includes('-ia')&&<figcaption>Imagem ilustrativa gerada por IA</figcaption>}</figure><div class="manifesto-photo-shade" aria-hidden="true"></div><div class="manifesto-shape" aria-hidden="true"></div><div class="container manifesto-inner" data-reveal><span class="eyebrow">{home.manifestoEyebrow}</span><blockquote>{home.manifestoQuote}</blockquote><span class="manifesto-attribution">{home.manifestoAttribution}</span><a class="text-link" href="/quem-somos/">Conheça nossa história<Icon name="arrow" size={20}/></a></div><CurveEdge fill="#fbf6e9" variant="rolling"/></section>
 
     {posts.length>0&&<section class="stories-section"><div class="container"><div class="section-heading"><div><span class="eyebrow">Informação que acolhe</span><h2>Para ler, entender<br/>e compartilhar.</h2></div><a class="text-link" href="/blog/">Todos os conteúdos<Icon name="arrow" size={20}/></a></div><div class="home-events">{posts.slice(0,3).map(post=><a class="home-event" href={`/blog/${post.slug}/`}><span class="eyebrow">{post.category}</span><h3>{post.title}</h3><p>{post.description}</p><span class="text-link">Ler conteúdo<Icon name="arrow" size={18}/></span></a>)}</div></div></section>}
 
