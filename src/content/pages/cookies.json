@@ -10,6 +10,10 @@
       "body": "As páginas institucionais não incorporam feeds de redes sociais nem iniciam vídeos externos automaticamente. Os perfis oficiais são apresentados como links, que você escolhe abrir.\n\nNão há categorias opcionais de rastreamento ativadas nesta versão."
     },
     {
+      "title": "Sua preferência de movimento",
+      "body": "O botão de movimento permite pausar as animações e os efeitos interativos. Quando disponível, o navegador guarda essa escolha apenas neste dispositivo para respeitá-la nas próximas visitas.\n\nEssa preferência não identifica visitantes nem é enviada para publicidade ou analytics. A opção de movimento reduzido do seu sistema também é respeitada."
+    },
+    {
       "title": "Links para outros serviços",
       "body": "Quando você abre WhatsApp, Instagram ou a Área do Associado, passa a utilizar outro serviço. Ele pode empregar cookies e outras tecnologias de acordo com suas próprias políticas.\n\nAs preferências desses serviços devem ser gerenciadas nos respectivos ambientes."
     },

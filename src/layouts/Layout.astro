@@ -2,11 +2,13 @@
 import '@fontsource-variable/dm-sans';
 import '@fontsource-variable/newsreader';
 import '../styles/global.css';
+import '../styles/organic-theme.css';
 import Icon from '../components/Icon.astro';
+import LivingBackground from '../components/LivingBackground.astro';
 import {site,indexable,whatsappUrl} from '../lib/content';
 import {existsSync} from 'node:fs';
-interface Props { title: string; description: string; path?: string; image?: string; noindex?: boolean; schema?: Record<string,unknown> | Record<string,unknown>[] }
-const {title,description,path=Astro.url.pathname,image='/images/compartilhamento.png',noindex=false,schema} = Astro.props;
+interface Props { title: string; description: string; path?: string; image?: string; noindex?: boolean; immersive?: boolean; schema?: Record<string,unknown> | Record<string,unknown>[] }
+const {title,description,path=Astro.url.pathname,image='/images/compartilhamento.png',noindex=false,immersive=false,schema} = Astro.props;
 const canonical = new URL(path, site.seo.url).href;
 const institutionalLogo = site.logoInstitutional || (existsSync('public/uploads/logo-maria-do-reino.png') ? '/uploads/logo-maria-do-reino.png' : existsSync('public/uploads/logo-maria-do-reino.svg') ? '/uploads/logo-maria-do-reino.svg' : null);
 const structured = [{ '@context':'https://schema.org', '@type':'NGO',name:site.name,url:site.seo.url,sameAs:[site.instagram,site.instagramCultural],address:{'@type':'PostalAddress',addressLocality:site.city,addressRegion:site.state,addressCountry:'BR'}}, ...(schema ? Array.isArray(schema)?schema:[schema]:[])];
@@ -32,9 +34,10 @@ const menu = [{label:'A associação',href:'/quem-somos/'},{label:'Acolhimento',
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g,'\\u003c')} />
   </head>
-  <body>
+  <body class:list={{'immersive-page':immersive}}>
+    <LivingBackground />
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <div class="utility"><div class="container utility-inner"><span>Uma associação sem fins lucrativos. Um cuidado que aproxima.</span><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Área do Associado <Icon name="up" size={13}/></a></div></div>
+    <div class="utility"><div class="container utility-inner"><span>Uma associação sem fins lucrativos. Um cuidado que aproxima.</span><div class="utility-actions"><button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false"><Icon name="sun" size={13}/><span data-motion-label>Pausar movimento</span></button><a href={site.memberUrl} target="_blank" rel="noopener noreferrer">Área do Associado <Icon name="up" size={13}/></a></div></div></div>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/">

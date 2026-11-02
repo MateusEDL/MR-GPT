@@ -67,6 +67,7 @@ collections:
           - { name: careEyebrow, label: Identificação acima do acolhimento, widget: string }
           - { name: careFootnote, label: Orientação ao final do acolhimento, widget: text }
           - { name: cultureEyebrow, label: Identificação cultural, widget: string }
+          - { name: cultureKicker, label: Chamada breve do MR Cultural, widget: string }
           - { name: cultureTitle, label: Título cultural, widget: string }
           - { name: cultureIntro, label: Texto cultural, widget: text }
           - { name: cultureButton, label: Botão da seção cultural, widget: string }
@@ -81,6 +82,9 @@ collections:
           - { name: faqTitle, label: Título de dúvidas frequentes, widget: text }
           - { name: faqIntro, label: Introdução das dúvidas frequentes, widget: text }
           - { name: supportEyebrow, label: Identificação acima da participação, widget: string }
+          - { name: natureEyebrow, label: Identificação acima da seção de natureza, widget: string }
+          - { name: natureTitle, label: Título da seção de natureza, widget: text }
+          - { name: natureIntro, label: Introdução da seção de natureza, widget: text }
           - { name: participationTitle, label: Título de participação, widget: string }
           - { name: participationIntro, label: Texto de participação, widget: text }
   - name: paginas

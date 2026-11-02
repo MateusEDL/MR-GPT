@@ -2,6 +2,8 @@
 
 Site institucional em português da Associação Maria do Reino, com destaque para o MR Cultural. Construído com Astro, HTML estático, fontes locais e conteúdo em JSON. O projeto não depende da Vercel para servir suas páginas.
 
+A direção visual usa paisagens botânicas amplas, imagens com recortes orgânicos e transições curvas. O verde institucional alterna com vinho e laranja do MR Cultural. Um fundo decorativo reage ao ponteiro e ao toque, com pausa manual e respeito à preferência do sistema por movimento reduzido. Não há rastreamento dessa interação; apenas a escolha de pausar pode ser guardada neste navegador.
+
 ## Começar
 
 Requisito: Node.js 24 e npm. Use o checkout existente; não é preciso criar outro worktree.
@@ -42,6 +44,7 @@ npm run export
 
 - `maria-do-reino-fonte.zip`: código, conteúdo, imagens, configuração e documentação, sem segredos nem node_modules.
 - `maria-do-reino-estatico.zip`: somente os arquivos de `dist/` para hospedagem estática.
+- `maria-do-reino-previa.html`: prévia interativa da home em um único arquivo, com imagens, fontes e scripts incorporados. Abra no navegador para revisar o movimento sem instalar dependências; a navegação completa pertence ao pacote do site.
 
 Os arquivos ZIP podem ser extraídos por ferramentas comuns de arquivo. No pacote fonte, execute `npm ci` e `npm run build` para reconstruir. Em uma hospedagem estática genérica, APIs `/api/*` precisam de um runtime separado; os links de WhatsApp e o conteúdo público continuam independentes dessas funções.
 

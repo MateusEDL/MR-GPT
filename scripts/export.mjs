@@ -1,5 +1,6 @@
 import { mkdir, rm, cp, writeFile } from 'node:fs/promises';
 import { zipDirectory } from './zip.mjs';
+import './export-preview.mjs';
 
 await mkdir('exports', { recursive: true });
 await rm('exports/maria-do-reino-fonte', { recursive: true, force: true });

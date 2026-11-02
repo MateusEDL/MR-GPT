@@ -22,6 +22,32 @@ async function prepareImages(page: Page) {
   await page.evaluate(() => document.fonts.ready);
 }
 
+async function revealFullPage(page: Page) {
+  const height = await page.evaluate(() => document.documentElement.scrollHeight);
+  for (let position = 0; position < height; position += 650) {
+    await page.evaluate((top) => window.scrollTo({ top, behavior: 'instant' }), position);
+    await page.waitForTimeout(100);
+  }
+  await page.waitForTimeout(1000);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await page.waitForTimeout(800);
+  if (await page.locator('html').evaluate((root) => root.classList.contains('motion-ready') && !root.classList.contains('motion-paused'))) {
+    await expect(page.locator('[data-reveal]:not(.is-visible)')).toHaveCount(0);
+  }
+}
+
+async function canvasChecksum(page: Page) {
+  return page.locator('canvas[data-living-background]').evaluate((element) => {
+    if (!(element instanceof HTMLCanvasElement)) throw new Error('Canvas não encontrado');
+    const context = element.getContext('2d');
+    if (!context) throw new Error('Contexto 2D indisponível');
+    const { data } = context.getImageData(0, 0, element.width, element.height);
+    let hash = 2166136261;
+    for (let index = 0; index < data.length; index++) hash = Math.imul(hash ^ data[index], 16777619) >>> 0;
+    return hash;
+  });
+}
+
 for (const route of routes) {
   test(`página ${route}: conteúdo acessível e layout sem cortes`, async ({ page }) => {
     const runtimeErrors: string[] = [];
@@ -47,7 +73,7 @@ test('home identifica as ilustrações e preserva o caminho dos associados', asy
   await page.goto('/');
   await prepareImages(page);
   const captions = page.locator('figcaption').filter({ hasText: 'Imagem ilustrativa gerada por IA' });
-  await expect(captions).toHaveCount(2);
+  await expect(captions).toHaveCount(4);
   for (const caption of await captions.all()) await expect(caption).toBeVisible();
   const memberLinks = page.getByRole('link', { name: 'Área do Associado' });
   expect(await memberLinks.count()).toBeGreaterThan(0);
@@ -55,7 +81,62 @@ test('home identifica as ilustrações e preserva o caminho dos associados', asy
     await expect(link).toHaveAttribute('href', 'https://acesso.mariadoreino.com.br/');
   }
   await expect(page.locator('main')).toContainText('Cultural como extensão do cuidado');
+  await revealFullPage(page);
   await page.screenshot({ path: testInfo.outputPath('home-full.png'), fullPage: true, animations: 'disabled' });
+  await page.screenshot({ path: testInfo.outputPath('home-above-fold.png'), fullPage: false, animations: 'disabled' });
+});
+
+test('movimento pode ser pausado, retomado e preserva a escolha após recarregar', async ({ page }) => {
+  await page.goto('/');
+  const toggle = page.locator('[data-motion-toggle]');
+  await expect(toggle).toBeEnabled();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(toggle).toContainText('Pausar movimento');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toContainText('Ativar movimento');
+  await expect(page.locator('html')).toHaveClass(/motion-paused/);
+  expect(await page.evaluate(() => localStorage.getItem('mr-motion-paused'))).toBe('true');
+  await page.reload();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('html')).toHaveClass(/motion-paused/);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator('html')).not.toHaveClass(/motion-paused/);
+  expect(await page.evaluate(() => localStorage.getItem('mr-motion-paused'))).toBe('false');
+});
+
+test('preferência de movimento reduzido desativa animações e o controle manual', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveClass(/motion-reduced/);
+  const toggle = page.locator('[data-motion-toggle]');
+  await expect(toggle).toBeDisabled();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(toggle).toContainText('Movimento reduzido');
+  const runningAnimations = await page.locator('.organic-home').evaluate((home) =>
+    home.getAnimations({ subtree: true }).filter((animation) => animation.playState === 'running').length,
+  );
+  expect(runningAnimations).toBe(0);
+});
+
+test('fundo vivo responde ao ponteiro e ao toque com desenho real no canvas', async ({ page }, testInfo) => {
+  await page.goto('/');
+  const canvas = page.locator('canvas[data-living-background]');
+  await expect(canvas).toHaveAttribute('data-ready', 'true');
+  await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  const before = await canvasChecksum(page);
+  const viewport = page.viewportSize();
+  if (!viewport) throw new Error('Viewport indisponível');
+  if (testInfo.project.name === 'mobile') {
+    await page.touchscreen.tap(viewport.width * .76, viewport.height * .45);
+  } else {
+    await page.mouse.move(viewport.width * .18, viewport.height * .48);
+    await page.mouse.move(viewport.width * .76, viewport.height * .45, { steps: 6 });
+  }
+  await page.waitForTimeout(120);
+  await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())));
+  expect(await canvasChecksum(page)).not.toBe(before);
 });
 
 test('menu móvel abre, fecha por Escape e permite navegar', async ({ page }, testInfo) => {
@@ -134,6 +215,7 @@ for (const route of ['/', '/quem-somos/', '/contato/']) {
   test(`acessibilidade automatizada WCAG A/AA em ${route}`, async ({ page }, testInfo) => {
     await page.goto(route);
     await prepareImages(page);
+    if (route === '/') await revealFullPage(page);
     const result = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();

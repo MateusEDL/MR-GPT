@@ -1,0 +1,6 @@
+---
+interface Props { fill: string; top?: boolean; variant?: 'soft'|'rolling' }
+const {fill,top=false,variant='soft'}=Astro.props;
+const path=variant==='rolling'?'M0,74 C180,155 328,-25 565,48 C760,125 972,143 1180,66 C1290,25 1380,36 1440,64 L1440,160 L0,160 Z':'M0,72 C285,150 375,160 675,92 C1000,17 1110,16 1440,74 L1440,160 L0,160 Z';
+---
+<svg class:list={['curve-edge',{'curve-edge--top':top}]} viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true"><path d={path} fill={fill}/></svg>

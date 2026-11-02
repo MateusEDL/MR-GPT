@@ -15,18 +15,19 @@ const paragraphs = (body: string) => body.split(/\n\s*\n/).filter(Boolean);
 const pixAvailable = Boolean(site.donation.pixKey && site.donation.pixHolder && site.donation.bank);
 ---
 <Layout title={page.seoTitle || page.title} description={page.description} path={`/${page.slug}/`}>
-  <header class:list={['inner-hero', { 'cultural-hero': cultural }]}>
+  <header class:list={['inner-hero', { 'cultural-hero': cultural }]} data-scene={cultural ? 'culture' : 'forest'}>
+    <div class="hero-organic-art" aria-hidden="true"></div>
     <div class="container">
       <nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">{page.title}</span></nav>
       {cultural ? (
         <div class="cultural-intro">
-          <div>{site.logoCultural && <img class="cultural-official-logo" src={site.logoCultural} alt="MR Cultural" width="120" height="120" />}<p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p><div class="page-actions"><a class="button button--dark" href="/mr-cultural/agenda/">Ver a agenda <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#participar">Quero participar</a></div></div>
-          <figure class="cultural-figure"><img src="/images/cultura-oficina-ia.webp" srcset="/images/cultura-oficina-ia-640.webp 640w, /images/cultura-oficina-ia-960.webp 960w, /images/cultura-oficina-ia.webp 1448w" sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1200px) 44vw, 580px" alt="Composição ilustrativa de mãos adultas criando em uma mesa de oficina artística." width="1448" height="1086" fetchpriority="high" /><figcaption>Imagem ilustrativa gerada por IA. Não é um registro de atividade da associação.</figcaption></figure>
+          <div class="cultural-copy">{site.logoCultural && <img class="cultural-official-logo" src={site.logoCultural} alt="MR Cultural" width="120" height="120" />}<p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p><div class="page-actions"><a class="button button--dark" href="/mr-cultural/agenda/">Ver a agenda <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#participar">Quero participar</a></div></div>
+          <figure class="cultural-figure"><img src="/images/cultura-oficina-ia.webp" srcset="/images/cultura-oficina-ia-640.webp 640w, /images/cultura-oficina-ia-960.webp 960w, /images/cultura-oficina-ia.webp 1448w" sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1200px) 48vw, 680px" alt="Composição ilustrativa de mãos adultas criando em uma mesa de oficina artística." width="1448" height="1086" fetchpriority="high" /><figcaption>Imagem ilustrativa gerada por IA. Não é um registro de atividade da associação.</figcaption></figure>
         </div>
       ) : <><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.intro}</p></>}
     </div>
   </header>
-  <div class="container content-layout">
+  <div class:list={['container', 'content-layout', { 'content-layout--cultural': cultural }]}>
     <div class="page-prose">
       {page.sections.map((section) => <section><h2>{section.title}</h2>{paragraphs(section.body).map((paragraph) => <p>{paragraph}</p>)}</section>)}
       {page.faqs && page.faqs.length > 0 && <div class="faq-list">{page.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>}

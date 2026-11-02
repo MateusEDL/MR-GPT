@@ -1,0 +1,284 @@
+<canvas class="living-background" data-living-background aria-hidden="true"></canvas>
+
+<style>
+  .living-background {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: .24;
+    contain: strict;
+  }
+
+  @media (max-width: 640px) {
+    .living-background { opacity: .18; }
+  }
+</style>
+
+<script>
+  (() => {
+    const canvas = document.querySelector<HTMLCanvasElement>('[data-living-background]');
+    if (!canvas || canvas.dataset.ready === 'true') return;
+    canvas.dataset.ready = 'true';
+    const context = canvas.getContext('2d', { alpha: true });
+    if (!context) return;
+
+    type Scene = 'forest' | 'culture' | 'earth';
+    type RGB = [number, number, number];
+    type Mark = {
+      x: number;
+      y: number;
+      angle: number;
+      size: number;
+      born: number;
+      life: number;
+      kind: 'leaf' | 'ripple';
+    };
+
+    const palettes: Record<Scene, { ink: RGB; accent: RGB }> = {
+      forest: { ink: [23, 62, 52], accent: [79, 137, 126] },
+      culture: { ink: [117, 26, 33], accent: [252, 125, 53] },
+      earth: { ink: [80, 92, 58], accent: [161, 123, 79] },
+    };
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const root = document.documentElement;
+    const sceneNodes = [...document.querySelectorAll<HTMLElement>('[data-scene]')];
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('button[data-motion-toggle]')];
+    const marks: Mark[] = [];
+    const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let frame = 0;
+    let scene: Scene = 'forest';
+    let sceneDirty = true;
+    let activeUntil = 0;
+    let previousTime = 0;
+    let lastMarkTime = 0;
+    let lastMarkX = 0;
+    let lastMarkY = 0;
+    let hasPointer = false;
+    let storedPause = false;
+    let paused = media.matches;
+    let currentInk: RGB = [...palettes.forest.ink];
+    let currentAccent: RGB = [...palettes.forest.accent];
+
+    try { storedPause = window.localStorage.getItem('mr-motion-paused') === 'true'; }
+    catch { /* Storage may be unavailable; animation preferences still work for this visit. */ }
+
+    function color(rgb: RGB, opacity: number) {
+      return `rgba(${rgb.map(value => Math.round(value)).join(',')},${opacity})`;
+    }
+
+    function updateControls(announce = true) {
+      paused = media.matches || storedPause;
+      root.classList.toggle('motion-paused', paused);
+      root.classList.toggle('motion-reduced', media.matches);
+      for (const button of buttons) {
+        const label = media.matches ? 'Movimento reduzido' : paused ? 'Ativar movimento' : 'Pausar movimento';
+        const labelNode = button.querySelector<HTMLElement>('[data-motion-label]');
+        if (labelNode) labelNode.textContent = label;
+        else button.textContent = label;
+        button.disabled = media.matches;
+        button.setAttribute('aria-pressed', String(paused));
+        button.setAttribute('aria-label', label);
+      }
+      if (paused) {
+        marks.length = 0;
+        pointer.x = pointer.y = pointer.targetX = pointer.targetY = 0;
+        activeUntil = 0;
+      }
+      if (announce) window.dispatchEvent(new CustomEvent('mr:motion-change', { detail: { paused, reduced: media.matches } }));
+      requestDraw();
+    }
+
+    function setScene() {
+      sceneDirty = false;
+      const focusY = height * .52;
+      let nearest: Scene = 'forest';
+      let nearestDistance = Number.POSITIVE_INFINITY;
+      for (const node of sceneNodes) {
+        const candidate = node.dataset.scene;
+        if (candidate !== 'forest' && candidate !== 'culture' && candidate !== 'earth') continue;
+        const rect = node.getBoundingClientRect();
+        const distance = rect.top <= focusY && rect.bottom >= focusY
+          ? 0 : Math.min(Math.abs(rect.top - focusY), Math.abs(rect.bottom - focusY));
+        if (distance < nearestDistance) {
+          nearest = candidate;
+          nearestDistance = distance;
+        }
+      }
+      scene = nearest;
+      if (paused) {
+        currentInk = [...palettes[scene].ink];
+        currentAccent = [...palettes[scene].accent];
+      }
+    }
+
+    function leaf(x: number, y: number, size: number, angle: number, opacity: number, accent = false) {
+      context!.save();
+      context!.translate(x, y);
+      context!.rotate(angle);
+      context!.lineWidth = .7;
+      context!.strokeStyle = color(accent ? currentAccent : currentInk, opacity);
+      context!.fillStyle = color(accent ? currentAccent : currentInk, opacity * .17);
+      context!.beginPath();
+      context!.moveTo(-size * .55, 0);
+      context!.bezierCurveTo(-size * .15, -size * .48, size * .48, -size * .35, size * .65, 0);
+      context!.bezierCurveTo(size * .22, size * .35, -size * .25, size * .4, -size * .55, 0);
+      context!.fill();
+      context!.stroke();
+      context!.beginPath();
+      context!.moveTo(-size * .7, size * .06);
+      context!.quadraticCurveTo(0, -size * .08, size * .55, 0);
+      context!.stroke();
+      context!.restore();
+    }
+
+    function drawBase() {
+      const shiftX = paused ? 0 : pointer.x * 4;
+      const shiftY = paused ? 0 : pointer.y * 4;
+      // Fixed, generic single leaves at the edges; never a cannabis silhouette or a logo.
+      const leaves = [
+        [.025, .17, 25, -.7], [.97, .3, 30, 2.2], [.04, .75, 23, .5],
+        [.94, .86, 26, 2.6], [.015, .46, 17, -.3], [.985, .61, 19, 2.7],
+      ];
+      for (let i = 0; i < leaves.length; i++) {
+        const [x, y, size, angle] = leaves[i];
+        leaf(x * width + shiftX, y * height + shiftY, size, angle, .22, i % 2 === 0);
+      }
+      context!.lineWidth = .55;
+      context!.strokeStyle = color(currentInk, .13);
+      for (const side of [-1, 1]) {
+        const edge = side < 0 ? 0 : width;
+        context!.beginPath();
+        context!.moveTo(edge + side * 8 + shiftX, height * .25);
+        context!.bezierCurveTo(edge - side * 65, height * .4, edge + side * 18, height * .58, edge - side * 34, height * .77);
+        context!.stroke();
+      }
+      context!.fillStyle = color(currentAccent, .24);
+      for (let i = 0; i < 9; i++) {
+        const x = ((i * 137 + 43) % 997) / 997 * width;
+        const y = ((i * 199 + 87) % 887) / 887 * height;
+        context!.beginPath();
+        context!.arc(x + shiftX, y + shiftY, i % 3 === 0 ? 1.4 : .8, 0, Math.PI * 2);
+        context!.fill();
+      }
+    }
+
+    function requestDraw(duration = 0) {
+      if (document.hidden) return;
+      if (!paused) activeUntil = Math.max(activeUntil, performance.now() + duration);
+      if (!frame) frame = window.requestAnimationFrame(draw);
+    }
+
+    function draw(now: number) {
+      frame = 0;
+      if (document.hidden) return;
+      if (sceneDirty) setScene();
+      const delta = previousTime ? Math.min(now - previousTime, 40) : 16;
+      previousTime = now;
+      const blend = Math.min(1, delta / 140);
+      const target = palettes[scene];
+      let changingColor = false;
+      for (let i = 0; i < 3; i++) {
+        currentInk[i] += (target.ink[i] - currentInk[i]) * blend;
+        currentAccent[i] += (target.accent[i] - currentAccent[i]) * blend;
+        changingColor ||= Math.abs(target.ink[i] - currentInk[i]) > .5 || Math.abs(target.accent[i] - currentAccent[i]) > .5;
+      }
+      if (!paused) {
+        pointer.x += (pointer.targetX - pointer.x) * .16;
+        pointer.y += (pointer.targetY - pointer.y) * .16;
+      }
+      context!.clearRect(0, 0, width, height);
+      drawBase();
+      for (let i = marks.length - 1; i >= 0; i--) {
+        const mark = marks[i];
+        const progress = (now - mark.born) / mark.life;
+        if (paused || progress >= 1) { marks.splice(i, 1); continue; }
+        const opacity = Math.sin(Math.PI * Math.max(0, progress)) * .3;
+        if (mark.kind === 'leaf') {
+          leaf(mark.x + progress * 7, mark.y - progress * 12, mark.size * (1 + progress * .22), mark.angle + progress * .2, opacity, true);
+        } else {
+          context!.beginPath();
+          context!.strokeStyle = color(currentAccent, opacity * .5);
+          context!.lineWidth = .7;
+          context!.ellipse(mark.x, mark.y, 8 + progress * 27, 5 + progress * 17, mark.angle, 0, Math.PI * 2);
+          context!.stroke();
+        }
+      }
+      if (!paused && (marks.length > 0 || now < activeUntil || changingColor)) {
+        frame = window.requestAnimationFrame(draw);
+      } else previousTime = 0;
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas!.width = Math.round(width * dpr);
+      canvas!.height = Math.round(height * dpr);
+      context!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      sceneDirty = true;
+      requestDraw(250);
+    }
+
+    function addMark(event: PointerEvent, kind: Mark['kind']) {
+      if (paused || document.hidden) return;
+      const now = performance.now();
+      const dx = event.clientX - lastMarkX;
+      const dy = event.clientY - lastMarkY;
+      const touch = event.pointerType === 'touch';
+      if (kind === 'leaf' && hasPointer && (now - lastMarkTime < (touch ? 105 : 55) || Math.hypot(dx, dy) < 25)) return;
+      marks.push({ x: event.clientX, y: event.clientY, angle: hasPointer ? Math.atan2(dy, dx) : -.5, size: touch ? 9 : 12, born: now, life: touch ? 760 : 1080, kind });
+      if (marks.length > 12) marks.splice(0, marks.length - 12);
+      lastMarkX = event.clientX;
+      lastMarkY = event.clientY;
+      lastMarkTime = now;
+      hasPointer = true;
+      requestDraw(900);
+    }
+
+    window.addEventListener('pointermove', event => {
+      if (paused || document.hidden) return;
+      pointer.targetX = (event.clientX / Math.max(width, 1) - .5) * 2;
+      pointer.targetY = (event.clientY / Math.max(height, 1) - .5) * 2;
+      addMark(event, 'leaf');
+      requestDraw(event.pointerType === 'touch' ? 350 : 550);
+    }, { passive: true });
+    window.addEventListener('pointerdown', event => addMark(event, 'ripple'), { passive: true });
+    window.addEventListener('pointerout', event => {
+      if (event.relatedTarget !== null) return;
+      pointer.targetX = pointer.targetY = 0;
+      hasPointer = false;
+      if (!paused) requestDraw(400);
+    }, { passive: true });
+    window.addEventListener('scroll', () => { sceneDirty = true; requestDraw(350); }, { passive: true });
+    window.addEventListener('resize', resize, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (frame) window.cancelAnimationFrame(frame);
+        frame = 0;
+        previousTime = 0;
+        marks.length = 0;
+      } else { sceneDirty = true; requestDraw(); }
+    });
+
+    for (const button of buttons) button.addEventListener('click', () => {
+      if (media.matches) return;
+      storedPause = !storedPause;
+      try { window.localStorage.setItem('mr-motion-paused', String(storedPause)); }
+      catch { /* A blocked store does not prevent pausing this visit. */ }
+      updateControls();
+    });
+    media.addEventListener('change', () => updateControls());
+    window.addEventListener('pagehide', () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = 0;
+    }, { once: true });
+
+    updateControls();
+    resize();
+  })();
+</script>
