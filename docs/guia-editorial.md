@@ -72,11 +72,11 @@ Use um texto alternativo curto que descreva o conteúdo real da foto quando ele 
 
 Fotografias de pacientes e de crianças exigem cuidados e autorizações adequados. Uma postagem pública em rede social não resolve automaticamente os direitos de republicação. Vídeos também podem conter música com direitos próprios.
 
-Os logos enviados na conversa foram identificados pelo responsável: o primeiro é da Maria do Reino e o segundo, do MR Cultural. Preserve suas proporções e características. Não invente um símbolo alternativo para substituir a identidade oficial.
+Os logos fornecidos foram identificados pelo responsável como Maria do Reino e MR Cultural. Preserve suas proporções e características. Não invente um símbolo alternativo para substituir a identidade oficial.
 
-Em **Dados da associação**, use os campos de logo institucional e logo cultural para enviar os arquivos fornecidos. Escolha o original na melhor qualidade disponível e preserve o arquivo; não distorça, redesenhe ou substitua o símbolo. Os campos ficam vazios até que esses arquivos sejam efetivamente adicionados à biblioteca do projeto.
+Em **Dados da associação**, use os campos de logo institucional e logo cultural para enviar os arquivos fornecidos. Escolha o original na melhor qualidade disponível e preserve o arquivo; não distorça, redesenhe ou substitua o símbolo. Os campos já apontam para os arquivos originais extraídos de `logos-mr.zip`: `/uploads/logo-maria-do-reino.png` e `/uploads/logo-mr-cultural.png`.
 
-Para os logos, prefira **SVG vetorial original** ou **PNG original com transparência e pelo menos 800 pixels de largura**, em boa resolução e sem recorte. Não redesenhe por IA nem invente detalhes para ampliar uma imagem de baixa qualidade. Os espaços de aplicação estão preparados no cabeçalho, no rodapé e na seção cultural; isso não significa que os arquivos originais já tenham sido inseridos no projeto. As imagens enviadas na conversa servem para identificar as duas marcas, mas seus arquivos originais ainda precisam ser adicionados à biblioteca.
+Para os logos, prefira **SVG vetorial original** ou **PNG original com transparência e pelo menos 800 pixels de largura**, em boa resolução e sem recorte. Não redesenhe por IA nem invente detalhes para ampliar uma imagem de baixa qualidade. Os originais do ZIP já estão aplicados no cabeçalho, no rodapé e nas apresentações culturais. O institucional possui 1016 × 867 pixels. O MR Cultural possui apenas 150 × 150 pixels e é exibido em tamanho limitado para preservar nitidez; se precisar de uma aplicação maior, substitua-o por arquivo original maior ou vetorial. Nenhum detalhe ou cor foi redesenhado e não foi usada ampliação generativa.
 
 ### Galerias
 

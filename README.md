@@ -101,7 +101,7 @@ Playwright usa `/usr/bin/chromium` neste ambiente; fora dele, defina `PLAYWRIGHT
 
 ## Conteúdo e pendências
 
-Os logos foram identificados visualmente na conversa, mas não chegaram ao filesystem como arquivos de imagem anexados. Por isso, o site usa o nome tipográfico até a inserção dos **originais**, sem recriar o símbolo. No painel, use os campos “Logotipo oficial Maria do Reino” e “Logotipo oficial MR Cultural”.
+Os dois logos foram recebidos em `logos-mr.zip` e copiados sem alteração para `public/uploads/`. O institucional tem 1016 × 867 px e o MR Cultural, 150 × 150 px. Eles aparecem no cabeçalho, nas apresentações culturais e no rodapé, conforme cada identidade. O arquivo pequeno do MR Cultural é apresentado em tamanho controlado; ampliar seus pixels não recuperaria detalhes. Uma versão maior ou vetorial pode ser substituída pelos campos de logo no painel. Consulte `docs/logos-originais.md` para dimensões, origem e conferência dos arquivos.
 
 Fotos e vídeos das redes não foram obtidos: a rede do ambiente bloqueou as requisições. Os domínios necessários foram salvos no rascunho do ambiente, cuja aplicação ainda está pendente. Não confundir as ilustrações de IA com esse acervo.
 

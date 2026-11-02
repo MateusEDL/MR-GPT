@@ -67,3 +67,9 @@ Após centralizar os créditos das três imagens com máscara orgânica, a valid
 ## Revisão de imagens botânicas e posições de marca
 
 Depois da inclusão de duas novas imagens botânicas e do componente preparado para os logos originais, foram executados 12 cenários dirigidos: 11 passaram e 1 foi pulado por ser menu móvel no desktop. Foram verificados home, cinco legendas de IA, MR Cultural, menu e as seis verificações Axe em desktop e celular. Não havia arquivos originais de logo no projeto; o teste não comprova qualidade ou visual de um logo ainda não fornecido. A exibição final das marcas requer validação após inserir os originais.
+
+## Aplicação dos arquivos do ZIP
+
+Os dois PNGs originais foram copiados sem alteração. A suíte com as marcas ativadas executou 66 cenários: 65 passaram, 1 foi pulado por ser menu móvel no desktop e nenhum falhou. Os seis cenários novos de marca verificam carregamento, proporção, limites de apresentação da resolução de origem, posições no cabeçalho/home/página cultural/rodapé e navegação sem overflow nas larguras de 1440, 390 e 360 pixels. As seis execuções Axe continuaram sem violações nas regras selecionadas. A fidelidade foi conferida pelos bytes originais e visualmente; contagem de pixels não transforma o arquivo cultural de 150 pixels em vetor.
+
+Após retirar apenas a moldura clara adicional do logo cultural, quatro verificações dirigidas passaram (home e aplicação cultural nos dois tamanhos). As capturas persistidas refletem essa apresentação final. O relatório HTML pode refletir essa seleção mais recente.

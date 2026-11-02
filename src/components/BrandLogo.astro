@@ -1,5 +1,7 @@
 ---
 import { site } from '../lib/content';
+import { closeSync, openSync, readSync, realpathSync } from 'node:fs';
+import { extname, resolve, sep } from 'node:path';
 
 interface Props {
   kind: 'institutional' | 'cultural';
@@ -12,11 +14,39 @@ interface Props {
 const { kind, variant = 'header', class: className, src: override, decorative = false } = Astro.props;
 const src = (override || (kind === 'institutional' ? site.logoInstitutional : site.logoCultural))?.trim();
 const alt = decorative ? '' : kind === 'institutional' ? 'Maria do Reino' : 'MR Cultural';
+
+// Apenas lê os 24 bytes do cabeçalho de PNGs locais contidos em public.
+// O original não é regravado, ampliado, recortado ou transformado.
+function pngDimensions(source: string | undefined): { width: number; height: number } | undefined {
+  if (!source?.startsWith('/') || source.startsWith('//')) return;
+  let descriptor: number | undefined;
+  try {
+    const publicRoot = realpathSync(resolve(process.cwd(), 'public'));
+    const requestedPath = decodeURIComponent(source.split(/[?#]/, 1)[0]);
+    const file = realpathSync(resolve(publicRoot, `.${requestedPath}`));
+    if (!file.startsWith(`${publicRoot}${sep}`) || extname(file).toLowerCase() !== '.png') return;
+    descriptor = openSync(file, 'r');
+    const header = Buffer.alloc(24);
+    if (readSync(descriptor, header, 0, 24, 0) !== 24) return;
+    if (!header.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) || header.toString('ascii', 12, 16) !== 'IHDR') return;
+    const width = header.readUInt32BE(16);
+    const height = header.readUInt32BE(20);
+    if (width > 0 && height > 0 && width <= 100000 && height <= 100000) return { width, height };
+  } catch {
+    // Fontes externas, arquivos ausentes ou outros formatos usam o tamanho normal.
+  } finally {
+    if (descriptor !== undefined) closeSync(descriptor);
+  }
+}
+
+const pixels = pngDimensions(src);
+const compact = kind === 'cultural' && pixels?.width === 150 && pixels.height === 150;
+const pixelCaps = pixels ? `max-width: ${pixels.width / 2}px; max-height: ${pixels.height / 2}px;` : undefined;
 ---
 
 {src && (
-  <span class:list={['brand-logo', `brand-logo--${kind}`, `brand-logo--${variant}`, className]}>
-    <img src={src} alt={alt} width="128" height="128" loading={variant === 'header' ? 'eager' : 'lazy'} decoding="async" />
+  <span class:list={['brand-logo', `brand-logo--${kind}`, `brand-logo--${variant}`, { 'brand-logo--compact': compact }, className]}>
+    <img src={src} alt={alt} width={pixels?.width || 128} height={pixels?.height || 128} style={pixelCaps} loading={variant === 'header' ? 'eager' : 'lazy'} decoding="async" />
   </span>
 )}
 
@@ -49,11 +79,13 @@ const alt = decorative ? '' : kind === 'institutional' ? 'Maria do Reino' : 'MR 
   }
 
   .brand-logo--header { width: 110px; height: 102px; }
+  .brand-logo--cultural { background: transparent; }
   .brand-logo--feature { width: 160px; height: 150px; margin-bottom: 24px; }
   .brand-logo--footer { width: 90px; height: 84px; }
+  .brand-logo--feature.brand-logo--compact { width: 96px; height: 92px; }
 
   @media (max-width: 700px) {
-    .brand-logo--header { width: 64px; height: 60px; }
+    .brand-logo--header { width: 58px; height: 56px; }
     .brand-logo--feature { width: 128px; height: 120px; margin-bottom: 22px; }
   }
 </style>
