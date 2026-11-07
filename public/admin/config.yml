@@ -91,6 +91,13 @@ collections:
           - { name: natureIntro, label: Introdução da seção de natureza, widget: text }
           - { name: participationTitle, label: Título de participação, widget: string }
           - { name: participationIntro, label: Texto de participação, widget: text }
+      - name: tv
+        label: TV e programas
+        file: src/content/tv.json
+        fields:
+          - { name: title, label: Título da TV, widget: string }
+          - { name: intro, label: Apresentação da TV, widget: text }
+          - { name: channelUrl, label: URL HTTPS do canal oficial confirmado, widget: string, required: false }
   - name: paginas
     label: Páginas institucionais
     folder: src/content/pages
@@ -179,6 +186,70 @@ collections:
       - { name: status, label: Situação real, widget: select, options: [{label: Em atividade, value: active}, {label: Em planejamento, value: planned}, {label: Encerrado, value: completed}] }
       - { name: image, label: Foto real autorizada, widget: image, required: false }
       - { name: imageAlt, label: Descrição da foto, widget: string, required: false }
+  - name: profissionais
+    label: Profissionais (saúde e cultura)
+    folder: src/content/professionals
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{name}} — {{role}}'
+    fields:
+      - { name: slug, label: Identificador curto sem acentos, widget: string }
+      - { name: name, label: Nome público autorizado, widget: string }
+      - { name: role, label: Atuação confirmada, widget: string }
+      - { name: summary, label: Apresentação breve, widget: text }
+      - { name: bio, label: Biografia pública autorizada, widget: text, required: false }
+      - { name: areas, label: Áreas de atuação no site, widget: select, multiple: true, options: [{label: Saúde, value: saude}, {label: MR Cultural, value: cultura}], hint: 'Use um único cadastro por pessoa. A área cultural faz o mesmo perfil aparecer no MR Cultural.' }
+      - { name: image, label: Fotografia autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição acessível da fotografia, widget: string, required: false }
+      - { name: credentials, label: Qualificação ou registro profissional público confirmado, widget: string, required: false }
+      - { name: credentialVerified, label: Credencial conferida, widget: boolean, default: false, hint: 'Ative somente após conferir a credencial e sua divulgação. Não equivale à revisão de artigos nem à aprovação clínica de conteúdo.' }
+      - { name: profileUrl, label: URL HTTPS do perfil público autorizado, widget: string, required: false }
+      - { name: contactUrl, label: URL HTTPS de contato profissional público autorizado, widget: string, required: false }
+      - { name: published, label: Publicar perfil, widget: boolean, default: false, hint: 'Ative somente com fonte, vínculo com a associação e autorização de publicação confirmados. Não publique documentos pessoais ou comprovantes.' }
+  - name: programas
+    label: Programas da TV
+    folder: src/content/programs
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{title}}'
+    fields:
+      - { name: slug, label: Identificador curto sem acentos, widget: string }
+      - { name: title, label: Nome real do programa, widget: string }
+      - { name: description, label: Resumo, widget: text }
+      - { name: body, label: Apresentação e contexto, widget: text, required: false }
+      - { name: image, label: Imagem autorizada do programa, widget: image, required: false }
+      - { name: imageAlt, label: Descrição acessível da imagem, widget: string, required: false }
+      - { name: hosts, label: Apresentadores ou profissionais participantes confirmados, widget: relation, collection: profissionais, search_fields: [name, role], value_field: slug, display_fields: [name, role], multiple: true, required: false }
+      - { name: category, label: Área do programa, widget: select, options: [{label: Saúde, value: saude}, {label: Cultura, value: cultura}, {label: Comunidade, value: comunidade}] }
+      - { name: status, label: Situação real, widget: select, options: [{label: Ativo, value: ativo}, {label: Arquivo, value: arquivo}, {label: Em planejamento, value: planejamento}] }
+      - { name: schedule, label: Horário ou periodicidade confirmados, widget: text, required: false, hint: 'Deixe vazio se não houver programação atual confirmada.' }
+      - { name: published, label: Publicar programa, widget: boolean, default: false, hint: 'Confira nome, fonte, vínculo, participantes e direitos de publicação antes de ativar.' }
+  - name: episodios
+    label: Episódios e vídeos da TV
+    folder: src/content/episodes
+    format: json
+    extension: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: slug
+    summary: '{{title}}'
+    fields:
+      - { name: slug, label: Identificador curto sem acentos, widget: string }
+      - { name: title, label: Título real do episódio ou vídeo, widget: string }
+      - { name: description, label: Resumo e contexto, widget: text }
+      - { name: programSlug, label: Programa ao qual o vídeo pertence, widget: relation, collection: programas, search_fields: [title], value_field: slug, display_fields: [title] }
+      - { name: url, label: URL HTTPS do vídeo real autorizado, widget: string, hint: 'Use o endereço público original. YouTube e Vimeo são carregados somente após o visitante escolher assistir.' }
+      - { name: publishedAt, label: Data real de publicação do vídeo (se confirmada), widget: datetime, format: 'YYYY-MM-DD', time_format: false, required: false }
+      - { name: image, label: Capa autorizada, widget: image, required: false }
+      - { name: imageAlt, label: Descrição acessível da capa, widget: string, required: false }
+      - { name: transcript, label: Transcrição ou alternativa textual, widget: text, required: false }
+      - { name: published, label: Publicar episódio, widget: boolean, default: false, hint: 'Confira o vídeo, sua relação com o programa e as autorizações antes de ativar.' }
   - name: galerias
     label: Galerias culturais
     folder: src/content/galleries

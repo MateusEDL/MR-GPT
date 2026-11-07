@@ -1,0 +1,82 @@
+---
+import Icon from './Icon.astro';
+import { professionals, whatsappUrl } from '../lib/content';
+import type { Professional } from '../lib/content';
+import '../styles/professionals.css';
+
+interface Props {
+  items?: Professional[];
+  area?: 'saude' | 'cultura';
+  compact?: boolean;
+}
+
+const { items = professionals, area, compact = false } = Astro.props;
+const available = items.filter((person) => person.published && (!area || person.areas.includes(area)));
+const selected = compact ? available.slice(0, 3) : available;
+const showFilters = !area && !compact && selected.length > 0;
+const labels = { saude: 'Saúde', cultura: 'MR Cultural' };
+const initials = (name: string) => name.trim().split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part.charAt(0)).join('');
+---
+<div class:list={['professionals', { 'professionals--cultural': area === 'cultura', 'professionals--compact': compact }]} data-professionals data-professionals-area={area || 'todos'}>
+  {selected.length === 0 ? (
+    <div class="professional-empty" data-professionals-empty>
+      <div class="professional-empty__sprout" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="professional-empty__copy">
+        <p class="eyebrow">{area === 'cultura' ? 'Cultura se faz com pessoas' : 'O encontro começa com uma conversa'}</p>
+        <h2>{area === 'cultura' ? 'Há espaço para criar juntos.' : 'Cuidado e comunidade, lado a lado.'}</h2>
+        <p>Para conhecer os profissionais e as possibilidades de participação, fale com a equipe.</p>
+        <div class="professional-actions">
+          <a class="button button--dark" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Falar com a equipe <Icon name="up" size={18} /></a>
+          <a class="text-link" href="/mr-cultural/#participar">Participar do MR Cultural <Icon name="up" size={18} /></a>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <>
+      {showFilters && <div class="professional-filters" role="group" aria-label="Filtrar profissionais por área">
+        <button type="button" data-professionals-filter="todos" aria-pressed="true">Todas as áreas</button>
+        <button type="button" data-professionals-filter="saude" aria-pressed="false">Saúde</button>
+        <button type="button" data-professionals-filter="cultura" aria-pressed="false">MR Cultural</button>
+      </div>}
+      <p class="professional-count" data-professionals-count aria-live="polite" aria-atomic="true">{selected.length} {selected.length === 1 ? 'perfil' : 'perfis'}</p>
+      <div class="professional-grid">
+        {selected.map((person) => (
+          <article class="professional-card" data-professional-card data-areas={person.areas.join(' ')}>
+            <a class="professional-card__portrait" href={`/profissionais/${person.slug}/`} tabindex="-1" aria-hidden="true">
+              {person.image ? <img src={person.image} alt="" width="640" height="720" loading="lazy" /> : <span class="professional-initials">{initials(person.name)}</span>}
+            </a>
+            <div class="professional-card__body">
+              <div class="professional-areas">{person.areas.map((item) => <span class:list={['professional-area', { 'professional-area--cultural': item === 'cultura' }]}>{labels[item]}</span>)}</div>
+              <h2><a href={`/profissionais/${person.slug}/`}>{person.name}</a></h2>
+              <p class="professional-role">{person.role}</p>
+              {person.credentialVerified && person.credentials && <p class="professional-credentials">{person.credentials}</p>}
+              <p>{person.summary}</p>
+              <a class="text-link" href={`/profissionais/${person.slug}/`}>Conhecer a trajetória <Icon name="up" size={18} /></a>
+            </div>
+          </article>
+        ))}
+      </div>
+      {showFilters && <p class="professional-filter-empty" data-professionals-filter-empty hidden>Não há perfis nesta área. Converse com a equipe para saber mais.</p>}
+    </>
+  )}
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-professionals]').forEach((list) => {
+    const buttons = Array.from(list.querySelectorAll<HTMLButtonElement>('[data-professionals-filter]'));
+    const cards = Array.from(list.querySelectorAll<HTMLElement>('[data-professional-card]'));
+    const count = list.querySelector<HTMLElement>('[data-professionals-count]');
+    const empty = list.querySelector<HTMLElement>('[data-professionals-filter-empty]');
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      const filter = button.dataset.professionalsFilter;
+      let visible = 0;
+      cards.forEach((card) => {
+        const matches = filter === 'todos' || (card.dataset.areas || '').split(' ').includes(filter || '');
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+      buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      if (count) count.textContent = `${visible} ${visible === 1 ? 'perfil' : 'perfis'}`;
+      if (empty) empty.hidden = visible > 0;
+    }));
+  });
+</script>

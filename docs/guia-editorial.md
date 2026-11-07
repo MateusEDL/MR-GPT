@@ -40,6 +40,30 @@ Uma informação clínica exige cuidado adicional: fontes confiáveis, escopo cl
 
 Não há notícias fictícias cadastradas nesta entrega. A coleção começa vazia até que a associação tenha material real aprovado. Não publique listas de doenças como promessa de resultado, doses, instruções de automedicação ou anúncios de produtos de cannabis.
 
+## Cadastrar profissionais de saúde e cultura
+
+Use a coleção **Profissionais (saúde e cultura)** para criar um único cadastro por pessoa. Preencha nome público, atuação, apresentação breve e áreas confirmadas. A área **Saúde** identifica a atuação de saúde; a área **MR Cultural** permite que o mesmo perfil apareça também na página cultural. Se a pessoa participa das duas áreas, selecione ambas em vez de duplicar o cadastro.
+
+Biografia, foto, qualificação, perfil e contato são opcionais. Publique somente informações profissionais que a pessoa autorizou divulgar, com fonte e vínculo com a associação confirmados. Use links HTTPS reais. Não copie dados de contato privados, documentos pessoais, atestados, receitas, comprovantes ou autorizações para o cadastro ou a biblioteca pública. Guarde as verificações em controle privado apropriado.
+
+A marcação **Credencial conferida** só pode ser ativada após verificar a qualificação ou o registro informado e sua divulgação. Não invente CRM, especialidade, título ou registro. Essa marcação permite apresentar a credencial conferida; não indica que a pessoa revisou artigos, aprova os conteúdos do site ou oferece uma consulta disponível. A revisão editorial de cada artigo continua sendo registrada separadamente em notícias.
+
+Os perfis começam com **Publicar perfil** desativado. Ative apenas depois de confirmar a fonte, o vínculo, os textos e a autorização pública da pessoa. A existência de um cadastro no painel não comprova vínculo nem autorização.
+
+## Organizar a TV, os programas e os episódios
+
+Em **Configurações e início → TV e programas**, edite o título e a apresentação da TV. O link do canal é opcional e deve apontar para um canal oficial confirmado. Não deduza um canal pelo nome da associação.
+
+Na coleção **Programas da TV**, crie um registro por programa real, com título, resumo, área e situação atual: ativo, arquivo ou em planejamento. Apresentação longa, imagem, periodicidade e participantes são opcionais. O campo de participantes seleciona pessoas já cadastradas em **Profissionais**; confirme a participação antes de associá-las. Não converta um vídeo isolado em série nem anuncie periodicidade sem uma fonte atual.
+
+Na coleção **Episódios e vídeos da TV**, crie um registro por vídeo real e selecione o programa correspondente. Um programa pode ter vários episódios: mantenha o programa cadastrado uma única vez. Informe título, descrição e URL HTTPS do vídeo autorizado. Inclua data de publicação somente quando confirmada; não use a data de cadastro como substituição. Capa, descrição acessível e transcrição ajudam a apresentar o vídeo com contexto.
+
+Programas e episódios começam com **Publicar** desativado. Revise as fontes, os vínculos, os direitos do vídeo e de sua trilha, a participação das pessoas e os links antes de ativar. Um episódio só deve ficar disponível quando seu programa também estiver publicado. Não use nomes de programas, horários, apresentadores ou URLs fictícios para preencher espaços.
+
+Vídeos do YouTube e Vimeo só devem carregar o player após o visitante escolher assistir. Não carregue iframes, capas remotas ou rastreadores desses serviços antes desse clique; envie uma capa autorizada à biblioteca do próprio site, se houver. Outros links de vídeo precisam continuar claramente identificados como destinos externos. A transcrição deve corresponder ao vídeo e não substituir uma revisão clínica quando necessária.
+
+O endereço de referência `https://maria-do-reino-cuidado.designdoreino-edl.chatgpt.site/` ainda não pôde ser lido por restrição de acesso da rede deste ambiente. Nenhum nome de profissional, programa ou episódio foi importado desse endereço. As novas coleções permanecem vazias até que seja possível consultar a fonte ou receber o material confirmado, verificar os vínculos e autorizar a publicação.
+
 ## Cadastrar um evento uma única vez
 
 Use a coleção **Eventos** tanto para programação geral quanto cultural. Selecione a categoria cultural no mesmo cadastro; não crie uma cópia do evento para a outra agenda.
@@ -116,7 +140,7 @@ Formulários públicos devem solicitar poucos dados. Não peça laudos, receitas
 
 Antes de ativar uma integração, defina quem recebe os dados, quem tem acesso, finalidade, base legal aplicável, retenção e exclusão. Não enviar conteúdo de formulários para pixels, ferramentas de publicidade ou analytics. Não pedir autorização promocional genérica ou pré-marcada.
 
-As páginas de privacidade e cookies descrevem a versão sem publicidade comportamental, sem analytics e com links simples para serviços externos. Revise-as antes de incluir rastreadores, vídeos incorporados, novos destinatários ou outro tratamento. Habilitar uma variável de ambiente não substitui essa revisão operacional.
+As páginas de privacidade e cookies descrevem uma versão sem publicidade comportamental e sem analytics. A TV oferece links externos e, para YouTube e Vimeo, o player só é carregado após a escolha explícita de assistir; esse clique estabelece a conexão com o provedor externo. Revise essas páginas antes de alterar esse fluxo, incluir rastreadores, novos destinatários ou outro tratamento. Habilitar uma variável de ambiente não substitui essa revisão operacional.
 
 ## Revisar e publicar
 
@@ -137,3 +161,5 @@ Após salvar, acompanhe o deploy. Abra a versão gerada e teste a alteração. O
 Confirmar contatos vigentes, endereço de atendimento e horários; detalhar o fluxo associativo real; informar serviços atuais e suas condições; aprovar fontes e revisão profissional para conteúdos clínicos; obter fotos reais e permissões; confirmar agenda, projetos e parceiros; validar dados de doação; configurar o receptor dos formulários e as regras de privacidade; concluir a autenticação do painel e a conexão com a Vercel; revisar URLs antigas e redirecionamentos.
 
 A ausência de números de impacto, depoimentos, parceiros ou eventos não impede uma apresentação honesta. Esses campos devem permanecer ausentes até haver conteúdo real aprovado.
+
+Nas novas coleções, as imagens precisam estar na biblioteca local (`/uploads/...`), com descrição acessível. Isso evita conexões a provedores externos apenas para exibir uma foto ou capa. O build verifica os dados e as relações: um episódio publicado precisa pertencer a programa publicado; participantes de programa precisam ter perfil publicado. Registros não publicados ficam fora das páginas, mas o repositório e seus arquivos de mídia podem continuar públicos; não use os campos como cofre de documentos ou informações privadas.

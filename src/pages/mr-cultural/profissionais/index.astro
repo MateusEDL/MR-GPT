@@ -1,0 +1,29 @@
+---
+import Icon from '../../../components/Icon.astro';
+import Layout from '../../../layouts/Layout.astro';
+import ProfessionalList from '../../../components/ProfessionalList.astro';
+import BrandLogo from '../../../components/BrandLogo.astro';
+import '../../../styles/pages.css';
+import '../../../styles/professionals.css';
+---
+<Layout title="Profissionais do MR Cultural | Maria do Reino" description="Um espaço para conhecer profissionais da cultura, trocar saberes e conversar sobre participação no MR Cultural." path="/mr-cultural/profissionais/">
+  <header class="inner-hero cultural-hero professional-hero" data-scene="culture">
+    <div class="hero-organic-art" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/mr-cultural/">MR Cultural</a><span aria-hidden="true">/</span><span aria-current="page">Profissionais</span></nav>
+      <div class="professional-cultural-heading"><BrandLogo kind="cultural" variant="feature" /><div><p class="eyebrow">Arte que aproxima</p><h1>Quem cria também<br />cultiva encontros.</h1></div></div>
+      <p class="lead">Artistas, educadores, oficineiros e outros saberes podem se encontrar na cultura. Um espaço para conhecer trajetórias e conversar sobre as possibilidades de construir em comunidade.</p>
+      <div class="page-actions"><a class="button button--dark" href="#profissionais-culturais">Conhecer profissionais <span aria-hidden="true" style="display:inline-flex;transform:rotate(90deg)"><Icon name="arrow" size={18} /></span></a><a class="button button--outline" href="/mr-cultural/#participar">Quero participar <Icon name="up" size={18} /></a></div>
+    </div>
+  </header>
+  <section class="container professional-list-section" id="profissionais-culturais" aria-label="Profissionais do MR Cultural">
+    <ProfessionalList area="cultura" />
+    <div class="professional-return"><a class="text-link" href="/profissionais/">Ver todas as áreas <Icon name="up" size={18} /></a><a class="text-link" href="/mr-cultural/">Voltar ao MR Cultural <Icon name="up" size={18} /></a></div>
+  </section>
+  <section class="container professional-care-note professional-care-note--cultural" aria-labelledby="professional-culture-title">
+    <p class="eyebrow">Cultura se constrói junto</p>
+    <h2 id="professional-culture-title">Sua experiência pode virar uma nova conversa.</h2>
+    <p>Tem uma proposta de oficina, apresentação ou ação coletiva? Conte sua ideia à equipe. As formas de participação, a programação e as condições de cada atividade são combinadas diretamente em conversa.</p>
+    <a class="text-link" href="/mr-cultural/#participar">Apresentar uma proposta <Icon name="up" size={18} /></a>
+  </section>
+</Layout>

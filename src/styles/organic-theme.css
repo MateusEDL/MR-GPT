@@ -17,3 +17,6 @@ html.motion-paused{scroll-behavior:auto}
 @media(max-width:1200px){.site-header--branded .desktop-nav{gap:20px}.site-header--branded .header-inner{gap:20px}.site-header .brand--with-mark .brand-type>span{font-size:28px}}
 @media(max-width:700px){.site-header--branded .header-inner{min-height:94px;gap:9px}.site-header .brand--with-mark{gap:10px}.site-header .brand--with-mark .brand-type>span{font-size:24px}.site-header .brand--with-mark .brand-type small{font-size:5.5px;letter-spacing:.12em}.site-header .brand--with-mark .brand-logo--header{width:58px;height:55px}.site-header--branded .header-actions{gap:0;margin-right:0}.site-header--branded .menu-toggle{width:38px}.brand--footer:has(.brand-logo){gap:15px}}
 @media(max-width:380px){.site-header .brand--with-mark .brand-logo--header{width:51px;height:49px}.site-header .brand--with-mark .brand-type>span{font-size:22px}.site-header--branded .search-link{display:none}}
+/* Keep the extended navigation comfortable without squeezing the brand. */
+.site-header .desktop-nav{gap:21px}
+@media(min-width:1051px) and (max-width:1280px){.site-header .header-cta{display:none}.site-header .desktop-nav{gap:17px;font-size:12px}.site-header .header-inner{gap:20px}}

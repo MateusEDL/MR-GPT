@@ -22,8 +22,8 @@ Para examinar o painel usando o backend local, iniciar `npm run cms` em outro te
 
 ## Cobertura
 
-- Resposta HTTP, idioma pt-BR, título principal único, descrição, ausência de imagens quebradas e rolagem horizontal em 17 rotas públicas, nas duas larguras.
-- Legendas das quatro imagens de IA do redesign, endereço preservado da Área do Associado e screenshots da home completa e da primeira dobra em cada largura.
+- Resposta HTTP, idioma pt-BR, título principal único, descrição, ausência de imagens quebradas e rolagem horizontal em 21 rotas públicas, nas duas larguras.
+- Legendas das cinco imagens de IA da home, endereço preservado da Área do Associado e screenshots da home completa e da primeira dobra em cada largura.
 - Controle de pausa e retomada de movimento, estado acessível, classe visual e persistência da escolha após recarregar.
 - Respeito a `prefers-reduced-motion`: controle manual desabilitado, identificação de movimento reduzido e nenhuma animação CSS em execução na home.
 - Desenho efetivo do canvas interativo: comparação do checksum de pixels antes e depois de mover o ponteiro no desktop ou tocar na tela móvel.
@@ -31,9 +31,10 @@ Para examinar o painel usando o backend local, iniciar `npm run cms` em outro te
 - Acordeão nativo de perguntas frequentes usando teclado.
 - Busca local com termos sem acentos, resultados culturais, mensagem de ausência e limpeza.
 - Estados vazios de notícias, agenda e galeria, adequados ao acervo inicialmente não validado.
+- Novas áreas de profissionais gerais e culturais, TV e catálogo de programas: navegação, contato, estados vazios e ausência de pedidos a provedores de vídeo sem acervo. Detalhes em [testes-profissionais-tv.md](testes-profissionais-tv.md).
 - Fallback para WhatsApp enquanto `PUBLIC_CONTACT_FORM_ENABLED` não estiver habilitado no build; ausência de confirmação falsa de envio.
 - Ausência de textos de demonstração e de termos de governança/documentos internos no conteúdo principal.
-- Axe nas páginas início, quem somos e contato, com regras WCAG 2 A/AA e 2.1 A/AA.
+- Axe nas páginas início, quem somos, contato e nas quatro novas rotas de profissionais e TV, com regras WCAG 2 A/AA e 2.1 A/AA.
 - Carregamento do painel e de sua configuração, uso de bundle local e `noindex`.
 
 ## Evidências e limites
@@ -73,3 +74,11 @@ Depois da inclusão de duas novas imagens botânicas e do componente preparado p
 Os dois PNGs originais foram copiados sem alteração. A suíte com as marcas ativadas executou 66 cenários: 65 passaram, 1 foi pulado por ser menu móvel no desktop e nenhum falhou. Os seis cenários novos de marca verificam carregamento, proporção, limites de apresentação da resolução de origem, posições no cabeçalho/home/página cultural/rodapé e navegação sem overflow nas larguras de 1440, 390 e 360 pixels. As seis execuções Axe continuaram sem violações nas regras selecionadas. A fidelidade foi conferida pelos bytes originais e visualmente; contagem de pixels não transforma o arquivo cultural de 150 pixels em vetor.
 
 Após retirar apenas a moldura clara adicional do logo cultural, quatro verificações dirigidas passaram (home e aplicação cultural nos dois tamanhos). As capturas persistidas refletem essa apresentação final. O relatório HTML pode refletir essa seleção mais recente.
+
+## Resultado final com profissionais e TV
+
+Em 7 de novembro de 2026, a suíte completa foi executada uma vez contra o build final com editor incluído, servido em `127.0.0.1:4321`: **90 cenários identificados, 89 aprovados, 1 pulado e nenhuma falha**. O tempo reportado foi **1,2 minuto**, com código de saída `0`.
+
+O único cenário pulado corresponde ao menu de celular no projeto desktop; ele passou no projeto móvel. As 42 verificações de rota (21 páginas × dois tamanhos) passaram sem imagens quebradas, exceções JavaScript ou rolagem horizontal. As 14 análises Axe (sete páginas × dois tamanhos) não encontraram violações nas regras selecionadas. Marcas, cinco legendas da home, movimento interativo, preferências de movimento, navegação, busca, estados vazios, contato e carregamento do painel também passaram.
+
+Os 24 cenários acrescentados para profissionais e TV estão descritos em [testes-profissionais-tv.md](testes-profissionais-tv.md). As coleções permanecem vazias até confirmação do conteúdo da referência; os testes não comprovam perfis individuais, programas, episódios, reprodução de vídeo ou publicação em produção. O painel foi validado no build local com editor e continua excluído do build público padrão.

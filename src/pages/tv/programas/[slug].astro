@@ -1,0 +1,21 @@
+---
+import Icon from '../../../components/Icon.astro';
+import Layout from '../../../layouts/Layout.astro';
+import VideoPlayer from '../../../components/VideoPlayer.astro';
+import { programs, episodes, professionals } from '../../../lib/content';
+import '../../../styles/pages.css';
+import '../../../styles/tv.css';
+export function getStaticPaths() { return programs.map((program) => ({ params: { slug: program.slug }, props: { program } })); }
+const { program } = Astro.props;
+const hosts = professionals.filter((person) => person.published && program.hosts?.includes(person.slug));
+const videos = episodes.filter((episode) => episode.programSlug === program.slug);
+const categories = { saude: 'Saúde e cuidado', cultura: 'Arte e cultura', comunidade: 'Vida em comunidade' };
+const statuses = { ativo: 'Programa em atividade', arquivo: 'Acervo', planejamento: 'Em preparação' };
+---
+<Layout title={`${program.title} | Maria do Reino`} description={program.description} path={`/tv/programas/${program.slug}/`} image={program.image}>
+  <article data-program-detail>
+    <header class:list={['inner-hero', 'tv-program-hero', { 'cultural-hero': program.category === 'cultura' }]} data-scene={program.category === 'cultura' ? 'culture' : 'forest'}><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/tv/">TV e programas</a><span aria-hidden="true">/</span><a href="/tv/programas/">Programas</a><span aria-hidden="true">/</span><span aria-current="page">{program.title}</span></nav><p class="eyebrow">{categories[program.category]} · {statuses[program.status]}</p><h1>{program.title}</h1><p class="lead">{program.description}</p>{program.schedule && <p class="tv-program-schedule">{program.schedule}</p>}</div></header>
+    <div class="container tv-program-intro">{program.image && <img class="tv-program-image" src={program.image} alt={program.imageAlt || ''} width="1200" height="675" />}{program.body && <div class="page-prose">{program.body.split(/\n\s*\n/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)}</div>}{hosts.length > 0 && <section class="tv-hosts" aria-labelledby="hosts-title"><p class="eyebrow">Quem participa da conversa</p><h2 id="hosts-title">Apresentação.</h2><ul>{hosts.map((person) => <li><a href={`/profissionais/${person.slug}/`}>{person.image && <img src={person.image} alt="" width="72" height="72" loading="lazy" />}<span><strong>{person.name}</strong><span>{person.role}</span></span><Icon name="up" size={18} /></a></li>)}</ul></section>}</div>
+    <section class="container tv-section tv-program-episodes" aria-labelledby="episodes-title"><div class="tv-section__heading"><div><p class="eyebrow">Para ver e rever</p><h2 id="episodes-title">Episódios do programa.</h2></div></div>{videos.length > 0 ? <div class="tv-program-video-list">{videos.map((episode) => <article class="tv-program-episode"><h3>{episode.title}</h3><p>{episode.description}</p><VideoPlayer url={episode.url} title={episode.title} poster={episode.image} posterAlt={episode.imageAlt} transcript={episode.transcript} /></article>)}</div> : <div class="empty-state" data-tv-episodes-empty><h2>A conversa continua.</h2><p>{program.status === 'planejamento' ? 'Este programa está em preparação. Acompanhe os canais da associação para saber quando os episódios estarão disponíveis.' : 'Consulte os canais oficiais da associação para acompanhar os conteúdos deste programa.'}</p><a class="text-link" href="/contato/">Falar com a associação <Icon name="up" size={18} /></a></div>}<div class="page-actions"><a class="text-link" href="/tv/programas/"><span aria-hidden="true" style="display:inline-flex;transform:rotate(180deg)"><Icon name="arrow" size={18} /></span> Conhecer outros programas</a></div></section>
+  </article>
+</Layout>

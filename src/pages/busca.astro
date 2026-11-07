@@ -1,12 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { pages, posts, events, projects } from '../lib/content';
+import { pages, posts, events, projects, professionals, programs } from '../lib/content';
 import '../styles/pages.css';
 const entries = [
   ...pages.map((page) => ({ title: page.title, description: page.description, keywords: [page.eyebrow, page.intro, ...page.sections.map((section) => `${section.title} ${section.body}`), ...(page.faqs || []).map((faq) => `${faq.question} ${faq.answer}`)].join(' '), url: `/${page.slug}/` })),
   ...posts.map((post) => ({ title: post.title, description: post.description, keywords: `${post.category} ${post.body}`, url: `/blog/${post.slug}/` })),
   ...events.map((event) => ({ title: event.title, description: event.description, url: `/agenda/${event.slug}/` })),
   ...projects.map((project) => ({ title: project.title, description: project.description, url: `/mr-cultural/projetos/${project.slug}/` })),
+  ...professionals.map((person) => ({ title: person.name, description: `${person.role}. ${person.summary}`, url: `/profissionais/${person.slug}/`, keywords: `${person.bio || ''} ${person.areas.join(' ')}` })),
+  ...programs.map((program) => ({ title: program.title, description: program.description, url: `/tv/programas/${program.slug}/`, keywords: program.body || '' })),
+  { title: 'Profissionais', description: 'Profissionais, acolhimento e participação na associação.', url: '/profissionais/' },
+  { title: 'Profissionais do MR Cultural', description: 'Arte, oficinas e pessoas que participam da cultura.', url: '/mr-cultural/profissionais/' },
+  { title: 'TV e programas', description: 'Conversas, vídeos e programas para acompanhar e compartilhar.', url: '/tv/' },
+  { title: 'Programas', description: 'Conheça os programas e encontre seus vídeos.', url: '/tv/programas/' },
   { title: 'Agenda da associação', description: 'Programação confirmada e condições de participação.', url: '/agenda/' },
   { title: 'Agenda do MR Cultural', description: 'Encontros e atividades culturais.', url: '/mr-cultural/agenda/' },
   { title: 'Projetos do MR Cultural', description: 'Iniciativas culturais e comunitárias.', url: '/mr-cultural/projetos/' },

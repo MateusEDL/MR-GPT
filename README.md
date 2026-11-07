@@ -21,8 +21,10 @@ O painel local foi testado com alteração real de um título, gravação de `ho
 
 - Home, associação, acolhimento, informação introdutória em saúde, MR Cultural, apoio, contato, FAQ, privacidade e cookies.
 - Agenda geral e cultural com uma base única; projetos, galeria e notícias preparados para registros reais.
+- Profissionais por áreas, com uma listagem cultural compartilhada e perfis individuais.
+- TV, catálogo de programas, episódios e player externo apenas após escolha do visitante.
 - Busca local, menu móvel, perguntas acessíveis por teclado, links oficiais e Área do Associado preservada.
-- Conteúdo e configurações editáveis: páginas, home, contatos, logos, notícias, eventos, projetos, galerias, parceiros e autores/revisores.
+- Conteúdo e configurações editáveis: páginas, home, contatos, logos, notícias, eventos, projetos, galerias, parceiros, autores/revisores, profissionais, programas e episódios.
 - Metadados, cartão social PNG, sitemap e robots; indexação desativada inicialmente.
 - APIs Vercel opcionais para autenticação editorial e contato. Não há confirmação falsa de envio.
 - Imagens ilustrativas de IA identificadas. Não são registros de eventos ou da sede.
@@ -114,4 +116,15 @@ Documentação:
 - [Auditoria de dependências](docs/auditoria-dependencias.md)
 - [Inventário das ilustrações](docs/inventario-imagens.md)
 - [Testes visuais](docs/testes-visuais.md)
+- [Testes de profissionais e TV](docs/testes-profissionais-tv.md)
+- [Validação com conteúdo isolado](docs/testes-funcionais-conteudo.md)
+- [Validação de cadastros e vínculos](docs/testes-validacao-conteudo.md)
 - [Migração e lançamento](docs/lancamento.md)
+
+## Profissionais e TV — fonte de conteúdo pendente
+
+As abas `/profissionais/`, `/mr-cultural/profissionais/`, `/tv/` e `/tv/programas/` foram preparadas com conteúdo editável. Profissionais, programas e episódios usam coleções próprias; somente registros com publicação ativada aparecem no site. Credenciais profissionais só são exibidas quando a conferência é marcada e não representam revisão automática de artigos. Os programas podem relacionar participantes já publicados; vídeos pertencem a um programa publicado.
+
+A referência solicitada foi `https://maria-do-reino-cuidado.designdoreino-edl.chatgpt.site/`. A conexão foi bloqueada com 403 pelo proxy do ambiente antes da leitura da página. Portanto, nomes, perfis, vínculos, fotos, programas, horários, canal e vídeos desse endereço **não foram importados nem verificados**. As coleções novas permanecem vazias. O domínio foi acrescentado ao rascunho de rede, preservando os anteriores; salvar esse rascunho não comprovou liberação no runtime. É necessário aplicar a alteração em configurações e repetir o acesso, ou fornecer uma exportação/cópia do conteúdo, para concluir a importação.
+
+No painel, use Profissionais, Programas, Episódios e TV e programas. Envie as fotos à biblioteca local. YouTube e Vimeo são incorporados apenas após clique, com explicação da conexão e alternativa de assistir na origem. URLs que não forem desses provedores não viram iframe. Não há transmissão ao vivo ou programação presumida. O build valida links, áreas, publicação e relações entre registros antes de gerar as páginas.

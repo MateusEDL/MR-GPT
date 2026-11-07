@@ -3,15 +3,19 @@
   "title": "Suas preferências, com clareza",
   "description": "Entenda o uso de cookies e serviços externos no site institucional da Associação Maria do Reino.",
   "eyebrow": "Cookies e preferências",
-  "intro": "Esta versão do site público não usa cookies de publicidade nem ferramentas de analytics. Você pode consultar o conteúdo sem aceitar rastreadores opcionais.",
+  "intro": "As páginas institucionais não iniciam publicidade comportamental nem ferramentas de analytics da associação. Os players de vídeo externos dependem da sua escolha para carregar.",
   "sections": [
     {
       "title": "Conteúdo sem rastreamento publicitário",
-      "body": "As páginas institucionais não incorporam feeds de redes sociais nem iniciam vídeos externos automaticamente. Os perfis oficiais são apresentados como links, que você escolhe abrir.\n\nNão há categorias opcionais de rastreamento ativadas nesta versão."
+      "body": "As páginas institucionais não incorporam feeds de redes sociais nem iniciam vídeos externos automaticamente. Os perfis oficiais são apresentados como links, que você escolhe abrir.\n\nA navegação institucional funciona sem ativar os players externos da TV."
     },
     {
       "title": "Sua preferência de movimento",
       "body": "O botão de movimento permite pausar as animações e os efeitos interativos. Quando disponível, o navegador guarda essa escolha apenas neste dispositivo para respeitá-la nas próximas visitas.\n\nEssa preferência não identifica visitantes nem é enviada para publicidade ou analytics. A opção de movimento reduzido do seu sistema também é respeitada."
+    },
+    {
+      "title": "Sua escolha para carregar vídeos",
+      "body": "Antes de carregar um player, o site informa qual é a plataforma responsável. Carregue o vídeo somente se quiser estabelecer essa conexão ou use o link para assistir diretamente na plataforma.\n\nYouTube e Vimeo podem tratar dados e utilizar tecnologias próprias após sua interação. As políticas e os controles dessas plataformas também se aplicam. Escolher um vídeo não autoriza o uso dos seus dados de contato ou de saúde para publicidade."
     },
     {
       "title": "Links para outros serviços",

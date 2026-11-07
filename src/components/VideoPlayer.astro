@@ -1,0 +1,94 @@
+---
+import Icon from './Icon.astro';
+import { videoEmbed } from '../lib/video';
+interface Props {
+  url: string;
+  title: string;
+  poster?: string;
+  posterAlt?: string;
+  transcript?: string;
+}
+
+const { url, title, poster, posterAlt, transcript } = Astro.props;
+type VideoSource = { provider: 'youtube' | 'vimeo' | 'external' | 'invalid'; label: string; url?: string; embedUrl?: string; privacyUrl?: string };
+function videoSource(value: string): VideoSource {
+  let parsed: URL;
+  try { parsed = new URL(value); } catch { return { provider: 'invalid', label: 'Vídeo' }; }
+  if (parsed.protocol !== 'https:' || parsed.username || parsed.password || parsed.port) return { provider: 'invalid', label: 'Vídeo' };
+  const embed = videoEmbed(value);
+  if (embed?.provider === 'YouTube') return { provider: 'youtube', label: 'YouTube', url: parsed.href, embedUrl: embed.src, privacyUrl: 'https://policies.google.com/privacy?hl=pt-BR' };
+  if (embed?.provider === 'Vimeo') return { provider: 'vimeo', label: 'Vimeo', url: parsed.href, embedUrl: embed.src, privacyUrl: 'https://vimeo.com/privacy' };
+  return { provider: 'external', label: 'canal de origem', url: parsed.href };
+}
+const source = videoSource(url);
+function safeLocalPoster(value?: string) {
+  if (!value?.startsWith('/') || value.startsWith('//')) return undefined;
+  try { const decoded = decodeURIComponent(value); return !decoded.startsWith('//') && !decoded.includes('\\') && !decoded.split('/').includes('..') ? value : undefined; } catch { return undefined; }
+}
+const localPoster = safeLocalPoster(poster);
+---
+<div class="video-player" data-video-player data-provider={source.provider} data-embed-url={source.embedUrl} data-video-title={title}>
+  {source.embedUrl ? <>
+    <div class="video-player__stage" data-video-stage>
+      {localPoster && <img class="video-player__poster" src={localPoster} alt={posterAlt || ''} width="960" height="540" loading="lazy" />}
+      <div class="video-player__invitation">
+        <span class="video-player__play" aria-hidden="true">▶</span>
+        <span class="video-player__provider">Vídeo no {source.label}</span>
+        <button class="button video-player__load" type="button" data-video-load hidden>Carregar vídeo<span class="sr-only">: {title}</span></button>
+        <noscript><p>Use o link abaixo para assistir no {source.label}.</p></noscript>
+      </div>
+    </div>
+    <p class="video-player__privacy">Ao carregar o vídeo, você se conecta ao {source.label}, que receberá dados como seu endereço IP. <a href={source.privacyUrl} target="_blank" rel="noopener noreferrer">Ler a política de privacidade do {source.label} <Icon name="up" size={18} /></a></p>
+    <p class="video-player__status" data-video-status role="status" aria-live="polite"></p>
+  </> : <p class="video-player__external-note">{source.url ? 'Este vídeo pode ser assistido no canal de origem.' : 'Consulte os canais oficiais para acompanhar este conteúdo.'}</p>}
+  {source.url && <a class="text-link video-player__external" data-video-external href={source.url} target="_blank" rel="noopener noreferrer">Assistir no {source.label} <Icon name="up" size={18} /><span class="sr-only">: {title} (abre em outra aba)</span></a>}
+  {transcript?.trim() && <details class="video-player__transcript"><summary>Ler transcrição</summary><div>{transcript.split(/\n\s*\n/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)}</div></details>}
+</div>
+
+<script>
+  function setupVideoPlayers() {
+    document.querySelectorAll<HTMLElement>('[data-video-player]').forEach((player) => {
+      if (player.dataset.videoReady === 'true') return;
+      player.dataset.videoReady = 'true';
+      const button = player.querySelector<HTMLButtonElement>('[data-video-load]');
+      const stage = player.querySelector<HTMLElement>('[data-video-stage]');
+      const status = player.querySelector<HTMLElement>('[data-video-status]');
+      if (!button || !stage || !status) return;
+      let embedUrl: string | undefined;
+      try {
+        const candidate = new URL(player.dataset.embedUrl || '');
+        if (candidate.protocol === 'https:' && !candidate.username && !candidate.password && !candidate.port) {
+          const youtubeId = candidate.pathname.match(/^\/embed\/([A-Za-z0-9_-]{11})$/)?.[1];
+          const vimeoId = candidate.pathname.match(/^\/video\/(\d{1,15})$/)?.[1];
+          if (candidate.hostname === 'www.youtube-nocookie.com' && youtubeId) embedUrl = `https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0`;
+          if (candidate.hostname === 'player.vimeo.com' && vimeoId) embedUrl = `https://player.vimeo.com/video/${vimeoId}?dnt=1`;
+        }
+      } catch { /* The ordinary external link remains available. */ }
+      if (!embedUrl) return;
+      button.hidden = false;
+      button.addEventListener('click', () => {
+        button.disabled = true;
+        status.textContent = 'Carregando o vídeo. Você também pode usar o link para o canal de origem.';
+        stage.setAttribute('aria-busy', 'true');
+        const frame = document.createElement('iframe');
+        frame.src = embedUrl!;
+        frame.title = player.dataset.videoTitle || 'Vídeo da Maria do Reino';
+        frame.allow = 'encrypted-media; picture-in-picture';
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.addEventListener('load', () => {
+          stage.removeAttribute('aria-busy');
+          status.textContent = 'Reprodutor carregado. Use os controles do vídeo para assistir.';
+        }, { once: true });
+        frame.addEventListener('error', () => {
+          stage.removeAttribute('aria-busy');
+          status.textContent = 'Não foi possível carregar o reprodutor. Use o link para assistir no canal de origem.';
+        }, { once: true });
+        stage.replaceChildren(frame);
+        frame.focus();
+      }, { once: true });
+    });
+  }
+  setupVideoPlayers();
+  document.addEventListener('astro:page-load', setupVideoPlayers);
+</script>

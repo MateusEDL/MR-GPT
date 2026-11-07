@@ -1,0 +1,11 @@
+---
+import Icon from '../../../components/Icon.astro';
+import Layout from '../../../layouts/Layout.astro';
+import ProgramList from '../../../components/ProgramList.astro';
+import '../../../styles/pages.css';
+import '../../../styles/tv.css';
+---
+<Layout title="Programas | Maria do Reino" description="Conheça os programas da Maria do Reino e acompanhe conversas sobre cuidado, cultura e comunidade." path="/tv/programas/">
+  <header class="inner-hero tv-programs-hero" data-scene="forest"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/tv/">TV e programas</a><span aria-hidden="true">/</span><span aria-current="page">Programas</span></nav><p class="eyebrow">Espaço para outras vozes</p><h1>Conversas para cultivar.</h1><p class="lead">Cuidado, cultura e vida em comunidade. Conheça cada programa e encontre seus conteúdos para assistir no seu tempo.</p></div></header>
+  <section class="container tv-section" aria-labelledby="all-programs-title"><div class="tv-section__heading"><div><p class="eyebrow">TV e programas</p><h2 id="all-programs-title">Programas da associação.</h2></div></div><ProgramList /><div class="page-actions"><a class="text-link" href="/tv/"><span aria-hidden="true" style="display:inline-flex;transform:rotate(180deg)"><Icon name="arrow" size={18} /></span> Voltar à TV e aos vídeos</a></div></section>
+</Layout>

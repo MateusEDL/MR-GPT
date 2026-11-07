@@ -1,0 +1,20 @@
+---
+import Icon from '../../components/Icon.astro';
+import Layout from '../../layouts/Layout.astro';
+import ProgramList from '../../components/ProgramList.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
+import { programs, episodes, site, tv } from '../../lib/content';
+import '../../styles/pages.css';
+import '../../styles/tv.css';
+let channelUrl: string | undefined;
+try { const candidate = new URL(tv.channelUrl); if (candidate.protocol === 'https:' && !candidate.username && !candidate.password) channelUrl = candidate.href; } catch { /* Official social channels remain available. */ }
+const videos = episodes.filter((episode) => programs.some((program) => program.slug === episode.programSlug));
+---
+<Layout title={`${tv.title} | Maria do Reino`} description={tv.intro} path="/tv/">
+  <div data-tv-page>
+    <header class="inner-hero tv-hero" data-scene="forest"><div class="container"><nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">TV e programas</span></nav><div class="tv-hero__layout"><div class="tv-hero__copy"><p class="eyebrow">Vozes, histórias e encontros</p><h1>{tv.title}</h1><p class="lead">{tv.intro}</p><div class="page-actions"><a class="button button--dark" href="#programas">Conhecer os programas <span aria-hidden="true" style="display:inline-flex;transform:rotate(90deg)"><Icon name="arrow" size={18} /></span></a>{channelUrl && <a class="text-link" href={channelUrl} target="_blank" rel="noopener noreferrer">Visitar o canal <Icon name="up" size={18} /></a>}</div></div><figure class="tv-hero__figure"><img src="/images/botanica-orvalho-ia.webp" alt="Folhas verdes com gotas de orvalho sob a luz natural, em imagem botânica ilustrativa." width="1536" height="1024" fetchpriority="high" /><figcaption>Imagem botânica ilustrativa gerada por IA.</figcaption></figure></div></div></header>
+    <section class="container tv-section" id="programas" data-tv-programs aria-labelledby="programas-title"><div class="tv-section__heading"><div><p class="eyebrow">Cada conversa, um caminho</p><h2 id="programas-title">Programas para acompanhar.</h2></div><a class="text-link" href="/tv/programas/">Ver todos os programas <Icon name="up" size={18} /></a></div><ProgramList items={programs.slice(0, 3)} compact /></section>
+    <section class="tv-videos" data-tv-episodes data-scene="culture" aria-labelledby="tv-videos-title"><div class="container"><div class="tv-section__heading"><div><p class="eyebrow">Para assistir com calma</p><h2 id="tv-videos-title">Histórias que seguem a conversa.</h2></div></div>{videos.length > 0 ? <div class="tv-episode-list">{videos.map((episode) => <article class="tv-episode"><div class="tv-episode__copy"><p class="eyebrow">{programs.find((program) => program.slug === episode.programSlug)?.title}</p><h3>{episode.title}</h3><p>{episode.description}</p><a class="text-link" href={`/tv/programas/${episode.programSlug}/`}>Conhecer o programa <Icon name="up" size={18} /></a></div><VideoPlayer url={episode.url} title={episode.title} poster={episode.image} posterAlt={episode.imageAlt} transcript={episode.transcript} /></article>)}</div> : <div class="tv-videos__empty" data-tv-episodes-empty><p>Os vídeos e as conversas da associação também passam pelos nossos canais oficiais. Acompanhe e fique por perto.</p><a class="text-link" href={channelUrl || site.instagram} target="_blank" rel="noopener noreferrer">Acompanhar os conteúdos <Icon name="up" size={18} /></a></div>}</div></section>
+    <aside class="container tv-connection"><p class="eyebrow">O encontro continua</p><h2>Cultura também se faz em comunidade.</h2><p>Conheça os projetos, as pessoas e os caminhos de participação do MR Cultural.</p><a class="text-link" href="/mr-cultural/">Entrar no MR Cultural <Icon name="up" size={18} /></a></aside>
+  </div>
+</Layout>
