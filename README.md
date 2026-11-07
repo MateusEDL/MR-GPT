@@ -107,7 +107,7 @@ Os dois logos foram recebidos em `logos-mr.zip` e copiados sem alteração para 
 
 Fotos e vídeos das redes não foram obtidos: a rede do ambiente bloqueou as requisições. Os domínios necessários foram salvos no rascunho do ambiente, cuja aplicação ainda está pendente. Não confundir as ilustrações de IA com esse acervo.
 
-Ainda precisam de confirmação: contatos atuais, endereço e horários, serviços e condições de participação, programação, autorizações de mídia, profissionais revisores, parceiros, dados oficiais de doação, hospedagem, integração real e inventário de URLs antigas. Campos sem dados ficam ausentes da interface. A área atual dos associados não foi alterada nem testada com autenticação.
+Ainda precisam de confirmação: contatos atuais, endereço e horários, serviços e condições de participação, programação, autorizações de mídia, profissionais revisores, parceiros, dados oficiais de doação, hospedagem, integração real e inventário de URLs antigas. Campos operacionais sem dados ficam ausentes da interface. Os espaços de fotos e mídia previstos nas capturas mantêm as indicações de preparação da referência. A área atual dos associados não foi alterada nem testada com autenticação.
 
 Documentação:
 
@@ -121,10 +121,10 @@ Documentação:
 - [Validação de cadastros e vínculos](docs/testes-validacao-conteudo.md)
 - [Migração e lançamento](docs/lancamento.md)
 
-## Profissionais e TV — fonte de conteúdo pendente
+## Profissionais e mídia — conteúdo das capturas
 
 As abas `/profissionais/`, `/mr-cultural/profissionais/`, `/tv/` e `/tv/programas/` foram preparadas com conteúdo editável. Profissionais, programas e episódios usam coleções próprias; somente registros com publicação ativada aparecem no site. Credenciais profissionais só são exibidas quando a conferência é marcada e não representam revisão automática de artigos. Os programas podem relacionar participantes já publicados; vídeos pertencem a um programa publicado.
 
-A referência solicitada foi `https://maria-do-reino-cuidado.designdoreino-edl.chatgpt.site/`. A conexão foi bloqueada com 403 pelo proxy do ambiente antes da leitura da página. Portanto, nomes, perfis, vínculos, fotos, programas, horários, canal e vídeos desse endereço **não foram importados nem verificados**. As coleções novas permanecem vazias. O domínio foi acrescentado ao rascunho de rede, preservando os anteriores; salvar esse rascunho não comprovou liberação no runtime. É necessário aplicar a alteração em configurações e repetir o acesso, ou fornecer uma exportação/cópia do conteúdo, para concluir a importação.
+O usuário forneceu duas capturas com os quatro profissionais (Alireza Dargahi, Leonardo Coelho, Wellington Medina e Thaís Simões) e três espaços de mídia (Participações na TV, Entrevistas e reportagens e Maria do Reino Talks). Esses registros agora aparecem na home e nas páginas próprias, com a identidade visual orgânica do projeto. O MR Cultural também apresenta os profissionais da associação, preservando sua atuação em saúde. As capturas indicam **Foto em breve** e **Conteúdo em preparação**; esses estados foram mantidos, sem fotos ou vídeos fabricados. A transcrição e seus limites estão em [referencia-profissionais-midia.md](docs/referencia-profissionais-midia.md). O endereço remoto continua sem leitura pelo ambiente; esta atualização se baseia nas imagens enviadas pelo usuário.
 
 No painel, use Profissionais, Programas, Episódios e TV e programas. Envie as fotos à biblioteca local. YouTube e Vimeo são incorporados apenas após clique, com explicação da conexão e alternativa de assistir na origem. URLs que não forem desses provedores não viram iframe. Não há transmissão ao vivo ou programação presumida. O build valida links, áreas, publicação e relações entre registros antes de gerar as páginas.

@@ -45,6 +45,7 @@ for(const collection of ['pages','posts','events','projects','galleries','partne
     if(collection==='galleries'){assert(Array.isArray(data.items),`${file}: galeria sem lista de imagens`);for(const image of data.items){validateString(image.src,`${file}.src`);validateString(image.alt,`${file}.alt`);}}
     if(['professionals','programs','episodes'].includes(collection)){
       assert(typeof data.published==='boolean',`${file}: published precisa ser boolean`);
+      assert(data.order===undefined||(Number.isInteger(data.order)&&data.order>=0),`${file}: ordem deve ser um inteiro não negativo`);
       linked[collection].push(data);
     }
     if(collection==='professionals'){

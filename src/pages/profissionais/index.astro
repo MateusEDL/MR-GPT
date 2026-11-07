@@ -5,18 +5,19 @@ import ProfessionalList from '../../components/ProfessionalList.astro';
 import '../../styles/pages.css';
 import '../../styles/professionals.css';
 ---
-<Layout title="Profissionais | Maria do Reino" description="Conheça os caminhos de atuação em saúde e cultura e converse com a equipe Maria do Reino sobre profissionais e participação." path="/profissionais/">
+<Layout title="Profissionais | Maria do Reino" description="Conheça os profissionais de saúde da Maria do Reino e converse com a equipe sobre disponibilidade e formas de atendimento." path="/profissionais/">
   <header class="inner-hero professional-hero" data-scene="forest">
     <div class="hero-organic-art" aria-hidden="true"></div>
     <div class="container">
       <nav class="page-breadcrumb" aria-label="Você está aqui"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">Profissionais</span></nav>
-      <p class="eyebrow">Pessoas, saberes e encontros</p>
-      <h1>O cuidado cresce<br />na troca.</h1>
-      <p class="lead">Saúde, arte e convivência abrem diferentes caminhos de cuidado. Conheça este espaço de encontro e converse com a equipe para entender as possibilidades.</p>
-      <div class="page-actions"><a class="button button--dark" href="#conhecer">Conhecer profissionais <span aria-hidden="true" style="display:inline-flex;transform:rotate(90deg)"><Icon name="arrow" size={18} /></span></a><a class="button button--outline" href="/mr-cultural/profissionais/">Profissionais do MR Cultural <Icon name="up" size={18} /></a></div>
+      <p class="eyebrow">Profissionais Maria do Reino</p>
+      <h1>Conheça quem<br />caminha com você.</h1>
+      <p class="lead professional-hero-motto">Saberes diferentes. Um compromisso comum: cuidar.</p>
+      <p class="professional-hero-description">Cada pessoa traz um olhar para a sua jornada. Conheça os profissionais de saúde da associação e converse com a equipe para saber como começar.</p>
+      <div class="page-actions"><a class="button button--dark" href="#conhecer">Conhecer profissionais <span aria-hidden="true" style="display:inline-flex;transform:rotate(90deg)"><Icon name="arrow" size={18} /></span></a><a class="button button--outline" href="/mr-cultural/profissionais/">Cuidado e cultura <Icon name="up" size={18} /></a></div>
     </div>
   </header>
-  <section class="container professional-list-section" id="conhecer" aria-label="Profissionais de saúde e cultura">
+  <section class="container professional-list-section" id="conhecer" aria-label="Profissionais da Maria do Reino">
     <ProfessionalList />
   </section>
   <section class="container professional-care-note" aria-labelledby="professional-care-title">

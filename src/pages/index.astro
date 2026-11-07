@@ -3,8 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import CurveEdge from '../components/CurveEdge.astro';
 import BrandLogo from '../components/BrandLogo.astro';
+import ProfessionalList from '../components/ProfessionalList.astro';
+import ProgramList from '../components/ProgramList.astro';
 import {home,site,pages,posts,events,partners,eventIsPast,formatDate} from '../lib/content';
 import '../styles/home.css';
+import '../styles/tv.css';
+import '../styles/home-people-media.css';
 const titleWords=home.title.trim().split(' ');
 const titleLast=titleWords.pop();
 const titleFirst=titleWords.join(' ');
@@ -44,6 +48,17 @@ const manifestoSet=manifestoImage==='/images/jardim-medicinal-ia.webp'?'/images/
       </div>
     </section>
 
+    <section class="home-professionals-section" id="profissionais" aria-labelledby="home-professionals-title" data-scene="forest" data-home-professionals>
+      <div class="container">
+        <div class="home-collection-heading" data-reveal>
+          <div><span class="eyebrow">{home.professionalsEyebrow}</span><h2 id="home-professionals-title">{home.professionalsTitle}<br/><em>{home.professionalsTitleEmphasis}</em></h2></div>
+          <p>{home.professionalsIntro}</p>
+        </div>
+        <ProfessionalList compact headingLevel="h3" />
+        <div class="home-collection-footer"><a class="text-link" href="/profissionais/">Conhecer todos os profissionais<Icon name="up" size={20}/></a></div>
+      </div>
+    </section>
+
     <section class="culture-section" aria-labelledby="culture-title" data-scene="culture">
       <CurveEdge fill="#fbf6e9" top variant="rolling"/>
       <div class="culture-glow" aria-hidden="true"></div>
@@ -59,6 +74,19 @@ const manifestoSet=manifestoImage==='/images/jardim-medicinal-ia.webp'?'/images/
       <div class="nature-visual" data-reveal><figure class="scene-media nature-photo" data-parallax="0.06"><img src="/images/cultivo-vivo-ia-960.webp" srcset="/images/cultivo-vivo-ia-640.webp 640w, /images/cultivo-vivo-ia-960.webp 960w, /images/cultivo-vivo-ia-1440.webp 1440w" sizes="(max-width:760px) 100vw,55vw" width="1536" height="1024" alt="Mãos adultas cuidando da terra e de pequenas mudas em um cultivo ilustrativo." loading="lazy"/><figcaption>Imagem ilustrativa gerada por IA</figcaption></figure><svg class="growing-line" viewBox="0 0 260 360" fill="none" aria-hidden="true"><path d="M120 350C40 300 220 240 110 170C40 120 110 60 140 10M110 170C180 160 220 110 220 110C160 85 115 125 110 170ZM105 255C40 245 20 190 20 190C85 175 116 220 105 255Z" stroke="currentColor" stroke-width="1"/></svg></div>
       <div class="nature-copy" data-reveal><span class="eyebrow">{home.natureEyebrow}</span><h2 id="nature-title">{home.natureTitle}</h2><p>{home.natureIntro}</p><a class="text-link" href="/quem-somos/">Conheça o que nos move<Icon name="up" size={22}/></a><span class="nature-signature" aria-hidden="true">da terra, para a vida.</span></div>
     </div><CurveEdge fill="#fbf6e9"/></section>
+
+    <section class="home-media-section" id="na-midia" aria-labelledby="home-media-title" data-scene="culture" data-home-media>
+      <CurveEdge fill="#fbf6e9" top variant="rolling"/>
+      <div class="container">
+        <div class="home-collection-heading" data-reveal>
+          <div><span class="eyebrow">{home.mediaEyebrow}</span><h2 id="home-media-title">{home.mediaTitle}<br/><em>{home.mediaTitleEmphasis}</em></h2></div>
+          <p>{home.mediaIntro}</p>
+        </div>
+        <ProgramList compact />
+        <div class="home-collection-footer"><a class="text-link" href="/tv/">Explorar a TV e os programas<Icon name="up" size={20}/></a></div>
+      </div>
+      <CurveEdge fill="#fbf6e9"/>
+    </section>
 
     <section class="community-section" data-scene="earth"><div class="container"><div class="section-heading" data-reveal><div><span class="eyebrow">{home.agendaEyebrow}</span><h2>{home.agendaTitle}</h2></div><a class="text-link" href="/mr-cultural/agenda/">Conheça a agenda cultural<Icon name="up" size={22}/></a></div>
       {upcoming.length?<div class="home-events">{upcoming.map(event=><a class="home-event" href={`/agenda/${event.slug}/`} data-reveal><span class="eyebrow">{formatDate(event.start)}</span><h3>{event.title}</h3><p>{event.description}</p><span class="text-link">Informações e participação<Icon name="arrow" size={18}/></span></a>)}</div>:<div class="community-invitation" data-reveal><span class="invitation-sun"><Icon name="sun" size={58}/></span><div><h3>{home.agendaEmptyTitle}</h3><p>{home.agendaEmptyDescription}</p><a class="text-link" href={site.instagramCultural} target="_blank" rel="noopener noreferrer">Acompanhe o MR Cultural<Icon name="up" size={20}/></a></div></div>}

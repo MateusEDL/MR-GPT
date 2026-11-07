@@ -1,0 +1,12 @@
+{
+  "slug": "leonardo-coelho",
+  "name": "Dr. Leonardo Coelho",
+  "role": "Atendimento médico",
+  "summary": "Avaliação clínica e acompanhamento da jornada de tratamento.",
+  "areas": [
+    "saude"
+  ],
+  "credentialVerified": false,
+  "published": true,
+  "order": 2
+}

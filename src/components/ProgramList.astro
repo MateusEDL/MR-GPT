@@ -4,12 +4,18 @@ import { programs, site, type Program } from '../lib/content';
 interface Props { items?: Program[]; compact?: boolean }
 const { items = programs, compact = false } = Astro.props;
 const publishedItems = items.filter((item) => item.published);
-const categories: Record<Program['category'], string> = { saude: 'Saúde e cuidado', cultura: 'Arte e cultura', comunidade: 'Vida em comunidade' };
-const statuses: Record<Program['status'], string> = { ativo: 'Programa em atividade', arquivo: 'Acervo', planejamento: 'Em preparação' };
+const visibleItems = compact ? publishedItems.slice(0, 3) : publishedItems;
+const statuses: Record<Program['status'], string> = { ativo: 'Programa em atividade', arquivo: 'Acervo', planejamento: 'Conteúdo em preparação' };
+const showDescription = (program: Program) => program.description.trim().replace(/[.!]$/, '').toLocaleLowerCase('pt-BR') !== statuses[program.status].toLocaleLowerCase('pt-BR');
 ---
 <div class:list={['program-list', { 'program-list--compact': compact }]} data-program-list>
-  {publishedItems.length > 0 ? publishedItems.map((program) => <article class="program-card" data-program-card data-program-category={program.category}>
-    {program.image ? <a class="program-card__image" href={`/tv/programas/${program.slug}/`} tabindex="-1" aria-hidden="true"><img src={program.image} alt="" width="720" height="450" loading="lazy" /></a> : <div class="program-card__seed" aria-hidden="true"><span></span><span></span><span></span></div>}
-    <div class="program-card__copy"><p class="program-card__category">{categories[program.category]} <span aria-hidden="true">·</span> {statuses[program.status]}</p><h3><a href={`/tv/programas/${program.slug}/`}>{program.title}</a></h3><p>{program.description}</p><a class="text-link" href={`/tv/programas/${program.slug}/`}>Conhecer o programa <Icon name="up" size={18} /><span class="sr-only"> {program.title}</span></a></div>
+  {visibleItems.length > 0 ? visibleItems.map((program, index) => <article class:list={['program-card', `program-card--${['forest', 'wine', 'earth'][index % 3]}`]} data-program-card data-program-slug={program.slug} data-program-category={program.category} data-program-status={program.status}>
+    <div class="program-card__visual" aria-hidden="true">
+      {program.image ? <img src={program.image} alt="" width="720" height="450" loading="lazy" /> : <>
+        <svg class="program-card__botanical" viewBox="0 0 440 260" fill="none"><path class="program-card__stem" d="M-18 274C92 187 139 115 205-14M50 225C151 191 231 171 302 116M123 138C133 85 128 33 105-20"/><path class="program-card__leaf" d="M27 231C-7 169 5 127 66 118C78 167 64 202 27 231ZM86 182C118 126 162 118 202 141C179 184 136 202 86 182ZM127 108C80 104 52 70 65 23C111 25 140 61 127 108ZM157 80C183 32 222 16 259 31C242 78 208 94 157 80ZM211 160C213 112 249 77 292 81C300 120 271 152 211 160Z"/><path class="program-card__vein" d="M27 231 58 137M86 182 183 148M127 108 78 43M157 80 240 42M211 160 276 96"/><circle class="program-card__orbit" cx="355" cy="85" r="94"/><circle class="program-card__orbit" cx="355" cy="85" r="123"/></svg>
+        <svg class="program-card__play" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30"/><path d="m27 22 16 10-16 10V22Z"/></svg>
+      </>}
+    </div>
+    <div class="program-card__copy"><h3><a href={`/tv/programas/${program.slug}/`}>{program.title}</a></h3>{showDescription(program) && <p class="program-card__description">{program.description}</p>}<p class="program-card__status"><span aria-hidden="true"></span>{statuses[program.status]}</p><a class="text-link" href={`/tv/programas/${program.slug}/`}>Conhecer o espaço <Icon name="up" size={18} /><span class="sr-only">: {program.title}</span></a></div>
   </article>) : <div class="empty-state program-list__empty" data-program-empty><p class="eyebrow">Conversas que aproximam</p><h2>Novas vozes encontram lugar por aqui.</h2><p>Acompanhe os canais oficiais da Maria do Reino para conhecer os conteúdos e as próximas conversas.</p><a class="text-link" href={site.instagram} target="_blank" rel="noopener noreferrer">Acompanhar a Maria do Reino <Icon name="up" size={18} /></a></div>}
 </div>

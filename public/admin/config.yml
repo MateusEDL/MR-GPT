@@ -91,6 +91,14 @@ collections:
           - { name: natureIntro, label: Introdução da seção de natureza, widget: text }
           - { name: participationTitle, label: Título de participação, widget: string }
           - { name: participationIntro, label: Texto de participação, widget: text }
+          - { name: professionalsEyebrow, label: Identificação dos profissionais, widget: string }
+          - { name: professionalsTitle, label: Título dos profissionais, widget: string }
+          - { name: professionalsTitleEmphasis, label: Trecho em destaque dos profissionais, widget: string }
+          - { name: professionalsIntro, label: Apresentação dos profissionais, widget: text }
+          - { name: mediaEyebrow, label: Identificação da mídia, widget: string }
+          - { name: mediaTitle, label: Título da mídia, widget: string }
+          - { name: mediaTitleEmphasis, label: Trecho em destaque da mídia, widget: string }
+          - { name: mediaIntro, label: Apresentação da mídia, widget: text }
       - name: tv
         label: TV e programas
         file: src/content/tv.json
@@ -198,10 +206,11 @@ collections:
     fields:
       - { name: slug, label: Identificador curto sem acentos, widget: string }
       - { name: name, label: Nome público autorizado, widget: string }
+      - { name: order, label: Ordem de exibição, widget: number, value_type: int, min: 0, required: false, hint: "Números menores aparecem primeiro." }
       - { name: role, label: Atuação confirmada, widget: string }
       - { name: summary, label: Apresentação breve, widget: text }
       - { name: bio, label: Biografia pública autorizada, widget: text, required: false }
-      - { name: areas, label: Áreas de atuação no site, widget: select, multiple: true, options: [{label: Saúde, value: saude}, {label: MR Cultural, value: cultura}], hint: 'Use um único cadastro por pessoa. A área cultural faz o mesmo perfil aparecer no MR Cultural.' }
+      - { name: areas, label: Áreas de atuação no site, widget: select, multiple: true, options: [{label: Saúde, value: saude}, {label: MR Cultural, value: cultura}], hint: 'Use um único cadastro por pessoa. Use Saúde para os atendimentos e MR Cultural para atuação cultural. A página cultural também apresenta os profissionais da associação, sem alterar sua área.' }
       - { name: image, label: Fotografia autorizada, widget: image, required: false }
       - { name: imageAlt, label: Descrição acessível da fotografia, widget: string, required: false }
       - { name: credentials, label: Qualificação ou registro profissional público confirmado, widget: string, required: false }
@@ -221,6 +230,7 @@ collections:
     fields:
       - { name: slug, label: Identificador curto sem acentos, widget: string }
       - { name: title, label: Nome real do programa, widget: string }
+      - { name: order, label: Ordem de exibição, widget: number, value_type: int, min: 0, required: false, hint: "Números menores aparecem primeiro." }
       - { name: description, label: Resumo, widget: text }
       - { name: body, label: Apresentação e contexto, widget: text, required: false }
       - { name: image, label: Imagem autorizada do programa, widget: image, required: false }

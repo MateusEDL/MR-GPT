@@ -42,7 +42,7 @@ Não há notícias fictícias cadastradas nesta entrega. A coleção começa vaz
 
 ## Cadastrar profissionais de saúde e cultura
 
-Use a coleção **Profissionais (saúde e cultura)** para criar um único cadastro por pessoa. Preencha nome público, atuação, apresentação breve e áreas confirmadas. A área **Saúde** identifica a atuação de saúde; a área **MR Cultural** permite que o mesmo perfil apareça também na página cultural. Se a pessoa participa das duas áreas, selecione ambas em vez de duplicar o cadastro.
+Use a coleção **Profissionais (saúde e cultura)** para criar um único cadastro por pessoa. Preencha nome público, atuação, apresentação breve e áreas confirmadas. A área **Saúde** identifica os atendimentos; a área **MR Cultural** identifica atuação cultural confirmada. A página cultural também apresenta os profissionais da associação com sua área original, sem transformar atendimentos de saúde em atividades artísticas. Use um único cadastro mesmo quando uma pessoa participe das duas áreas. O campo **Ordem de exibição** organiza os cartões; números menores aparecem primeiro.
 
 Biografia, foto, qualificação, perfil e contato são opcionais. Publique somente informações profissionais que a pessoa autorizou divulgar, com fonte e vínculo com a associação confirmados. Use links HTTPS reais. Não copie dados de contato privados, documentos pessoais, atestados, receitas, comprovantes ou autorizações para o cadastro ou a biblioteca pública. Guarde as verificações em controle privado apropriado.
 
@@ -62,7 +62,7 @@ Programas e episódios começam com **Publicar** desativado. Revise as fontes, o
 
 Vídeos do YouTube e Vimeo só devem carregar o player após o visitante escolher assistir. Não carregue iframes, capas remotas ou rastreadores desses serviços antes desse clique; envie uma capa autorizada à biblioteca do próprio site, se houver. Outros links de vídeo precisam continuar claramente identificados como destinos externos. A transcrição deve corresponder ao vídeo e não substituir uma revisão clínica quando necessária.
 
-O endereço de referência `https://maria-do-reino-cuidado.designdoreino-edl.chatgpt.site/` ainda não pôde ser lido por restrição de acesso da rede deste ambiente. Nenhum nome de profissional, programa ou episódio foi importado desse endereço. As novas coleções permanecem vazias até que seja possível consultar a fonte ou receber o material confirmado, verificar os vínculos e autorizar a publicação.
+As capturas enviadas pelo usuário forneceram quatro perfis e três espaços de mídia, já cadastrados e apresentados na home e nas páginas próprias. A fonte desta transcrição está descrita em [referencia-profissionais-midia.md](referencia-profissionais-midia.md). As capturas mostram **Foto em breve** e **Conteúdo em preparação**; não contêm retratos ou links de episódios. Substitua esses estados ao receber os arquivos reais. Os títulos e apresentações das novas seções da home ficam em **Configurações e início → Página inicial**. O site remoto não foi lido nesta etapa.
 
 ## Cadastrar um evento uma única vez
 

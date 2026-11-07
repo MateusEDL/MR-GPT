@@ -1,0 +1,12 @@
+{
+  "slug": "wellington-medina",
+  "name": "Wellington Medina",
+  "role": "Psicologia",
+  "summary": "Escuta, acolhimento e cuidado com a saúde emocional.",
+  "areas": [
+    "saude"
+  ],
+  "credentialVerified": false,
+  "published": true,
+  "order": 3
+}

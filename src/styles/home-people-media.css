@@ -1,0 +1,15 @@
+.home-professionals-section,.home-media-section { position: relative; isolation: isolate; }
+.home-professionals-section { padding: 15px 0 110px; background: #fbf6e9; }
+.home-professionals-section::before { content: ''; position: absolute; z-index: -1; width: min(58vw,760px); height: 580px; top: 50px; right: -18%; border: 1px solid #b7c7ab4d; border-radius: 42% 58% 35% 65% / 33% 49% 51% 67%; transform: rotate(-18deg); pointer-events: none; }
+.home-collection-heading { display: grid; grid-template-columns: 1fr minmax(220px,320px); gap: 55px; align-items: end; margin-bottom: 58px; }
+.home-collection-heading .eyebrow { color: #355c49; }
+.home-collection-heading h2 { font-family: var(--serif,Georgia,serif); font-size: clamp(44px,5.2vw,78px); font-weight: 430; line-height: 1.04; letter-spacing: -.045em; margin: 20px 0 0; }
+.home-collection-heading h2 em { color: #4c8270; font-weight: 400; }
+.home-collection-heading > p { white-space: pre-line; font-size: 17px; line-height: 1.85; margin: 0 0 7px; max-width: 320px; color: #3d5b4a; }
+.home-collection-footer { display: flex; justify-content: flex-end; margin-top: 36px; }
+.home-media-section { padding: 155px 0 155px; background: radial-gradient(ellipse at 5% 30%,#f7e9d966,transparent 55%),#e3eadb; }
+.home-media-section .home-collection-heading h2 { color: #751a21; }
+.home-media-section .home-collection-heading h2 em { color: #8a4c32; }
+.home-media-section .home-collection-footer .text-link { color: #751a21; }
+@media(max-width:900px) { .home-collection-heading { gap: 32px; grid-template-columns: 1fr 260px; } .home-professionals-section { padding-bottom: 65px; } }
+@media(max-width:700px) { .home-professionals-section { padding: 20px 0 65px; } .home-professionals-section::before { width: 390px; height: 350px; right: -68%; } .home-collection-heading { grid-template-columns: 1fr; gap: 22px; margin-bottom: 36px; } .home-collection-heading h2 { font-size: clamp(42px,10.5vw,60px); line-height: 1.08; } .home-collection-heading > p { white-space: pre-line; font-size: 15px; margin: 0; } .home-collection-footer { justify-content: flex-start; margin-top: 28px; } .home-media-section { padding: 100px 0 110px; } }

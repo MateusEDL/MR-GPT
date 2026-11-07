@@ -75,10 +75,18 @@ Os dois PNGs originais foram copiados sem alteração. A suíte com as marcas at
 
 Após retirar apenas a moldura clara adicional do logo cultural, quatro verificações dirigidas passaram (home e aplicação cultural nos dois tamanhos). As capturas persistidas refletem essa apresentação final. O relatório HTML pode refletir essa seleção mais recente.
 
-## Resultado final com profissionais e TV
+## Verificação anterior com a estrutura de profissionais e TV
 
 Em 7 de novembro de 2026, a suíte completa foi executada uma vez contra o build final com editor incluído, servido em `127.0.0.1:4321`: **90 cenários identificados, 89 aprovados, 1 pulado e nenhuma falha**. O tempo reportado foi **1,2 minuto**, com código de saída `0`.
 
 O único cenário pulado corresponde ao menu de celular no projeto desktop; ele passou no projeto móvel. As 42 verificações de rota (21 páginas × dois tamanhos) passaram sem imagens quebradas, exceções JavaScript ou rolagem horizontal. As 14 análises Axe (sete páginas × dois tamanhos) não encontraram violações nas regras selecionadas. Marcas, cinco legendas da home, movimento interativo, preferências de movimento, navegação, busca, estados vazios, contato e carregamento do painel também passaram.
 
-Os 24 cenários acrescentados para profissionais e TV estão descritos em [testes-profissionais-tv.md](testes-profissionais-tv.md). As coleções permanecem vazias até confirmação do conteúdo da referência; os testes não comprovam perfis individuais, programas, episódios, reprodução de vídeo ou publicação em produção. O painel foi validado no build local com editor e continua excluído do build público padrão.
+Os 24 cenários acrescentados para profissionais e TV estão descritos em [testes-profissionais-tv.md](testes-profissionais-tv.md). Naquela execução, as coleções ainda estavam vazias; os testes não comprovam perfis individuais, programas, episódios, reprodução de vídeo ou publicação em produção. O painel foi validado no build local com editor e continua excluído do build público padrão.
+
+## Conteúdo das capturas na identidade visual do site
+
+Após as capturas fornecidas pelo usuário, a home, o diretório e o MR Cultural passaram a apresentar quatro profissionais da associação. A home, a TV e o catálogo exibem os três espaços de mídia em planejamento. Os avisos “Foto em breve” e “Conteúdo em preparação” correspondem à referência; nenhum retrato ou episódio foi fabricado. Os sete detalhes possuem rotas próprias.
+
+A suíte atual identificou **96 cenários**. Na execução completa, 93 passaram, 1 foi pulado por ser menu de celular no desktop e 2 falharam por uma expectativa antiga de texto no link de retorno dos programas. O link correto e seu destino já funcionavam. Após atualizar somente essa expectativa, os dois cenários dirigidos passaram nos dois tamanhos. Assim, **os 95 cenários aplicáveis foram verificados com sucesso**, sem alteração de implementação entre as execuções. As 14 análises Axe passaram. Detalhes e limites em [testes-profissionais-tv.md](testes-profissionais-tv.md).
+
+As capturas dos trechos novos da home estão em `docs/previews/home-profissionais-desktop.png` e `docs/previews/home-midia-desktop.png`. São evidência visual do build local, não de uma publicação na Vercel.
